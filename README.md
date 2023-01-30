@@ -1,6 +1,6 @@
 # Linketinder (Beta)
 
-O programa é uma junção do Tinder com o Linkedin, onde as empresas e os candidatos poder da um "Like" pra gostarem um do outro, em caso de match será possível com que mandem uma mensagem um por outro.
+O programa é uma junção do Tinder com o Linkedin, onde as empresas e os candidatos podem da um "Like" pra gostarem um do outro e em caso de match será possível com que mandem uma mensagem um para outro.
 
 Programa feito para o processo seletivo da ZG Soluções. 
 
