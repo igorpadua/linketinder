@@ -3,3 +3,4 @@ linketinder.iml
 out/
 lib/
 *.class
+.directory
