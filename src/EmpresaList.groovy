@@ -14,12 +14,15 @@ class EmpresaList {
         String pais = scanner.nextLine()
         print("Digite o estado da empresa: ")
         String estado = scanner.nextLine()
-        print("Digite o CEP  do candidato: ")
+        print("Digite o CEP  da empresa: ")
         String cep = scanner.nextLine()
-        print("Digite uma descrição do candidato: ")
+        print("Digite uma descrição da empresa: ")
         String desc = scanner.nextLine()
 
-        new Empresa(nome, email, cnpj, pais, estado, cep, desc)
+        ArrayList<Competencia> aux = new ArrayList<>()
+        aux = CompetenciaAbstract.choiseCompetencia()
+
+        new Empresa(nome, email, cnpj, pais, estado, cep, desc, aux)
     }
 
     static void printEmpresas(List<Empresa> empresas) {

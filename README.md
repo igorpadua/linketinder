@@ -8,8 +8,8 @@ Feito por Igor Moreira Pádua.
 
 # Funções
 
-1. Adicionar um novo candidato (apesar de não poder colocar suas compendecias)
-2. Adicionar uma nova empresa (mesmo problema do candidato)
+1. Adicionar um novo candidato
+2. Adicionar uma nova empresa
 3. Listar candidatos e empresas
 
 # Executar

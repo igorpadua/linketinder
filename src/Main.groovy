@@ -44,6 +44,7 @@ static void main(String[] args) {
         println("Saiu com sucesso")
         break
       default:
+        menu()
         println("Opção incorreta")
     }
   }

@@ -17,10 +17,11 @@ class CandidatoList {
         String cep = scanner.nextLine()
         print("Digite uma descrição do candidato: ")
         String desc = scanner.nextLine()
-        print("Digite as competencias: ")
-        String competencias = scanner.nextLine()
 
-        new Pessoa(nome, email, cpf, idade, cep, desc)
+        ArrayList<Competencia> aux = new ArrayList<>()
+        aux = CompetenciaAbstract.choiseCompetencia()
+
+        new Pessoa(nome, email, cpf, idade, cep, desc, aux)
     }
 
     static void printCandidatos(List<Pessoa> pessoas) {
