@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#titulo {
+    font-family: sans-serif;
+    color: #232629;
+    margin-left: 7%;
+}
+
+body{
+    background-color: #eff0f1;
+    font-family: sans-serif;
+    font-size: 1em;
+    color: #232629;
+    margin-left: 5%;
+    margin-top: 2%;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    margin-bottom: 0.2em;
+    color: #232629;
+    display: block;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3daee9;
+}
+
+input, select, textarea, button {
+    font-family: sans-serif;
+    font-size: 1em;
+    color: #232629;
+    border-radius: 5px;
+}
+
+.campo input {
+    width: 180px;
+}
+
+.grupo:before, .grupo:after {
+    display: table;
+}
+
+.grupo:after {
+    clear: both;
+}
+
+.campo {
+    margin-bottom: 1em;
+}
+
+.campo label {
+    margin-bottom: 0.2em;
+    color: #232629;
+    display: block;
+}
+
+.campo input[type="text"], .campo input[type="date"], .campo input[type="number"], .campo select, .campo textarea {
+    padding: 0.2em;
+    border: 1px solid #232629;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    display: block;
+}
+
+.campo select option {
+    padding-right: 1em;
+}
+
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+    background: #dadada;
+}
+
+.botao {
+    margin-top: 10px;
+    font-size: 1.2em;
+    background: #232629;
+    border: 0;
+    margin-bottom: 1em;
+    color: #ffffff;
+    padding: 0.2em 0.6em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.botao:hover {
+    background: #3daee9;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: none;
+}
+
+.botao, select{
+    cursor: pointer;
+}
+
+.tableBox {
+    padding: 15px 0;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.tableBox table {
+    max-width: 900px;
+    border-collapse: collapse;
+    font-family: arial;
+}
+
+
+.tableBox table td,th {
+    padding: 5px 0;
+    min-width: 180px;
+    border: solid 1px black;
+    font-size: 15px;
+
+}
+
+.tableBox table th {
+    text-align: center;
+    background-color: rgb(230,230,230);
+}
+
+.tableBox table td {
+    padding-left: 6px;
+}
