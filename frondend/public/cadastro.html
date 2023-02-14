@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<header>
+    <a href="index.html"><< Voltar</a>
+    <h1 class="titulo" id="idAddH1">Adicionar um condidato/empresa</h1>
+</header>
+<form class="grupo">
+
+    <div>
+        <h2>Qual você quer cadastrar?</h2>
+        <form>
+            <input type="radio" name="tipoPessoa" value="Candidato" checked>Candidato<br>
+            <input type="radio" name="tipoPessoa" value="Empresa">Empresa<br>
+        </form>
+    </div>
+
+    <div class="campo">
+        <label for="idNome">Nome: </label>
+        <input id="idNome" type="text" name="idNome">
+    </div>
+    <div class="campo">
+        <label for="idEmail">Email: </label>
+        <input id="idEmail" type="email" name="idEmail">
+    </div>
+    <div class="campo">
+        <label for="idDescricao">Descrição: </label>
+        <textarea id="idDescricao" rows="6" style="width: 26em" name="idDescricao"></textarea>
+    </div>
+    <div class="campo">
+        <label for="idIdade" id="idLabelIdade">Idade: </label>
+        <input id="idIdade" type="number" name="idIdade">
+    </div>
+    <div class="campo">
+        <label for="idCpf" id="idLabelCpf">CPF: </label>
+        <input id="idCpf" type="number" name="idCpf">
+    </div>
+    <div class="campo">
+        <label for="idCnpj" id="idLabelCnpj">CNPJ: </label>
+        <input id="idCnpj" type="number" name="idCnpj">
+    </div>
+    <div class="campo">
+        <label for="idPais">Pais: </label>
+        <input id="idPais" type="text" name="idPais">
+    </div>
+    <div class="campo">
+        <label for="idEstado">Estado: </label>
+        <input id="idEstado" type="text" name="idEstado">
+    </div>
+    <div class="campo">
+        <label for="idCidade">Cidade: </label>
+        <input id="idCidade" type="text" name="idCidade">
+    </div>
+    <div class="campo">
+        <label for="idCep">CEP: </label>
+        <input id="idCep" type="number" name="idCep">
+    </div>
+
+    <div>
+        <label>Competencias: <br></label>
+        <input type="checkbox" name="competencias" value="python"> Python<br>
+        <input type="checkbox" name="competencias" value="java"> Java<br>
+        <input type="checkbox" name="competencias" value="springFramework"> SpringFramework<br>
+        <input type="checkbox" name="competencias" value="javascript"> Javascript<br>
+        <input type="checkbox" name="competencias" value="angular"> Angular<br>
+        <input type="checkbox" name="competencias" value="c++"> C++<br>
+        <input type="checkbox" name="competencias" value="c"> C<br>
+        <input type="checkbox" name="competencias" value="html"> HTML<br>
+        <input type="checkbox" name="competencias" value="node"> Node<br>
+    </div>
+
+    <button id="addCadastro" class="botao" type="submit">Adicionar</button>
+    <script src="app.min.js"></script>
+</body>
+</html>
