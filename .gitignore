@@ -4,3 +4,5 @@ out/
 lib/
 *.class
 .directory
+node_modules/
+dist/
