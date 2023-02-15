@@ -126,3 +126,8 @@ input, select, textarea, button {
 .tableBox table td {
     padding-left: 6px;
 }
+
+.chart-canvas {
+    width: 500px;
+    height: 500px;
+}

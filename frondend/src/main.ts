@@ -64,4 +64,5 @@ if (window.location.pathname == '/lista_empresa.html') {
 
 if (window.location.pathname == '/lista_candidato.html') {
     PessoasServices.getCandidatos()
+    PessoasServices.desenharCompetenciaCandidatos()
 }

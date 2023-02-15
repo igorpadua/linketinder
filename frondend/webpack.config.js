@@ -10,7 +10,7 @@ module.exports = {
         },
     },
     output: {
-        filename: 'app.min.js',
+        filename: 'app.js',
         path: path.join(__dirname, 'dist')
     },
     plugins: [
@@ -27,5 +27,10 @@ module.exports = {
             use: 'ts-loader',
             exclude: /node_modules/
         }]
+    },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
     }
 }

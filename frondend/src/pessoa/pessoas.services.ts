@@ -1,6 +1,7 @@
 import Pessoa from "./entities/pessoa.entity";
 import Candidato from "./entities/candidato.entity";
 import Empresa from "./entities/empresa.entity";
+import Chart from 'chart.js/auto';
 
 export default class PessoasServices {
 
@@ -65,4 +66,68 @@ export default class PessoasServices {
         })
         document.getElementById('listarEmpresas')!.innerHTML = lista_empresas
     }
+
+    static desenharCompetenciaCandidatos() {
+        const candidatos = JSON.parse(localStorage.getItem('candidatos')!)
+        let python = 0
+        let java = 0
+        let javascript = 0
+        let c = 0
+        let cplusplus = 0
+        let angular = 0
+        let html = 0
+        let nodejs = 0
+        let spring = 0
+
+        candidatos.forEach((candidato: Candidato) => {
+            candidato.competencias.forEach((competencia: string) => {
+                switch (competencia) {
+                    case "python":
+                        python++
+                        break
+                    case "java":
+                        java++
+                        break
+                    case "javaScript":
+                        javascript++
+                        break
+                    case "c":
+                        c++
+                        break
+                    case "c++":
+                        cplusplus++
+                        break
+                    case "angular":
+                        angular++
+                        break
+                    case "html":
+                        html++
+                        break
+                    case "nodejs":
+                        nodejs++
+                        break
+                    case "spring":
+                        spring++
+                        break
+                }
+            })
+        })
+
+        const canvas = <HTMLCanvasElement>document.getElementById('competenciaCandidatos')
+        const ctx = canvas.getContext('2d')!
+
+
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Python', 'Java', 'JavaScript', 'C', 'C++', 'Angular', 'HTML', 'NodeJS', 'Spring'],
+                datasets: [{
+                    label: 'Quantidade de candidatos por competência',
+                    data: [python, java, javascript, c, cplusplus, angular, html, nodejs, spring],
+                    borderWidth: 1
+                }]
+            },
+        })
+    }
 }
+
