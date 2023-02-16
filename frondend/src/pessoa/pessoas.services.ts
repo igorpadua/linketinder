@@ -1,8 +1,8 @@
 import Pessoa from "./entities/pessoa.entity";
 import Candidato from "./entities/candidato.entity";
 import Empresa from "./entities/empresa.entity";
-import Chart from 'chart.js/auto';
 import validaPessoa from "../validacao/validarPessoa";
+import desenharCompetenciaCandidatos from "../grafico/competenciaCandidatos";
 
 export default class PessoasServices {
 
@@ -40,99 +40,33 @@ export default class PessoasServices {
         return validaPessoa(pessoa)
     }
 
-    static getCandidatos() {
-        let lista_candidatos = "<th>Idade</th><th>Descrição</th><th>País</th><th>Estado</th><th>Cidade</th><th>Competências</th></tr>"
-        const candidatos: Candidato[] = JSON.parse(localStorage.getItem('candidatos')!)
-        candidatos.forEach((candidato) => {
-            lista_candidatos += `<tr>
-                                    <td>${candidato.idade}</td>
-                                    <td>${candidato.desc}</td>
-                                    <td>${candidato.pais}</td>
-                                    <td>${candidato.estado}</td>
-                                    <td>${candidato.cidade}</td>
-                                    <td>${candidato.competencias}</td>
-                              </tr>`
+    static listarPessoas(pessoas: Pessoa[]) {
+        let lista_pessoa = ''
+        if ((pessoas.at(0) as Candidato).cpf != undefined) {
+            lista_pessoa = "<th>Idade</th>"
+        }
+        lista_pessoa += "<th>Descrição</th><th>País</th><th>Estado</th><th>Cidade</th><th>Competências</th></tr>"
+        pessoas.forEach((pessoa) => {
+            lista_pessoa += '<tr>'
+            if ((pessoa as Candidato).idade != undefined) {
+                lista_pessoa += `<td>${(pessoa as Candidato).idade}</td>`
+            }
+            lista_pessoa +=     `<td>${pessoa.desc}</td>`
+            lista_pessoa +=     `<td>${pessoa.pais}</td>`
+            lista_pessoa +=     `<td>${pessoa.estado}</td>`
+            lista_pessoa +=     `<td>${pessoa.cidade}</td>`
+            lista_pessoa +=     `<td>${pessoa.competencias}</td>`
+            lista_pessoa += "</tr>"
         })
-        document.getElementById('listarCandidatos')!.innerHTML = lista_candidatos
+        if ((pessoas.at(0) as Candidato).cpf != undefined) {
+            document.getElementById('listarCandidatos')!.innerHTML = lista_pessoa
+        } else {
+            document.getElementById('listarEmpresas')!.innerHTML = lista_pessoa
+        }
     }
 
-    static getEmpresas() {
-        let lista_empresas = "<tr><th>Descrição</th><th>País</th><th>Estado</th><th>Cidade</th><th>CEP</th><th>Competências</th></tr>"
-        const empresas: Empresa[] = JSON.parse(localStorage.getItem('empresas')!)
-        empresas.forEach((empresa) => {
-            lista_empresas += `<tr>
-                                    <td>${empresa.desc}</td>
-                                    <td>${empresa.pais}</td>
-                                    <td>${empresa.estado}</td>
-                                    <td>${empresa.cidade}</td>
-                                    <td>${empresa.cep}</td>
-                                    <td>${empresa.competencias}</td>
-                              </tr>`
-        })
-        document.getElementById('listarEmpresas')!.innerHTML = lista_empresas
-    }
-
-    static desenharCompetenciaCandidatos() {
-        const candidatos = JSON.parse(localStorage.getItem('candidatos')!)
-        let python = 0
-        let java = 0
-        let javascript = 0
-        let c = 0
-        let cplusplus = 0
-        let angular = 0
-        let html = 0
-        let nodejs = 0
-        let spring = 0
-
-        candidatos.forEach((candidato: Candidato) => {
-            candidato.competencias.forEach((competencia: string) => {
-                switch (competencia) {
-                    case "python":
-                        python++
-                        break
-                    case "java":
-                        java++
-                        break
-                    case "javaScript":
-                        javascript++
-                        break
-                    case "c":
-                        c++
-                        break
-                    case "c++":
-                        cplusplus++
-                        break
-                    case "angular":
-                        angular++
-                        break
-                    case "html":
-                        html++
-                        break
-                    case "nodejs":
-                        nodejs++
-                        break
-                    case "springFramework":
-                        spring++
-                        break
-                }
-            })
-        })
-
-        const canvas = <HTMLCanvasElement>document.getElementById('competenciaCandidatos')
-        const ctx = canvas.getContext('2d')!
-
-
-        const myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Python', 'Java', 'JavaScript', 'C', 'C++', 'Angular', 'HTML', 'NodeJS', 'Spring'],
-                datasets: [{
-                    label: 'Quantidade de candidatos por competência',
-                    data: [python, java, javascript, c, cplusplus, angular, html, nodejs, spring],
-                    borderWidth: 1
-                }]
-            },
-        })
+    static graficoCompetencias(pessoas: Pessoa[]) {
+        desenharCompetenciaCandidatos(pessoas)
     }
 }
 

@@ -66,10 +66,10 @@ if (window.location.pathname == '/cadastro.html') {
 }
 
 if (window.location.pathname == '/lista_empresa.html') {
-    PessoasServices.getEmpresas()
+    PessoasServices.listarPessoas(empresas)
 }
 
 if (window.location.pathname == '/lista_candidato.html') {
-    PessoasServices.getCandidatos()
-    PessoasServices.desenharCompetenciaCandidatos()
+    PessoasServices.listarPessoas(candidatos)
+    PessoasServices.graficoCompetencias(candidatos)
 }
