@@ -2,10 +2,11 @@ import Pessoa from "./entities/pessoa.entity";
 import Candidato from "./entities/candidato.entity";
 import Empresa from "./entities/empresa.entity";
 import Chart from 'chart.js/auto';
+import validaPessoa from "../validacao/validarPessoa";
 
 export default class PessoasServices {
 
-    static addPessoa(): Pessoa {
+    static addPessoa() {
         let pessoa: Pessoa
         // Radio button
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
@@ -33,6 +34,10 @@ export default class PessoasServices {
 
         const cnpj: string = (<HTMLInputElement>document.getElementById("idCnpj")).value
         return new Empresa(nome, email, cnpj, descricao, pais, estado, cidade, cep, competencias)
+    }
+
+    static validarPessoa(pessoa: Pessoa): boolean {
+        return validaPessoa(pessoa)
     }
 
     static getCandidatos() {
@@ -106,7 +111,7 @@ export default class PessoasServices {
                     case "nodejs":
                         nodejs++
                         break
-                    case "spring":
+                    case "springFramework":
                         spring++
                         break
                 }

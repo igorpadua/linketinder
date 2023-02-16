@@ -45,16 +45,23 @@ if (window.location.pathname == '/cadastro.html') {
     document.getElementById('addCadastro')!.onclick = () => {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
         if (radio_selecionado == 'Candidato') {
-            candidatos.push(PessoasServices.addPessoa() as Candidato)
-            localStorage.setItem('candidatos', JSON.stringify(candidatos))
-            alert('Candidato cadastrado com sucesso!')
+            const pessoa: Candidato = PessoasServices.addPessoa() as Candidato
+            if (PessoasServices.validarPessoa(pessoa)) {
+                candidatos.push(pessoa)
+                localStorage.setItem('candidatos', JSON.stringify(candidatos))
+                alert('Candidato cadastrado com sucesso!')
+                window.location.href = '/index.html'
+            }
         } else {
-            empresas.push(PessoasServices.addPessoa() as Empresa)
-            localStorage.setItem('empresas', JSON.stringify(empresas))
-            alert('Empresa cadastrada com sucesso!')
+            const pessoa: Empresa = PessoasServices.addPessoa() as Empresa
+            if (PessoasServices.validarPessoa(pessoa)){
+                empresas.push(pessoa)
+                localStorage.setItem('empresas', JSON.stringify(empresas))
+                alert('Empresa cadastrada com sucesso!')
+                window.location.href = '/index.html'
+            }
         }
 
-        window.location.href = '/index.html'
     }
 }
 
