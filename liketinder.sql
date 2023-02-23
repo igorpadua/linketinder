@@ -51,7 +51,7 @@ CREATE TABLE competencia_vagas (
 
 CREATE TABLE curtidas (
   id SERIAL PRIMARY KEY,
-  curtiu varchar NOT NULL
+  curtiu int NOT NULL
 );
 
 CREATE TABLE cutida_empresa (
