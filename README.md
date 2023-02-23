@@ -24,8 +24,10 @@ Feito por Igor Moreira Pádua.
 _Feito com a ferramenta dbdiagram_
 
 ### Match Explicação
-Quando um candidato curti uma vaga isso é registrado na tabela curtida onde no atributo curtiu é salvo o id da vaga. Para que seja possível identificar que um candidato curtiu uma vaga existe a tabela cutida_candidato que registra as curtidas dos candidatos.
+Quando um candidato curti uma vaga isso é registrado na tabela curtida onde no atributo curtiu é salvo o id da vaga. Para que seja possível identificar que um candidato curtiu uma vaga existe a tabela curtida_candidato que registra as curtidas dos candidatos.
 Para a empresa é basicamente a mesma coisa, a curtida da empresa é salvo na tabela curtidas, onde o id do candidato é salvo no atributo curtiu. E para a indentificação das curtidas da empresa existe a tabela curtida_empresa.
+
+Para verificarmos o match é necessario consultar a tabela curtida e curtida_empresa é verificar se a empresa curtiu o candidato e em seguida verificar se o canidato curtiu a empresa consultando as tabelas curtida e curtida_candidato.
 
 # Funções
 
