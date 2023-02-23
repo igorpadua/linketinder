@@ -2,20 +2,20 @@
 
 CREATE TABLE competencias (
   id SERIAL PRIMARY KEY,
-  competencia varchar NOT NULL
+  competencia varchar(30) NOT NULL
 );
 
 CREATE TABLE candidatos (
   id SERIAL PRIMARY KEY,
-  nome varchar NOT NULL,
+  nome char(15) NOT NULL,
   sobrenome varchar NOT NULL,
   data_nascimento date NOT NULL,
-  email varchar UNIQUE NOT NULL,
-  cpf varchar UNIQUE NOT NULL,
-  pais varchar NOT NULL,
-  cep varchar NOT NULL,
-  descricao varchar NOT NULL,
-  senha varchar NOT NULL
+  email varchar(50) UNIQUE NOT NULL,
+  cpf char(14) UNIQUE NOT NULL,
+  pais varchar(50) NOT NULL,
+  cep char(9) NOT NULL,
+  descricao varchar(100) NOT NULL,
+  senha char(16) NOT NULL
 );
 
 CREATE TABLE competencias_candidato (
@@ -26,20 +26,20 @@ CREATE TABLE competencias_candidato (
 
 CREATE TABLE empresas (
   id SERIAL PRIMARY KEY,
-  nome varchar NOT NULL,
-  cnpj varchar UNIQUE NOT NULL,
-  email varchar UNIQUE NOT NULL,
-  descricao varchar NOT NULL,
-  pais varchar NOT NULL,
-  cep varchar NOT NULL,
-  senha varchar NOT NULL
+  nome char(15) NOT NULL,
+  cnpj char(18) UNIQUE NOT NULL,
+  email char(50) UNIQUE NOT NULL,
+  descricao varchar(100) NOT NULL,
+  pais varchar(50) NOT NULL,
+  cep varchar(9) NOT NULL,
+  senha varchar(16) NOT NULL
 );
 
 CREATE TABLE vagas (
   id SERIAL PRIMARY KEY,
-  nome varchar NOT NULL,
-  descricao varchar NOT NULL,
-  local_vaga varchar NOT NULL,
+  nome varchar(50) NOT NULL,
+  descricao varchar(100) NOT NULL,
+  local_vaga varchar(50) NOT NULL,
   empresa_id int REFERENCES empresas(id) NOT NULL
 );
 
