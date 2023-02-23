@@ -16,14 +16,14 @@ if (localStorage.getItem('empresas')) {
 
 if (window.location.pathname == '/cadastro.html') {
 
-    document.getElementById('idAddH1')!.innerText = 'Cadastrar Candidato'
+    document.getElementById('idAddH1')!.innerText = 'Cadastrar main.groovy.entity.Candidato'
     document.getElementById('idCnpj')!.style.display = 'none'
     document.getElementById('idLabelCnpj')!.style.display = 'none'
 
     document.getElementsByName('tipoPessoa').forEach((radio: any) => {
         radio.onclick = () => {
             if (radio.value == 'Candidato') {
-                document.getElementById('idAddH1')!.innerText = 'Cadastrar Candidato'
+                document.getElementById('idAddH1')!.innerText = 'Cadastrar main.groovy.entity.Candidato'
                 document.getElementById('idCpf')!.style.display = 'block'
                 document.getElementById('idLabelCpf')!.style.display = 'block'
                 document.getElementById('idIdade')!.style.display = 'block'
@@ -31,7 +31,7 @@ if (window.location.pathname == '/cadastro.html') {
                 document.getElementById('idCnpj')!.style.display = 'none'
                 document.getElementById('idLabelCnpj')!.style.display = 'none'
             } else {
-                document.getElementById('idAddH1')!.innerText = 'Cadastrar Empresa'
+                document.getElementById('idAddH1')!.innerText = 'Cadastrar main.groovy.entity.Empresa'
                 document.getElementById('idCpf')!.style.display = 'none'
                 document.getElementById('idLabelCpf')!.style.display = 'none'
                 document.getElementById('idIdade')!.style.display = 'none'
@@ -49,7 +49,7 @@ if (window.location.pathname == '/cadastro.html') {
             if (PessoasServices.validarPessoa(pessoa)) {
                 candidatos.push(pessoa)
                 localStorage.setItem('candidatos', JSON.stringify(candidatos))
-                alert('Candidato cadastrado com sucesso!')
+                alert('main.groovy.entity.Candidato cadastrado com sucesso!')
                 window.location.href = '/index.html'
             }
         } else {
@@ -57,7 +57,7 @@ if (window.location.pathname == '/cadastro.html') {
             if (PessoasServices.validarPessoa(pessoa)){
                 empresas.push(pessoa)
                 localStorage.setItem('empresas', JSON.stringify(empresas))
-                alert('Empresa cadastrada com sucesso!')
+                alert('main.groovy.entity.Empresa cadastrada com sucesso!')
                 window.location.href = '/index.html'
             }
         }

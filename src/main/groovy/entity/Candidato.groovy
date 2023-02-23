@@ -1,9 +1,12 @@
+package main.groovy.entity
+
+
 import groovy.transform.Canonical
 import groovy.transform.TypeChecked
 
 @TypeChecked
 @Canonical
-class Pessoa {
+class Candidato {
     String nome
     String email
     String cpf
@@ -11,5 +14,4 @@ class Pessoa {
     String cep
     String desc
     ArrayList<Competencia> competencias;
-
 }

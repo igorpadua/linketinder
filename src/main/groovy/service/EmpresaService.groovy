@@ -1,8 +1,13 @@
+package main.groovy.service
+
+import main.groovy.entity.Competencia
+import main.groovy.entity.CompetenciaAbstract
+import main.groovy.entity.Empresa
 import groovy.transform.TypeChecked
 
 @TypeChecked
-class EmpresaList {
-    static Empresa newEmpresa(List<Empresa> empresas) {
+class EmpresaService {
+    static Empresa newEmpresa() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome da nova empresa: ")
         String nome = scanner.nextLine()

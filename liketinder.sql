@@ -106,19 +106,19 @@ INSERT INTO competencias_candidato (competencia_id, candidatos_id) VALUES (6,5);
 
 -- Empresas
 INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
-	VALUES('Empresa 1', '00.000.000/0000-00', 'empresa1@gmail.com', 'Empresa de jogos', 'Brasil', '00000-000', '12345');
+	VALUES('main.groovy.entity.Empresa 1', '00.000.000/0000-00', 'empresa1@gmail.com', 'main.groovy.entity.Empresa de jogos', 'Brasil', '00000-000', '12345');
 
 INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
-	VALUES('Empresa 2', '10.000.000/0000-00', 'empresa2@gmail.com', 'Farmacia', 'Brasil', '00000-000', '12345');
+	VALUES('main.groovy.entity.Empresa 2', '10.000.000/0000-00', 'empresa2@gmail.com', 'Farmacia', 'Brasil', '00000-000', '12345');
 
 INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
-	VALUES('Empresa 3', '20.000.000/0000-00', 'empresa3@gmail.com', 'Empresa de vendas', 'Brasil', '00000-000', '12345');
+	VALUES('main.groovy.entity.Empresa 3', '20.000.000/0000-00', 'empresa3@gmail.com', 'main.groovy.entity.Empresa de vendas', 'Brasil', '00000-000', '12345');
 
 INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
-	VALUES('Empresa 4', '30.000.000/0000-00', 'empresa4@gmail.com', 'Empresa de jogos', 'Brasil', '00000-000', '12345');
+	VALUES('main.groovy.entity.Empresa 4', '30.000.000/0000-00', 'empresa4@gmail.com', 'main.groovy.entity.Empresa de jogos', 'Brasil', '00000-000', '12345');
 
 INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
-	VALUES('Empresa 5', '40.000.000/0000-00', 'empresa5@gmail.com', 'Empresa de software', 'Brasil', '00000-000', '12345');
+	VALUES('main.groovy.entity.Empresa 5', '40.000.000/0000-00', 'empresa5@gmail.com', 'main.groovy.entity.Empresa de software', 'Brasil', '00000-000', '12345');
 
 -- Vagas
 INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)

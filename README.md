@@ -45,5 +45,5 @@ Primeiramente compile
 
 Para executar:
 
-> groovy Main
+> groovy main.groovy.Main
 

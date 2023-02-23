@@ -1,3 +1,5 @@
+package main.groovy.entity
+
 enum Competencia {
     Python,
     Java,

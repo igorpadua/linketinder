@@ -1,5 +1,8 @@
+package main.groovy.entity
+
 import groovy.transform.Canonical
 import groovy.transform.TypeChecked
+import main.groovy.entity.Competencia
 
 @TypeChecked
 @Canonical
