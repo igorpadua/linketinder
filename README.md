@@ -8,13 +8,20 @@ Feito por Igor Moreira Pádua.
 
 # Tecnologias
 
-Front-end:
+## Front-end:
 * HTML
 * CSS
 * TypeScript
 
-Back-end:
+## Back-end:
 * Groovy
+
+## Banco de dados:
+* postgresql
+
+### Modelagem:
+![liketinder](https://user-images.githubusercontent.com/40117861/220912573-1ca8f999-ccf2-4a46-acc4-542138c07783.png)
+_Feito com a ferramenta dbdiagram_
 
 # Funções
 
