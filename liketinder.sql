@@ -54,13 +54,13 @@ CREATE TABLE curtidas (
   curtiu int NOT NULL
 );
 
-CREATE TABLE cutida_empresa (
+CREATE TABLE curtida_empresa (
   id SERIAL PRIMARY KEY,
   empresa_id int REFERENCES empresas(id) NOT NULL,
   cutida_id int REFERENCES curtidas(id) NOT NULL
 );
 
-CREATE TABLE cutida_candidato (
+CREATE TABLE curtida_candidato (
   id SERIAL PRIMARY KEY,
   candidato_id int REFERENCES candidatos(id) NOT NULL,
   cutida_id int REFERENCES curtidas(id) NOT NULL
