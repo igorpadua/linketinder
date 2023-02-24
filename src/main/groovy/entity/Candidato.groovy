@@ -8,10 +8,13 @@ import groovy.transform.TypeChecked
 @Canonical
 class Candidato {
     String nome
+    String sobrenome
+    Date nascimento
     String email
     String cpf
-    int idade
+    String pais
     String cep
     String desc
+    String senha
     ArrayList<Competencia> competencias;
 }
