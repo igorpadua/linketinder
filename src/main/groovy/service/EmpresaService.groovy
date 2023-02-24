@@ -1,7 +1,6 @@
 package main.groovy.service
 
 import main.groovy.entity.Competencia
-import main.groovy.entity.CompetenciaAbstract
 import main.groovy.entity.Empresa
 import groovy.transform.TypeChecked
 
@@ -25,7 +24,7 @@ class EmpresaService {
         String desc = scanner.nextLine()
 
         ArrayList<Competencia> aux = new ArrayList<>()
-        aux = CompetenciaAbstract.choiseCompetencia()
+        aux = CompetenciaService.choiseCompetencia()
 
         new Empresa(nome, email, cnpj, pais, estado, cep, desc, aux)
     }
