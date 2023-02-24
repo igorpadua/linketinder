@@ -25,6 +25,13 @@ class CandidatoDTO {
         sql.close()
     }
 
+    void removeCandidato(String cpf) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.executeInsert('DELETE FROM candidatos ' +
+                "WHERE cpf = '${cpf}'")
+        sql.close()
+    }
+
     List<Candidato> listaTodosCandidatos() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         List<Candidato> aux = new ArrayList<>()

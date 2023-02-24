@@ -43,8 +43,10 @@ class CandidatoService {
             println("Não existe candidatos")
         }
 
+        int i = 0
         for (candidato in pessoas) {
-            println("Nome: ${candidato.nome} ${candidato.sobrenome} - " +
+            println("Id: ${i} - " +
+                    "Nome: ${candidato.nome} ${candidato.sobrenome} - " +
                     "Data nascimento: ${candidato.nascimento} - " +
                     "Email: ${candidato.email} - " +
                     "CPF: ${candidato.cpf} - " +
@@ -52,7 +54,15 @@ class CandidatoService {
                     "CEP: ${candidato.cep} - " +
                     "Descrição: ${candidato.desc} - " +
                     "Competencias: ${candidato.competencias}")
+            i++
         }
+    }
+
+    static String removeCandidato() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CPF do candidato que deseja remover: ")
+        String cpf = scanner.nextLine()
+        return cpf
     }
 
 }
