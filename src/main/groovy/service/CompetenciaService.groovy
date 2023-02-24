@@ -61,6 +61,31 @@ class CompetenciaService {
         return aux
     }
 
+    static Competencia transformaString(String competencia) {
+        switch (competencia) {
+            case "Python":
+                return Competencia.Python
+            case "Java":
+                return Competencia.Java
+            case "SpringFramework":
+                return Competencia.SpringFramework
+            case "Angular":
+                return Competencia.Angular
+            case "cplusplus":
+                return Competencia.cplusplus
+            case "c":
+                return Competencia.c
+            case "JavaScript":
+                return Competencia.JavaScript
+            case "Html":
+                return Competencia.Html
+            case "Node":
+                return Competencia.Node
+            default:
+                return null
+        }
+    }
+
     private static void menu() {
         println("Escolhas as competencias: ")
         println("1 - Python")
