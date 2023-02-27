@@ -32,4 +32,11 @@ class CompetenciaCandidatoDTO {
         }
         sql.close()
     }
+
+    static void removeCompetenciaCandidato(String cpf) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        final int idCandidato = CandidatoDTO.getIdCandidato(cpf)
+        sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
+        sql.close()
+    }
 }
