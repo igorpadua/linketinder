@@ -46,7 +46,7 @@ class EmpresaService {
     static private void menuAtualizar() {
         println("1 - Atualizar nome")
         println("2 - Atualizar email")
-        println("3 Atualizar pais")
+        println("3 - Atualizar pais")
         println("4 - Atualizar CEP")
         println("5 - Atualizar descrição")
         println("6 - Atualizar senha")
@@ -57,8 +57,8 @@ class EmpresaService {
         menuAtualizar()
         boolean end = true
         Scanner scanner = new Scanner(System.in)
-        String opc = '0'
         while (end) {
+            String opc = scanner.nextLine()
             switch (opc) {
                 case '1':
                     print("Digite o novo nome: ")
