@@ -31,8 +31,7 @@ class CandidatoService {
         print("Digite a senha do candidato: ")
         String senha = scanner.nextLine()
 
-        ArrayList<Competencia> competencias = new ArrayList<>()
-        competencias = CompetenciaService.choiseCompetencia()
+        List<Competencia> competencias = CompetenciaService.choiseCompetencia()
 
         return new Candidato(nome, sobrenome, data, email, cpf, pais, cep, desc, senha,competencias)
     }
