@@ -18,4 +18,14 @@ class VagaService {
 
         new Vaga(nome, descricao, local_vaga , competencias)
     }
+
+    static void printVagas(List<Vaga> vagas) {
+        if (vagas.isEmpty()) {
+            println("Não existe vagas")
+        }
+
+        for (vaga in vagas) {
+            println(vaga)
+        }
+    }
 }

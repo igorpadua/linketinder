@@ -13,6 +13,7 @@ import main.groovy.service.VagaService
 
 @TypeChecked
 static void main(String[] args) {
+  List<Vaga> vagas = []
   Boolean end = true
   Scanner scanner = new Scanner(System.in)
 
@@ -37,6 +38,7 @@ static void main(String[] args) {
       case 3:
         // Adicionar uma vaga
         Vaga vaga = VagaService.adicionaVaga()
+        vagas.add(vaga)
         println("\nAdicionado com sucesso\n")
         break
       case 4:
@@ -91,6 +93,10 @@ static void main(String[] args) {
          EmpresaService.printEmpresas(EmpresaDTO.listarEmpresas())
         break
       case 12:
+        // Listar vagas
+        VagaService.printVagas(vagas)
+        break
+      case 13:
         end = false
         println("Saiu com sucesso")
         break
