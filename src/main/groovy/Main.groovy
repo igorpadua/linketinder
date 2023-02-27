@@ -99,7 +99,7 @@ static void main(String[] args) {
         break
       case 12:
         // Listar vagas
-        VagaService.printVagas(vagas)
+        VagaService.printVagas(VagaDTO.listarVagas())
         break
       case 13:
         end = false

@@ -16,4 +16,15 @@ class VagaDTO {
                 "VALUES ('${vaga.nome}', '${vaga.descricao}', '${vaga.local_vaga}', '${id}')")
         sql.close()
     }
+
+    static List<Vaga> listarVagas() {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        List<Vaga> result = []
+        sql.eachRow('SELECT * FROM vagas') { rs ->
+            Vaga vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'))
+            result.add(vaga)
+            }
+        sql.close()
+        return result
+    }
 }
