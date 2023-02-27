@@ -20,4 +20,10 @@ class CompetenciaVagasDTO {
         }
         sql.close()
     }
+
+    static void removeCompetenciaVaga(int id) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${id}")
+        sql.close()
+    }
 }

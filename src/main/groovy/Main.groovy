@@ -102,8 +102,11 @@ static void main(String[] args) {
         // Remover uma vaga
         final String nome = VagaService.pegaNomeVaga()
         final String cnpj = EmpresaService.pegaCnpjEmpresa()
-        // Pega o ID
+        // Pega o ID Empresas
         final int id = EmpresaDTO.getIdEmpresa(cnpj)
+        // Pega o ID Vagas
+        final int idVaga = VagaDTO.getIdVaga(nome, id)
+        CompetenciaVagasDTO.removeCompetenciaVaga(idVaga)
         VagaDTO.removeVaga(nome, id)
         println("\nRemovido com sucesso\n")
         break
