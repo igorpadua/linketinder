@@ -11,8 +11,8 @@ class CandidatoServiceTest {
     @Test
     public void testAdicionaCandidato() {
         List<Candidato> pessoas = new ArrayList<>()
-        pessoas.add(new Candidato('Joao', 'Silva', new Date(2000-04-23), 'joao@gmail.com', '000.000.000-00', 'Brasil', '00000-00', 'Sou um candidato', '123456', [Competencia.cplusplus, Competencia.Java] as ArrayList<Competencia>))
-        Candidato resul = new Candidato('Joao', 'Silva', new Date(2000-04-23), 'joao@gmail.com', '000.000.000-00', 'Brasil', '00000-00', 'Sou um candidato', '123456', [Competencia.cplusplus, Competencia.Java] as ArrayList<Competencia>)
+        pessoas.add(new Candidato('Joao', 'Silva', new Date(2000-04-23), 'joao@gmail.com', '000.000.000-00', 'Brasil', '00000-00', 'Sou um candidato', '123456', [Competencia.cplusplus, Competencia.Java]))
+        Candidato resul = new Candidato('Joao', 'Silva', new Date(2000-04-23), 'joao@gmail.com', '000.000.000-00', 'Brasil', '00000-00', 'Sou um candidato', '123456', [Competencia.cplusplus, Competencia.Java])
         assertEquals(pessoas.get(0), resul);
     }
 }
