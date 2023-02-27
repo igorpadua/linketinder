@@ -71,7 +71,16 @@ static void main(String[] args) {
         break
       case 6:
         // Atualizar uma vaga
-        VagaService.atualizarVaga(vagas.get(0))
+        final String nome = VagaService.pegaNomeVaga()
+        final String cnpj = EmpresaService.pegaCnpjEmpresa()
+        // Pega o ID
+        final int id = EmpresaDTO.getIdEmpresa(cnpj)
+        // Pega a vaga do banco de dados
+        Vaga vaga = VagaDTO.getVaga(nome, id)
+        // Atualiza a vaga
+        VagaService.atualizarVaga(vaga)
+        // Atualiza a vaga no banco de dados
+        VagaDTO.atualizarVaga(vaga, nome, id)
         break
       case 7:
         // Remover um candidato
@@ -88,8 +97,7 @@ static void main(String[] args) {
         break
       case 9:
         // Remover uma vaga
-        print("Digite o nome da vaga Empresa: ")
-        final String nome = scanner.next()
+        final String nome = VagaService.pegaNomeVaga()
         final String cnpj = EmpresaService.pegaCnpjEmpresa()
         // Pega o ID
         final int id = EmpresaDTO.getIdEmpresa(cnpj)

@@ -72,4 +72,11 @@ class VagaService {
             }
         }
     }
+
+    static String pegaNomeVaga() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o nome da vaga: ")
+        String nome = scanner.nextLine()
+        return nome
+    }
 }

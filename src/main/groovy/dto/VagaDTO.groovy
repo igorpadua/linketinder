@@ -33,4 +33,22 @@ class VagaDTO {
         sql.execute("DELETE FROM vagas WHERE nome = ${nome} and empresa_id = ${id}")
         sql.close()
     }
+
+    static void atualizarVaga(Vaga vaga, nome, int id) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.executeUpdate('UPDATE vagas ' +
+                "SET nome = '${vaga.nome}', descricao = '${vaga.descricao}', local_vaga = '${vaga.local_vaga}' " +
+                "WHERE nome = '${nome}' and empresa_id = ${id}")
+        sql.close()
+    }
+
+    static Vaga getVaga(String nome, int id) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        Vaga vaga = null
+        sql.eachRow("SELECT * FROM vagas WHERE nome = ${nome} and empresa_id = ${id}") { rs ->
+            vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'))
+        }
+        sql.close()
+        return vaga
+    }
 }
