@@ -16,17 +16,14 @@ class EmpresaService {
         String cnpj = scanner.nextLine()
         print("Digite o pais da empresa: ")
         String pais = scanner.nextLine()
-        print("Digite o estado da empresa: ")
-        String estado = scanner.nextLine()
         print("Digite o CEP  da empresa: ")
         String cep = scanner.nextLine()
         print("Digite uma descrição da empresa: ")
         String desc = scanner.nextLine()
+        print("Digite a senha da empresa: ")
+        String senha = scanner.nextLine()
 
-        ArrayList<Competencia> aux = new ArrayList<>()
-        aux = CompetenciaService.choiseCompetencia()
-
-        new Empresa(nome, email, cnpj, pais, estado, cep, desc, aux)
+        new Empresa(nome, email, cnpj, pais, cep, desc, senha)
     }
 
     static void printEmpresas(List<Empresa> empresas) {
