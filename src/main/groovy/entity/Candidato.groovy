@@ -16,7 +16,7 @@ class Candidato {
     String cep
     String desc
     String senha
-    ArrayList<Competencia> competencias;
+    List<Competencia> competencias;
 
     String toString() {
         return"Nome: ${this.nome} ${this.sobrenome} - " +
