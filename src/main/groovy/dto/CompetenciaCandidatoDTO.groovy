@@ -20,4 +20,16 @@ class CompetenciaCandidatoDTO {
         }
         sql.close()
     }
+
+    static void atualizarCompetenciaCandidato(Candidato candidato) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        final int idCandidato = CandidatoDTO.getIdCandidato(candidato.cpf)
+        sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
+        for (Competencia competencia in candidato.competencias) {
+            int idCompetencia = CompetenciaDTO.getIdCompetencia(competencia.toString())
+            sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
+                                    VALUES (${idCandidato}, ${idCompetencia});""")
+        }
+        sql.close()
+    }
 }
