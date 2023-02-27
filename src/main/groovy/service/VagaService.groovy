@@ -1,18 +1,21 @@
 package main.groovy.service
 
+import main.groovy.entity.Competencia
 import main.groovy.entity.Vaga
 
 class VagaService {
 
     static Vaga adicionaVaga() {
         Scanner scanner = new Scanner(System.in)
-        println("Digite o nome da vaga: ")
+        print("Digite o nome da vaga: ")
         String nome = scanner.nextLine()
-        println("Digite a descrição da vaga: ")
+        print("Digite a descrição da vaga: ")
         String descricao = scanner.nextLine()
-        println("Digite o local da vaga: ")
+        print("Digite o local da vaga: ")
         String local_vaga = scanner.nextLine()
 
-        new Vaga(nome, descricao, local_vaga)
+        List<Competencia> competencias = CompetenciaService.choiseCompetencia()
+
+        new Vaga(nome, descricao, local_vaga , competencias)
     }
 }
