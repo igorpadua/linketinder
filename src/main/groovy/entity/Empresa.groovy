@@ -13,4 +13,14 @@ class Empresa {
     String cep
     String desc
     String senha
+
+    String toString() {
+        return "Nome: ${this.nome} - " +
+                "Email: ${this.email} - " +
+                "CNPJ: ${this.cnpj} - " +
+                "Pais: ${this.pais} - " +
+                "CEP: ${this.cep} - " +
+                "Descrição: ${this.desc} - " +
+                "Senha: ${this.senha}"
+    }
 }

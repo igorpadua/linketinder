@@ -18,4 +18,16 @@ class EmpresaDTO {
         sql.close()
     }
 
+    static List<Empresa> listarEmpresas() {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        List<Empresa> result = new ArrayList<>()
+        sql.eachRow('SELECT * FROM empresas') { rs ->
+            Empresa empresa = new Empresa(rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
+                    rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'), rs.getString('senha'))
+            result.add(empresa)
+            }
+        sql.close()
+        return result
+    }
+
 }
