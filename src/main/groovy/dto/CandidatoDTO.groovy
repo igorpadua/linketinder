@@ -10,12 +10,12 @@ import java.text.SimpleDateFormat
 
 @TypeChecked
 class CandidatoDTO {
-    final url = 'jdbc:postgresql://localhost/liketinder'
-    final user= 'postgres'
-    final password= '123456'
-    final drive= "org.postgresql.Driver"
+    static final url = 'jdbc:postgresql://localhost/liketinder'
+    static final user= 'postgres'
+    static final password= '123456'
+    static final drive= "org.postgresql.Driver"
 
-    void inserirCandidato(Candidato candidato) {
+    static void inserirCandidato(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('INSERT INTO candidatos ' +
                 '(nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) ' +
@@ -25,7 +25,7 @@ class CandidatoDTO {
         sql.close()
     }
 
-    void atualizarCandidato(Candidato candidato) {
+    static void atualizarCandidato(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('UPDATE candidatos ' +
                 "SET nome = '${candidato.nome}', sobrenome = '${candidato.sobrenome}', " +
@@ -36,14 +36,14 @@ class CandidatoDTO {
         sql.close()
     }
 
-    void removeCandidato(String cpf) {
+    static void removeCandidato(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
         sql.close()
     }
 
-    private List<Competencia> arrayCompetencia(String competencias) {
+    static private List<Competencia> arrayCompetencia(String competencias) {
         // Remove os {} do array de competencias
         String remover = competencias.replace('{', '').replace('}', '')
         // Separa as competencias por virgula
@@ -56,7 +56,7 @@ class CandidatoDTO {
         return competenciasList
     }
 
-    Candidato getCandidato(String cpf) {
+    static Candidato getCandidato(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         Candidato aux = null
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -77,7 +77,7 @@ class CandidatoDTO {
         return aux
     }
 
-    List<Candidato> listaTodosCandidatos() {
+    static List<Candidato> listaTodosCandidatos() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         List<Candidato> aux = new ArrayList<>()
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -97,7 +97,7 @@ class CandidatoDTO {
         return aux
     }
 
-    private int getIdCandidato(String cpf) {
+    static int getIdCandidato(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         int aux = 0
         sql.eachRow("""SELECT c.id
@@ -107,16 +107,5 @@ class CandidatoDTO {
         }
         sql.close()
         return aux
-    }
-
-    void addCompetencias(Candidato candidato) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
-        int idCandidato = getIdCandidato(candidato.cpf)
-        for (Competencia competencia in candidato.competencias) {
-            int idCompetencia = CompetenciaDTO.getIdCompetencia(competencia.toString())
-            sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
-                                    VALUES (${idCandidato}, ${idCompetencia});""")
-        }
-        sql.close()
     }
 }
