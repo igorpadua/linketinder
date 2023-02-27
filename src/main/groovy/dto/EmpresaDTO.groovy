@@ -35,4 +35,23 @@ class EmpresaDTO {
         sql.execute('DELETE FROM empresas WHERE cnpj = ?', [cnpj])
         sql.close()
     }
+
+    static Empresa getEmpresa(String cnpj) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        Empresa empresa = null
+        sql.eachRow('SELECT * FROM empresas WHERE cnpj = ?', [cnpj]) { rs ->
+            empresa = new Empresa(rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
+                    rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'), rs.getString('senha'))
+        }
+        sql.close()
+        return empresa
+    }
+
+    static void atualizarEmpresa(Empresa empresa) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.executeUpdate('UPDATE empresas ' +
+                'SET nome = ?, email = ?, cnpj = ?, pais = ?, cep = ?, descricao = ?, senha = ? WHERE cnpj = ?',
+                [empresa.nome, empresa.email, empresa.cnpj, empresa.pais, empresa.cep, empresa.desc, empresa.senha, empresa.cnpj])
+        sql.close()
+    }
 }
