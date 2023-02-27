@@ -68,12 +68,11 @@ class CandidatoService {
     }
 
     static void atualizarCandidato(Candidato candidato) {
-        menuAtualizar()
         boolean end = true
         Scanner scanner = new Scanner(System.in)
-        String opc = '0'
         while (end) {
-            opc = scanner.nextLine()
+            menuAtualizar()
+            String opc = scanner.nextLine()
             switch (opc) {
                 case '1':
                     print("Digite o novo nome: ")

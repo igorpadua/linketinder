@@ -54,10 +54,10 @@ class EmpresaService {
     }
 
     static void atualizarEmpresa(Empresa empresa) {
-        menuAtualizar()
         boolean end = true
         Scanner scanner = new Scanner(System.in)
         while (end) {
+            menuAtualizar()
             String opc = scanner.nextLine()
             switch (opc) {
                 case '1':

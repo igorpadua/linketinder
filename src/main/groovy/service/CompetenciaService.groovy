@@ -10,45 +10,36 @@ class CompetenciaService {
         List<Competencia> aux = new ArrayList<>()
         Scanner scanner = new Scanner(System.in)
 
-        menu()
         while (end) {
+            menu()
             int opc = scanner.nextInt()
             switch (opc) {
                 case 1:
                     aux.add(Competencia.Python)
-                    print("Escolha outra opção: ")
                     break
                 case 2:
                     aux.add(Competencia.Java)
-                    print("Escolha outra opção: ")
                     break
                 case 3:
                     aux.add(Competencia.SpringFramework)
-                    print("Escolha outra opção: ")
                     break
                 case 4:
                     aux.add(Competencia.Angular)
-                    print("Escolha outra opção: ")
                     break
                 case 5:
                     aux.add(Competencia.cplusplus)
-                    print("Escolha outra opção: ")
                     break
                 case 6:
                     aux.add(Competencia.c)
-                    print("Escolha outra opção: ")
                     break
                 case 7:
                     aux.add(Competencia.JavaScript)
-                    print("Escolha outra opção: ")
                     break
                 case 8:
                     aux.add(Competencia.Html)
-                    print("Escolha outra opção: ")
                     break
                 case 9:
                     aux.add(Competencia.Node)
-                    print("Escolha outra opção: ")
                     break
                 case 10:
                     end = false
