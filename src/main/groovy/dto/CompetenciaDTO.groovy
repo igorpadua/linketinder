@@ -17,7 +17,7 @@ class CompetenciaDTO {
 
     static int getIdCompetencia(String competencia) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        List result = sql.rows("SELECT id FROM competencias WHERE competencia = '${competencia}';")
+        List result = sql.rows("SELECT id FROM competencias WHERE competencia = ?", [competencia])
         sql.close()
         return result[0].id
     }

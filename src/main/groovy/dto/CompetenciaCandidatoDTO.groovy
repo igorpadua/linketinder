@@ -1,25 +1,23 @@
 package main.groovy.dto
 
 import groovy.sql.Sql
+import main.groovy.entity.Candidato
+import main.groovy.entity.Competencia
 
 class CompetenciaCandidatoDTO {
-    final url = 'jdbc:postgresql://localhost/liketinder'
-    final user= 'postgres'
-    final password= '123456'
-    final drive= "org.postgresql.Driver"
+    static final url = 'jdbc:postgresql://localhost/liketinder'
+    static final user= 'postgres'
+    static final password= '123456'
+    static final drive= "org.postgresql.Driver"
 
-    void inserirCompetenciaCandidato(int idCandidato, int idCompetencia) {
+    static void inserirCompetenciaCandidato(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        sql.executeInsert('INSERT INTO competencias_candidatos ' +
-                '(id_candidato, id_competencia) ' +
-                "VALUES ('${idCandidato}', '${idCompetencia}')")
-        sql.close()
-    }
-
-    void removeCompetenciaCandidato(int idCandidato, int idCompetencia) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
-        sql.executeInsert('DELETE FROM competencias_candidatos ' +
-                "WHERE id_candidato = '${idCandidato}' AND id_competencia = '${idCompetencia}'")
+        final int idCandidato = CandidatoDTO.getIdCandidato(candidato.cpf)
+        for (Competencia competencia in candidato.competencias) {
+            int idCompetencia = CompetenciaDTO.getIdCompetencia(competencia.toString())
+            sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
+                                    VALUES (${idCandidato}, ${idCompetencia});""")
+        }
         sql.close()
     }
 }
