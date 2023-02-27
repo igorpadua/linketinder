@@ -30,4 +30,9 @@ class EmpresaDTO {
         return result
     }
 
+    static void removeEmpresa(String cnpj) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.execute('DELETE FROM empresas WHERE cnpj = ?', [cnpj])
+        sql.close()
+    }
 }

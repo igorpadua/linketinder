@@ -36,4 +36,11 @@ class EmpresaService {
             println(empresa)
         }
     }
+
+    static String pegaCnpjEmpresa() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CNPJ da empresa: ")
+        String cnpj = scanner.nextLine()
+        return cnpj
+    }
 }
