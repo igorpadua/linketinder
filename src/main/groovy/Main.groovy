@@ -2,6 +2,7 @@ package main.groovy
 
 import main.groovy.dto.CandidatoDTO
 import main.groovy.dto.CompetenciaCandidatoDTO
+import main.groovy.dto.CompetenciaVagasDTO
 import main.groovy.dto.EmpresaDTO
 import main.groovy.dto.VagaDTO
 import main.groovy.entity.Candidato
@@ -43,6 +44,8 @@ static void main(String[] args) {
         final int id = EmpresaDTO.getIdEmpresa(cnpj)
         Vaga vaga = VagaService.adicionaVaga()
         VagaDTO.inserirVaga(vaga, id)
+        // Adiciona as competencias da vaga
+        CompetenciaVagasDTO.inserirCompetenciaVaga(vaga, id)
         println("\nAdicionado com sucesso\n")
         break
       case 4:

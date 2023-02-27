@@ -51,4 +51,14 @@ class VagaDTO {
         sql.close()
         return vaga
     }
+
+    static int getIdVaga(String nome, int id) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        int idVaga = 0
+        sql.eachRow("SELECT id FROM vagas WHERE nome = ${nome} and empresa_id = ${id}") { rs ->
+            idVaga = rs.getInt('id')
+        }
+        sql.close()
+        return idVaga
+    }
 }
