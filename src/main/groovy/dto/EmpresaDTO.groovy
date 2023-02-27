@@ -52,8 +52,8 @@ class EmpresaDTO {
     static void atualizarEmpresa(Empresa empresa) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeUpdate('UPDATE empresas ' +
-                "SET nome = ${empresa.nome}, email = ${empresa.email}, cnpj = ${empresa.cnpj}, pais = ${empresa.pais}, " +
-                "cep = ${empresa.cep}, descricao = ${empresa.desc}, senha = ${empresa.senha} WHERE cnpj = ${empresa.cnpj}")
+                "SET nome = '${empresa.nome}', email = '${empresa.email}', cnpj = '${empresa.cnpj}', pais = '${empresa.pais}', " +
+                "cep = '${empresa.cep}', descricao = '${empresa.desc}', senha = '${empresa.senha}' WHERE cnpj = '${empresa.cnpj}'")
         sql.close()
     }
 }
