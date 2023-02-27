@@ -6,17 +6,18 @@ import main.groovy.dto.EmpresaDTO
 import main.groovy.entity.Candidato
 import main.groovy.entity.Empresa
 import groovy.transform.TypeChecked
+import main.groovy.entity.Vaga
 import main.groovy.service.EmpresaService
 import main.groovy.service.CandidatoService
+import main.groovy.service.VagaService
 
 @TypeChecked
 static void main(String[] args) {
-  menu()
-
   Boolean end = true
   Scanner scanner = new Scanner(System.in)
 
   while (end) {
+    menu()
     int opc = scanner.nextInt()
     switch (opc) {
       case 1 :
@@ -34,6 +35,11 @@ static void main(String[] args) {
         println("\nAdiciona com sucesso\n")
         break
       case 3:
+        // Adicionar uma vaga
+        Vaga vaga = VagaService.adicionaVaga()
+        println("\nAdicionado com sucesso\n")
+        break
+      case 4:
         // Atualizar um candidato
         final String cpf = CandidatoService.pegaCpfCandidado()
         // Pega o candidato do banco de dados
@@ -46,7 +52,7 @@ static void main(String[] args) {
         CompetenciaCandidatoDTO.atualizarCompetenciaCandidato(candidato)
         println("\nAtualizado com sucesso\n")
         break
-      case 4:
+      case 5:
         // Atualizar uma empresa
         final String cnpj = EmpresaService.pegaCnpjEmpresa()
         // Pega a empresa do banco de dados
@@ -57,33 +63,38 @@ static void main(String[] args) {
         EmpresaDTO.atualizarEmpresa(empresa)
         println("\nAtualizado com sucesso\n")
         break
-      case 5:
+      case 6:
+        // Atualizar uma vaga
+        break
+      case 7:
         // Remover um candidato
         final String cpf = CandidatoService.pegaCpfCandidado()
         CompetenciaCandidatoDTO.removeCompetenciaCandidato(cpf)
         CandidatoDTO.removeCandidato(cpf)
         println("\nRemovido com sucesso\n")
         break
-      case 6:
+      case 8:
         // Remover uma empresa
         final String cnpj = EmpresaService.pegaCnpjEmpresa()
         EmpresaDTO.removeEmpresa(cnpj)
         println("\nRemovido com sucesso\n")
         break
-      case 7:
+      case 9:
+        // Remover uma vaga
+        break
+      case 10:
         // Listar candidatos
         CandidatoService.printCandidatos(CandidatoDTO.listaTodosCandidatos())
         break
-      case 8:
+      case 11:
         // Listar empresas
          EmpresaService.printEmpresas(EmpresaDTO.listarEmpresas())
         break
-      case 9:
+      case 12:
         end = false
         println("Saiu com sucesso")
         break
       default:
-        menu()
         println("Opção incorreta")
     }
   }
@@ -93,11 +104,15 @@ static void main(String[] args) {
 static private void menu() {
   println("1 - Adicionar um novo candidato")
   println("2 - Adicionar uma nova empresa")
-  println("3 - Atualizar um candidato")
-  println("4 - Atualizar uma empresa")
-  println("5 - Remover um candidato")
-  println("6 - Remover uma empresa")
-  println("7 - Listar candidatos")
-  println("8 - Listar empresas")
-  println("9 - Sair")
+  println("3 - Adicionar uma nova vaga")
+  println("4 - Atualizar um candidato")
+  println("5 - Atualizar uma empresa")
+  println("6 - Atualizar uma vaga")
+  println("7 - Remover um candidato")
+  println("8 - Remover uma empresa")
+  println("9 - Remover uma vaga")
+  println("10 - Listar candidatos")
+  println("11 - Listar empresas")
+  println("12 - Listar vagas")
+  println("13 - Sair")
 }
