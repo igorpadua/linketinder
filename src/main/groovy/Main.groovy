@@ -67,6 +67,7 @@ static void main(String[] args) {
         break
       case 6:
         // Atualizar uma vaga
+        VagaService.atualizarVaga(vagas.get(0))
         break
       case 7:
         // Remover um candidato
