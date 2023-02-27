@@ -43,18 +43,8 @@ class CandidatoService {
             println("Não existe candidatos")
         }
 
-        int i = 1
         for (candidato in pessoas) {
-            println("Id: ${i} - " +
-                    "Nome: ${candidato.nome} ${candidato.sobrenome} - " +
-                    "Data nascimento: ${candidato.nascimento} - " +
-                    "Email: ${candidato.email} - " +
-                    "CPF: ${candidato.cpf} - " +
-                    "Pais: ${candidato.pais} - " +
-                    "CEP: ${candidato.cep} - " +
-                    "Descrição: ${candidato.desc} - " +
-                    "Competencias: ${candidato.competencias}")
-            i++
+            println(candidato)
         }
     }
 

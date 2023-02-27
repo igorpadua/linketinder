@@ -17,4 +17,15 @@ class Candidato {
     String desc
     String senha
     ArrayList<Competencia> competencias;
+
+    String toString() {
+        return"Nome: ${this.nome} ${this.sobrenome} - " +
+                "Data nascimento: ${this.nascimento} - " +
+                "Email: ${this.email} - " +
+                "CPF: ${this.cpf} - " +
+                "Pais: ${this.pais} - " +
+                "CEP: ${this.cep} - " +
+                "Descrição: ${this.desc} - " +
+                "Competencias: ${this.competencias}"
+    }
 }
