@@ -27,4 +27,10 @@ class VagaDTO {
         sql.close()
         return result
     }
+
+    static void removeVaga(String nome, int id) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        sql.execute("DELETE FROM vagas WHERE nome = ${nome} and empresa_id = ${id}")
+        sql.close()
+    }
 }

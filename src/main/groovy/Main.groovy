@@ -88,6 +88,13 @@ static void main(String[] args) {
         break
       case 9:
         // Remover uma vaga
+        print("Digite o nome da vaga Empresa: ")
+        final String nome = scanner.next()
+        final String cnpj = EmpresaService.pegaCnpjEmpresa()
+        // Pega o ID
+        final int id = EmpresaDTO.getIdEmpresa(cnpj)
+        VagaDTO.removeVaga(nome, id)
+        println("\nRemovido com sucesso\n")
         break
       case 10:
         // Listar candidatos
