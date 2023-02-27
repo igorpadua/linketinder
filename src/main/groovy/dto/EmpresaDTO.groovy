@@ -56,4 +56,14 @@ class EmpresaDTO {
                 "cep = '${empresa.cep}', descricao = '${empresa.desc}', senha = '${empresa.senha}' WHERE cnpj = '${empresa.cnpj}'")
         sql.close()
     }
+
+    static int getIdEmpresa(String cnpj) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        int id = 0
+        sql.eachRow("SELECT id FROM empresas WHERE cnpj = ${cnpj}") { rs ->
+            id = rs.getInt('id')
+        }
+        sql.close()
+        return id
+    }
 }

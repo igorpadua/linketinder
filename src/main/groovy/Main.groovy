@@ -3,6 +3,7 @@ package main.groovy
 import main.groovy.dto.CandidatoDTO
 import main.groovy.dto.CompetenciaCandidatoDTO
 import main.groovy.dto.EmpresaDTO
+import main.groovy.dto.VagaDTO
 import main.groovy.entity.Candidato
 import main.groovy.entity.Empresa
 import groovy.transform.TypeChecked
@@ -37,8 +38,11 @@ static void main(String[] args) {
         break
       case 3:
         // Adicionar uma vaga
+        final String cnpj = EmpresaService.pegaCnpjEmpresa()
+        // Pega o ID
+        final int id = EmpresaDTO.getIdEmpresa(cnpj)
         Vaga vaga = VagaService.adicionaVaga()
-        vagas.add(vaga)
+        VagaDTO.inserirVaga(vaga, id)
         println("\nAdicionado com sucesso\n")
         break
       case 4:
