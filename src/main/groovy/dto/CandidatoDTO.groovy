@@ -94,8 +94,29 @@ class CandidatoDTO {
             aux.add(candidato)
         }
         sql.close()
-
         return aux
     }
 
+    private int getIdCandidato(String cpf) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        int aux = 0
+        sql.eachRow("""SELECT c.id
+                            FROM candidatos c
+                            WHERE c.cpf = ${cpf};""") { rs ->
+            aux = rs.getInt('id')
+        }
+        sql.close()
+        return aux
+    }
+
+    void addCompetencias(Candidato candidato) {
+        Sql sql = Sql.newInstance(url, user, password, drive)
+        int idCandidato = getIdCandidato(candidato.cpf)
+        for (Competencia competencia in candidato.competencias) {
+            int idCompetencia = CompetenciaDTO.getIdCompetencia(competencia.toString())
+            sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
+                                    VALUES (${idCandidato}, ${idCompetencia});""")
+        }
+        sql.close()
+    }
 }
