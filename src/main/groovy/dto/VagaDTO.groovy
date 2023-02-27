@@ -1,7 +1,9 @@
 package main.groovy.dto
 
 import groovy.sql.Sql
+import main.groovy.entity.Competencia
 import main.groovy.entity.Vaga
+import main.groovy.service.CompetenciaService
 
 class VagaDTO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
@@ -20,8 +22,13 @@ class VagaDTO {
     static List<Vaga> listarVagas() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         List<Vaga> result = []
-        sql.eachRow('SELECT * FROM vagas') { rs ->
-            Vaga vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'))
+        sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
+	                        from vagas as v
+                        	INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
+                        	INNER JOIN competencias c ON c.id = cv.competencia_id
+                        	GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            Vaga vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
             result.add(vaga)
             }
         sql.close()
@@ -45,8 +52,14 @@ class VagaDTO {
     static Vaga getVaga(String nome, int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         Vaga vaga = null
-        sql.eachRow("SELECT * FROM vagas WHERE nome = ${nome} and empresa_id = ${id}") { rs ->
-            vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'))
+        sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
+	                   from vagas as v
+	                   INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
+	                   INNER JOIN competencias c ON c.id = cv.competencia_id
+	                   WHERE nome = ${nome} and empresa_id = ${id} 
+	                   GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
         sql.close()
         return vaga

@@ -2,6 +2,8 @@ package main.groovy.dto
 
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
+import main.groovy.entity.Competencia
+import main.groovy.service.CompetenciaService
 
 @TypeChecked
 class CompetenciaDTO {
@@ -23,4 +25,5 @@ class CompetenciaDTO {
         sql.close()
         return result[0].id as int
     }
+
 }

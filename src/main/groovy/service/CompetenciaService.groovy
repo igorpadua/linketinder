@@ -91,4 +91,17 @@ class CompetenciaService {
         println("9 - Node")
         println("10 - Sair")
     }
+
+    static List<Competencia> arrayCompetencia(String competencias) {
+        // Remove os {} do array de competencias
+        String remover = competencias.replace('{', '').replace('}', '')
+        // Separa as competencias por virgula
+        String[] competenciasArray = remover.split(',')
+        // Transforma cada competencia
+        List<Competencia> competenciasList = new ArrayList<>()
+        for (String competencia in competenciasArray) {
+            competenciasList.add(CompetenciaService.transformaString(competencia))
+        }
+        return competenciasList
+    }
 }
