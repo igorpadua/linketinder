@@ -1,17 +1,18 @@
 package main.groovy.service
 
+import groovy.transform.TypeChecked
 import main.groovy.entity.Competencia
 
+@TypeChecked
 class CompetenciaService {
     static ArrayList<Competencia> choiseCompetencia() {
         boolean end = true
-        int opc = 0
         List<Competencia> aux = new ArrayList<>()
         Scanner scanner = new Scanner(System.in)
 
         menu()
         while (end) {
-            opc = scanner.nextInt()
+            int opc = scanner.nextInt()
             switch (opc) {
                 case 1:
                     aux.add(Competencia.Python)

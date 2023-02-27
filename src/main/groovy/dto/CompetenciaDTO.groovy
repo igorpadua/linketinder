@@ -1,7 +1,9 @@
 package main.groovy.dto
 
 import groovy.sql.Sql
+import groovy.transform.TypeChecked
 
+@TypeChecked
 class CompetenciaDTO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
     static final user= 'postgres'
@@ -17,8 +19,8 @@ class CompetenciaDTO {
 
     static int getIdCompetencia(String competencia) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        List result = sql.rows("SELECT id FROM competencias WHERE competencia = ?", [competencia])
+        List result = sql.rows("SELECT id FROM competencias WHERE competencia = ${competencias}")
         sql.close()
-        return result[0].id
+        return result[0].id as int
     }
 }

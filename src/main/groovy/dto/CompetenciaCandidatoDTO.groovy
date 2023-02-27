@@ -1,9 +1,11 @@
 package main.groovy.dto
 
 import groovy.sql.Sql
+import groovy.transform.TypeChecked
 import main.groovy.entity.Candidato
 import main.groovy.entity.Competencia
 
+@TypeChecked
 class CompetenciaCandidatoDTO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
     static final user= 'postgres'
