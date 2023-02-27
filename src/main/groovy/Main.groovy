@@ -76,7 +76,7 @@ static void main(String[] args) {
         // Atualizar uma vaga
         final String nome = VagaService.pegaNomeVaga()
         final String cnpj = EmpresaService.pegaCnpjEmpresa()
-        // Pega o ID
+        // Pega o ID Empresa
         final int id = EmpresaDTO.getIdEmpresa(cnpj)
         // Pega a vaga do banco de dados
         Vaga vaga = VagaDTO.getVaga(nome, id)
@@ -84,6 +84,8 @@ static void main(String[] args) {
         VagaService.atualizarVaga(vaga)
         // Atualiza a vaga no banco de dados
         VagaDTO.atualizarVaga(vaga, nome, id)
+        // Atualiza as competencias da vaga
+        CompetenciaVagasDTO.atualizarCompetenciaVaga(vaga, id)
         break
       case 7:
         // Remover um candidato
