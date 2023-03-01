@@ -1,6 +1,6 @@
-package test
+package test.groovy.com.igor.linketinder
 
-import main.groovy.entity.Empresa
+import main.groovy.com.igor.linketinder.entity.Empresa
 import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertEquals

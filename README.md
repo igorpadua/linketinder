@@ -45,5 +45,5 @@ Primeiramente compile
 
 Para executar:
 
-> groovy main.groovy.Main
+> groovy main.groovy.com.igor.linketinder.Main
 

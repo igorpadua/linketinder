@@ -1,9 +1,7 @@
-package main.groovy.dto
+package main.groovy.com.igor.linketinder.dto
 
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
-import main.groovy.entity.Competencia
-import main.groovy.service.CompetenciaService
 
 @TypeChecked
 class CompetenciaDTO {

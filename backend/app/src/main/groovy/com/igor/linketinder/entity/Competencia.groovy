@@ -1,4 +1,4 @@
-package main.groovy.entity
+package main.groovy.com.igor.linketinder.entity
 
 enum Competencia {
     Python,

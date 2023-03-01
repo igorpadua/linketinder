@@ -1,8 +1,8 @@
-package main.groovy.dto
+package main.groovy.com.igor.linketinder.dto
 
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
-import main.groovy.entity.Empresa
+import main.groovy.com.igor.linketinder.entity.Empresa
 
 @TypeChecked
 class EmpresaDTO {

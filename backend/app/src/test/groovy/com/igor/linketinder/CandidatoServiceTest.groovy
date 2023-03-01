@@ -1,8 +1,8 @@
-package test
+package test.groovy.com.igor.linketinder
 
 import groovy.transform.TypeChecked
-import main.groovy.entity.Candidato
-import main.groovy.entity.Competencia
+import main.groovy.com.igor.linketinder.entity.Candidato
+import main.groovy.com.igor.linketinder.entity.Competencia
 import org.junit.jupiter.api.Test
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,7 +1,7 @@
-package main.groovy.service
+package main.groovy.com.igor.linketinder.dto.service
 
 import groovy.transform.TypeChecked
-import main.groovy.entity.Competencia
+import main.groovy.com.igor.linketinder.entity.Competencia
 
 @TypeChecked
 class CompetenciaService {
