@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
-
     id 'application'
+    id 'java'
 }
 
 repositories {
@@ -10,17 +10,21 @@ repositories {
 
 dependencies {
     implementation 'org.codehaus.groovy:groovy-all:3.0.13'
-
+    implementation 'org.postgresql:postgresql:42.5.4'
     implementation 'com.google.guava:guava:31.1-jre'
 
     testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
     testImplementation 'junit:junit:4.13.2'
 }
 
-application {
-    mainClass = 'main.groovy.com.igor.linketinder.App'
+run {
+    standardInput = System.in
 }
 
-tasks.named('test') {
+application {
+    mainClass = 'com.igor.linketinder.App'
+}
+
+test {
     useJUnitPlatform()
 }

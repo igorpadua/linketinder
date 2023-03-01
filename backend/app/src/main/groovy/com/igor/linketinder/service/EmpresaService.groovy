@@ -1,7 +1,7 @@
-package main.groovy.com.igor.linketinder.dto.service
+package com.igor.linketinder.service
 
-import main.groovy.com.igor.linketinder.entity.Empresa
 import groovy.transform.TypeChecked
+import com.igor.linketinder.entity.Empresa
 
 @TypeChecked
 class EmpresaService {

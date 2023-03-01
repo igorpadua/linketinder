@@ -1,8 +1,8 @@
-package main.groovy.com.igor.linketinder.dto.service
+package com.igor.linketinder.service
 
-import main.groovy.com.igor.linketinder.entity.Candidato
-import main.groovy.com.igor.linketinder.entity.Competencia
 import groovy.transform.TypeChecked
+import com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.entity.Competencia
 
 import java.text.SimpleDateFormat
 

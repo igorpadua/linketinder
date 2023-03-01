@@ -1,9 +1,10 @@
-package main.groovy.com.igor.linketinder.dto
+package com.igor.linketinder.dto
 
+import com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.entity.Competencia
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
-import main.groovy.com.igor.linketinder.entity.Candidato
-import main.groovy.com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.dto.CompetenciaDTO
 
 @TypeChecked
 class CompetenciaCandidatoDTO {

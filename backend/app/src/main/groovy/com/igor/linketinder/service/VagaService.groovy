@@ -1,7 +1,7 @@
-package main.groovy.com.igor.linketinder.dto.service
+package com.igor.linketinder.service
 
-import main.groovy.com.igor.linketinder.entity.Competencia
-import main.groovy.com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.entity.Vaga
 
 class VagaService {
 

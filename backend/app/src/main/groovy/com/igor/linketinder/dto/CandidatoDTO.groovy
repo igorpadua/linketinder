@@ -1,10 +1,10 @@
-package main.groovy.com.igor.linketinder.dto
+package com.igor.linketinder.dto
 
-import main.groovy.com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.entity.Competencia
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
-import main.groovy.com.igor.linketinder.entity.Competencia
-import main.groovy.com.igor.linketinder.dto.service.CompetenciaService
+import com.igor.linketinder.service.CompetenciaService
 
 import java.text.SimpleDateFormat
 
@@ -17,9 +17,10 @@ class CandidatoDTO {
 
     static void inserirCandidato(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
+        String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
         sql.executeInsert('INSERT INTO candidatos ' +
                 '(nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) ' +
-                "VALUES ('${candidato.nome}', '${candidato.sobrenome}', '${candidato.nascimento.dateString}', " +
+                "VALUES ('${candidato.nome}', '${candidato.sobrenome}', '${nascimento}', " +
                 "'${candidato.email}', '${candidato.cpf}', '${candidato.pais}', '${candidato.cep}', " +
                 "'${candidato.desc}', '${candidato.senha}')")
         sql.close()
@@ -27,9 +28,10 @@ class CandidatoDTO {
 
     static void atualizarCandidato(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
+        String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
         sql.executeInsert('UPDATE candidatos ' +
                 "SET nome = '${candidato.nome}', sobrenome = '${candidato.sobrenome}', " +
-                "data_nascimento = '${candidato.nascimento.dateString}', email = '${candidato.email}', " +
+                "data_nascimento = '${nascimento}', email = '${candidato.email}', " +
                 "cpf = '${candidato.cpf}', pais = '${candidato.pais}', cep = '${candidato.cep}', " +
                 "descricao = '${candidato.desc}', senha = '${candidato.senha}' " +
                 "WHERE cpf = '${candidato.cpf}'")

@@ -1,8 +1,8 @@
-package main.groovy.com.igor.linketinder.dto
+package com.igor.linketinder.dto
 
 import groovy.sql.Sql
-import main.groovy.com.igor.linketinder.entity.Competencia
-import main.groovy.com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.entity.Vaga
 
 class CompetenciaVagasDTO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
