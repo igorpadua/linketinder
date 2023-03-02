@@ -24,7 +24,7 @@ export default function validaPessoa(pessoa: Pessoa) {
     }
 
     const genericRegex: RegExp = /^[a-zA-Z ]{2,30}$/
-    const emailRegex: RegExp = /\S+@\w+\.\w{2,6}(\.\w{2})?/
+    const emailRegex: RegExp = /^\S+@\w+\.\w{2,6}(\.\w{2})?$/
     const descRegex: RegExp = /^(?=.*[A-Za-z])([0-9])*.{3,100}$/
     const cepRegex: RegExp = /^\d{5}-\d{3}$/
     const cpfRegex: RegExp = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
