@@ -39,11 +39,8 @@ Para verificarmos o match é necessario consultar a tabela curtida e curtida_emp
 
 # Executar
 
-Primeiramente compile
+## Front-end
+npm start
 
-> groovyc *.groovy
-
-Para executar:
-
-> groovy main.groovy.com.igor.linketinder.Main
-
+## Back-end
+gradle run
