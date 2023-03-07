@@ -1,4 +1,4 @@
-package com.igor.linketinder.dto
+package com.igor.linketinder.dao
 
 import com.igor.linketinder.entity.Candidato
 import com.igor.linketinder.entity.Competencia
@@ -9,7 +9,7 @@ import com.igor.linketinder.service.CompetenciaService
 import java.text.SimpleDateFormat
 
 @TypeChecked
-class CandidatoDTO {
+class CandidatoDAO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
     static final user= 'postgres'
     static final password= '123456'

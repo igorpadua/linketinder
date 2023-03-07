@@ -1,4 +1,4 @@
-package com.igor.linketinder.dto
+package com.igor.linketinder.dao
 
 
 import com.igor.linketinder.service.CompetenciaService
@@ -6,7 +6,7 @@ import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class VagaDTO {
+class VagaDAO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
     static final user= 'postgres'
     static final password= '123456'
@@ -20,7 +20,7 @@ class VagaDTO {
         sql.close()
     }
 
-    static List<com.igor.linketinder.entity.Vaga> listarVagas() {
+    static List<Vaga> listarVagas() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         List<Vaga> result = []
         sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias

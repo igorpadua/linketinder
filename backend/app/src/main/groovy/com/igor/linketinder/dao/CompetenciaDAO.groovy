@@ -1,10 +1,10 @@
-package com.igor.linketinder.dto
+package com.igor.linketinder.dao
 
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
 
 @TypeChecked
-class CompetenciaDTO {
+class CompetenciaDAO {
     static final url = 'jdbc:postgresql://localhost/liketinder'
     static final user= 'postgres'
     static final password= '123456'

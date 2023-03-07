@@ -1,10 +1,10 @@
 package com.igor.linketinder
 
-import com.igor.linketinder.dto.CandidatoDTO
-import com.igor.linketinder.dto.CompetenciaCandidatoDTO
-import com.igor.linketinder.dto.CompetenciaVagasDTO
-import com.igor.linketinder.dto.EmpresaDTO
-import com.igor.linketinder.dto.VagaDTO
+import com.igor.linketinder.dao.CandidatoDAO
+import com.igor.linketinder.dao.CompetenciaCandidatoDAO
+import com.igor.linketinder.dao.CompetenciaVagasDAO
+import com.igor.linketinder.dao.EmpresaDAO
+import com.igor.linketinder.dao.VagaDAO
 import com.igor.linketinder.entity.Candidato
 import com.igor.linketinder.entity.Empresa
 import com.igor.linketinder.entity.Vaga
@@ -40,50 +40,49 @@ class App {
                 case 1 :
                     // Adicionar um candidato
                     Candidato candidato = CandidatoService.newCandidato()
-                    CandidatoDTO.inserirCandidato(candidato)
+                    CandidatoDAO.inserirCandidato(candidato)
                     // Adiciona as competencias do candidato
-                    CompetenciaCandidatoDTO.inserirCompetenciaCandidato(candidato)
+                    CompetenciaCandidatoDAO.inserirCompetenciaCandidato(candidato)
                     println("\nAdicionado com sucesso\n")
                     break
                 case 2:
                     // Adicionar uma empresa
                     Empresa empresa = EmpresaService.newEmpresa()
-                    EmpresaDTO.inserirEmpresa(empresa)
-                    println("\nAdiciona com sucesso\n")
+                    EmpresaDAO.inserirEmpresa(empresa) println("\nAdiciona com sucesso\n")
                     break
                 case 3:
                     // Adicionar uma vaga
                     final String cnpj = EmpresaService.pegaCnpjEmpresa()
                     // Pega o ID
-                    final int id = EmpresaDTO.getIdEmpresa(cnpj)
+                    final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     Vaga vaga = VagaService.adicionaVaga()
-                    VagaDTO.inserirVaga(vaga, id)
+                    VagaDAO.inserirVaga(vaga, id)
                     // Adiciona as competencias da vaga
-                    CompetenciaVagasDTO.inserirCompetenciaVaga(vaga, id)
+                    CompetenciaVagasDAO.inserirCompetenciaVaga(vaga, id)
                     println("\nAdicionado com sucesso\n")
                     break
                 case 4:
                     // Atualizar um candidato
                     final String cpf = CandidatoService.pegaCpfCandidado()
                     // Pega o candidato do banco de dados
-                    Candidato candidato = CandidatoDTO.getCandidato(cpf)
+                    Candidato candidato = CandidatoDAO.getCandidato(cpf)
                     // Atualiza o candidato
                     CandidatoService.atualizarCandidato(candidato)
                     // Atualiza o candidato no banco de dados
-                    CandidatoDTO.atualizarCandidato(candidato)
+                    CandidatoDAO.atualizarCandidato(candidato)
                     // Atualiza as competencias do candidato
-                    CompetenciaCandidatoDTO.atualizarCompetenciaCandidato(candidato)
+                    CompetenciaCandidatoDAO.atualizarCompetenciaCandidato(candidato)
                     println("\nAtualizado com sucesso\n")
                     break
                 case 5:
                     // Atualizar uma empresa
                     final String cnpj = EmpresaService.pegaCnpjEmpresa()
                     // Pega a empresa do banco de dados
-                    Empresa empresa = EmpresaDTO.getEmpresa(cnpj)
+                    Empresa empresa = EmpresaDAO.getEmpresa(cnpj)
                     // Atualiza a empresa
                     EmpresaService.atualizarEmpresa(empresa)
                     // Atualiza a empresa no banco de dados
-                    EmpresaDTO.atualizarEmpresa(empresa)
+                    EmpresaDAO.atualizarEmpresa(empresa)
                     println("\nAtualizado com sucesso\n")
                     break
                 case 6:
@@ -91,27 +90,27 @@ class App {
                     final String nome = VagaService.pegaNomeVaga()
                     final String cnpj = EmpresaService.pegaCnpjEmpresa()
                     // Pega o ID Empresa
-                    final int id = EmpresaDTO.getIdEmpresa(cnpj)
+                    final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     // Pega a vaga do banco de dados
-                    Vaga vaga = VagaDTO.getVaga(nome, id)
+                    Vaga vaga = VagaDAO.getVaga(nome, id)
                     // Atualiza a vaga
                     VagaService.atualizarVaga(vaga)
                     // Atualiza a vaga no banco de dados
-                    VagaDTO.atualizarVaga(vaga, nome, id)
+                    VagaDAO.atualizarVaga(vaga, nome, id)
                     // Atualiza as competencias da vaga
-                    CompetenciaVagasDTO.atualizarCompetenciaVaga(vaga, id)
+                    CompetenciaVagasDAO.atualizarCompetenciaVaga(vaga, id)
                     break
                 case 7:
                     // Remover um candidato
                     final String cpf = CandidatoService.pegaCpfCandidado()
-                    CompetenciaCandidatoDTO.removeCompetenciaCandidato(cpf)
-                    CandidatoDTO.removeCandidato(cpf)
+                    CompetenciaCandidatoDAO.removeCompetenciaCandidato(cpf)
+                    CandidatoDAO.removeCandidato(cpf)
                     println("\nRemovido com sucesso\n")
                     break
                 case 8:
                     // Remover uma empresa
                     final String cnpj = EmpresaService.pegaCnpjEmpresa()
-                    EmpresaDTO.removeEmpresa(cnpj)
+                    EmpresaDAO.removeEmpresa(cnpj)
                     println("\nRemovido com sucesso\n")
                     break
                 case 9:
@@ -119,24 +118,24 @@ class App {
                     final String nome = VagaService.pegaNomeVaga()
                     final String cnpj = EmpresaService.pegaCnpjEmpresa()
                     // Pega o ID Empresas
-                    final int id = EmpresaDTO.getIdEmpresa(cnpj)
+                    final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     // Pega o ID Vagas
-                    final int idVaga = VagaDTO.getIdVaga(nome, id)
-                    CompetenciaVagasDTO.removeCompetenciaVaga(idVaga)
-                    VagaDTO.removeVaga(nome, id)
+                    final int idVaga = VagaDAO.getIdVaga(nome, id)
+                    CompetenciaVagasDAO.removeCompetenciaVaga(idVaga)
+                    VagaDAO.removeVaga(nome, id)
                     println("\nRemovido com sucesso\n")
                     break
                 case 10:
                     // Listar candidatos
-                    CandidatoService.printCandidatos(CandidatoDTO.listaTodosCandidatos())
+                    CandidatoService.printCandidatos(CandidatoDAO.listaTodosCandidatos())
                     break
                 case 11:
                     // Listar empresas
-                    EmpresaService.printEmpresas(EmpresaDTO.listarEmpresas())
+                    EmpresaService.printEmpresas(EmpresaDAO.listarEmpresas())
                     break
                 case 12:
                     // Listar vagas
-                    VagaService.printVagas(VagaDTO.listarVagas())
+                    VagaService.printVagas(VagaDAO.listarVagas())
                     break
                 case 13:
                     end = false
