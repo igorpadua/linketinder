@@ -10,6 +10,7 @@ import com.igor.linketinder.entity.Empresa
 import com.igor.linketinder.entity.Vaga
 import com.igor.linketinder.service.CandidatoService
 import com.igor.linketinder.service.EmpresaService
+import com.igor.linketinder.service.PessoaService
 import com.igor.linketinder.service.VagaService
 
 class App {
@@ -128,11 +129,11 @@ class App {
                     break
                 case 10:
                     // Listar candidatos
-                    CandidatoService.printCandidatos(CandidatoDAO.listaTodosCandidatos())
+                    PessoaService.imprimir(CandidatoDAO.listaTodosCandidatos())
                     break
                 case 11:
                     // Listar empresas
-                    EmpresaService.imprimir(EmpresaDAO.listarEmpresas())
+                    PessoaService.imprimir(EmpresaDAO.listarEmpresas())
                     break
                 case 12:
                     // Listar vagas

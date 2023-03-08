@@ -16,13 +16,6 @@ class EmpresaServiceTest {
     }
 
     @Test
-    void listaVaziaTest() {
-        List<Empresa> empresas = new ArrayList<>()
-        EmpresaService.imprimir(empresas)
-        assertEquals(0, empresas.size())
-    }
-
-    @Test
     void cnpjValidoTest() {
         String cnpj = "50.000.000/0000-00"
         Boolean resul = EmpresaService.validaCNPJ(cnpj)

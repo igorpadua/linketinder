@@ -1,5 +1,6 @@
 package com.igor.linketinder.service
 
+import com.igor.linketinder.entity.Pessoa
 import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertEquals

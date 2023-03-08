@@ -1,5 +1,8 @@
 package com.igor.linketinder.service
 
+import com.igor.linketinder.entity.Empresa
+import com.igor.linketinder.entity.Pessoa
+
 import java.util.regex.Pattern
 
 class PessoaService {
@@ -21,5 +24,17 @@ class PessoaService {
             cep = scanner.nextLine()
         }
         return cep
+    }
+
+    private static Boolean listaEstaValida(List<Pessoa> pessoas) {
+        return pessoas != null && !pessoas.isEmpty()
+    }
+
+    static void imprimir(List<Pessoa> pessoas) {
+        if (!listaEstaValida(pessoas)) return
+
+        for (pessoa in pessoas) {
+            println(pessoa)
+        }
     }
 }
