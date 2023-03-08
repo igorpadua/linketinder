@@ -51,6 +51,6 @@ class VagaController {
 
     static void listar() {
         // Listar todas as vagas
-        VagaDAO.listarVagas()
+        VagaService.printVagas(VagaDAO.listarVagas())
     }
 }
