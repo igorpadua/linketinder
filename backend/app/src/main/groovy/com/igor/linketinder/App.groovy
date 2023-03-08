@@ -1,5 +1,6 @@
 package com.igor.linketinder
 
+import com.igor.linketinder.controller.CandidatoController
 import com.igor.linketinder.dao.CandidatoDAO
 import com.igor.linketinder.dao.CompetenciaCandidatoDAO
 import com.igor.linketinder.dao.CompetenciaVagasDAO
@@ -39,12 +40,7 @@ class App {
             int opc = scanner.nextInt()
             switch (opc) {
                 case 1 :
-                    // Adicionar um candidato
-                    Candidato candidato = CandidatoService.newCandidato()
-                    CandidatoDAO.inserirCandidato(candidato)
-                    // Adiciona as competencias do candidato
-                    CompetenciaCandidatoDAO.inserirCompetenciaCandidato(candidato)
-                    println("\nAdicionado com sucesso\n")
+                    CandidatoController.adicionar()
                     break
                 case 2:
                     // Adicionar uma empresa
@@ -64,17 +60,7 @@ class App {
                     println("\nAdicionado com sucesso\n")
                     break
                 case 4:
-                    // Atualizar um candidato
-                    final String cpf = CandidatoService.pegaCPF()
-                    // Pega o candidato do banco de dados
-                    Candidato candidato = CandidatoDAO.getCandidato(cpf)
-                    // Atualiza o candidato
-                    CandidatoService.atualizarCandidato(candidato)
-                    // Atualiza o candidato no banco de dados
-                    CandidatoDAO.atualizarCandidato(candidato)
-                    // Atualiza as competencias do candidato
-                    CompetenciaCandidatoDAO.atualizarCompetenciaCandidato(candidato)
-                    println("\nAtualizado com sucesso\n")
+                    CandidatoController.atualizar()
                     break
                 case 5:
                     // Atualizar uma empresa
@@ -103,11 +89,7 @@ class App {
                     CompetenciaVagasDAO.atualizarCompetenciaVaga(vaga, id)
                     break
                 case 7:
-                    // Remover um candidato
-                    final String cpf = CandidatoService.pegaCPF()
-                    CompetenciaCandidatoDAO.removeCompetenciaCandidato(cpf)
-                    CandidatoDAO.removeCandidato(cpf)
-                    println("\nRemovido com sucesso\n")
+                    CandidatoController.remover()
                     break
                 case 8:
                     // Remover uma empresa
@@ -128,8 +110,7 @@ class App {
                     println("\nRemovido com sucesso\n")
                     break
                 case 10:
-                    // Listar candidatos
-                    PessoaService.imprimir(CandidatoDAO.listaTodosCandidatos())
+                    CandidatoController.listar()
                     break
                 case 11:
                     // Listar empresas
