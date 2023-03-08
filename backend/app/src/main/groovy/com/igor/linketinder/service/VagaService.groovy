@@ -16,7 +16,7 @@ class VagaService {
 
         List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
-        new Vaga(nome, descricao, local_vaga , competencias)
+        new Vaga(0, nome, descricao, local_vaga , competencias)
     }
 
     private static Boolean listaEstaValida(List<Vaga> vagas) {
@@ -75,10 +75,10 @@ class VagaService {
         }
     }
 
-    static String pegaNomeVaga() {
+    static int pegaID() {
         Scanner scanner = new Scanner(System.in)
-        print("Digite o nome da vaga: ")
-        String nome = scanner.nextLine()
-        return nome
+        print("Digite o id da vaga: ")
+        int id = scanner.nextInt()
+        return id
     }
 }

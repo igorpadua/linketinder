@@ -6,12 +6,13 @@ import groovy.transform.TypeChecked
 @TypeChecked
 @Canonical
 class Vaga {
+    int id
     String nome
     String descricao
     String local_vaga
     List<Competencia> competencias
 
     String toString() {
-        return "Vaga: ${nome} - ${descricao} - ${local_vaga} - ${competencias}"
+        return "Vaga: ${id} - ${nome} - ${descricao} - ${local_vaga} - ${competencias}"
     }
 }

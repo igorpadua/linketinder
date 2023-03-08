@@ -12,12 +12,11 @@ class CompetenciaVagasDAO {
 
     static void adicionar(Vaga vaga, int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        final int idVaga = VagaDAO.getIdVaga(vaga.nome, id)
 
         for (Competencia competencia in vaga.competencias) {
             int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
-                                    VALUES (${idVaga}, ${idCompetencia});""")
+                                    VALUES (${id}, ${idCompetencia});""")
         }
 
         sql.close()
@@ -31,13 +30,12 @@ class CompetenciaVagasDAO {
 
     static void atualizar(Vaga vaga, int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        final int idVaga = VagaDAO.getIdVaga(vaga.nome, id)
 
-        remove(idVaga)
+        remove(id)
         for (Competencia competencia in vaga.competencias) {
             int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
-                                    VALUES (${idVaga}, ${idCompetencia});""")
+                                    VALUES (${id}, ${idCompetencia});""")
         }
 
         sql.close()

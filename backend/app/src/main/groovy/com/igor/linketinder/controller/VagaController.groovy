@@ -12,45 +12,38 @@ class VagaController {
         // Adicionar uma vaga
         final String cnpj = EmpresaService.pegaCnpj()
         // Pega o ID
-        final int id = EmpresaDAO.pegaId(cnpj)
+        final int idEmpresa = EmpresaDAO.pegaId(cnpj)
         Vaga vaga = VagaService.adicionaVaga()
-        VagaDAO.inserirVaga(vaga, id)
+        VagaDAO.adicionar(vaga, idEmpresa)
         // Adiciona as competencias da vaga
-        CompetenciaVagasDAO.adicionar(vaga, id)
+        CompetenciaVagasDAO.adicionar(vaga, idEmpresa)
         println("\nAdicionado com sucesso\n")
     }
 
     static void atualizar() {
         // Atualizar uma vaga
-        final String nome = VagaService.pegaNomeVaga()
-        final String cnpj = EmpresaService.pegaCnpj()
-        // Pega o ID Empresa
-        final int id = EmpresaDAO.pegaId(cnpj)
+        final int id = VagaService.pegaID()
         // Pega a vaga do banco de dados
-        Vaga vaga = VagaDAO.getVaga(nome, id)
+        Vaga vaga = VagaDAO.pega(id)
+        println(vaga)
         // Atualiza a vaga
         VagaService.atualizarVaga(vaga)
         // Atualiza a vaga no banco de dados
-        VagaDAO.atualizarVaga(vaga, nome, id)
+        VagaDAO.atualiza(vaga, id)
         // Atualiza as competencias da vaga
         CompetenciaVagasDAO.atualizar(vaga, id)
     }
 
     static void remover() {
         // Remover uma vaga
-        final String nome = VagaService.pegaNomeVaga()
-        final String cnpj = EmpresaService.pegaCnpj()
-        // Pega o ID Empresas
-        final int id = EmpresaDAO.pegaId(cnpj)
-        // Pega o ID Vagas
-        final int idVaga = VagaDAO.getIdVaga(nome, id)
-        CompetenciaVagasDAO.remove(idVaga)
-        VagaDAO.removeVaga(nome, id)
+        final int id = VagaService.pegaID()
+        CompetenciaVagasDAO.remove(id)
+        VagaDAO.remove(id)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
         // Listar todas as vagas
-        VagaService.printVagas(VagaDAO.listarVagas())
+        VagaService.printVagas(VagaDAO.listaComTodasVagas())
     }
 }
