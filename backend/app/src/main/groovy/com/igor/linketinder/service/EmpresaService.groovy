@@ -11,7 +11,7 @@ class EmpresaService {
     static Boolean validaCNPJ(String cnpj) {
         if (cnpj == null || cnpj.isEmpty()) return false
         if (cnpj.length() != 18) return false
-        Pattern cnpjRegex = ~/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
+        final Pattern cnpjRegex = ~/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
         if (!cnpjRegex.matcher(cnpj).matches()) return false
         return true
     }
@@ -77,32 +77,31 @@ class EmpresaService {
             switch (opc) {
                 case '1':
                     print("Digite o novo nome: ")
-                    String nome = scanner.nextLine()
+                    final String nome = scanner.nextLine()
                     empresa.nome = nome
                     break
                 case '2':
                     print("Digite o novo email: ")
-                    String email = scanner.nextLine()
+                    final String email = scanner.nextLine()
                     empresa.email = email
                     break
                 case '3':
                     print("Digite o novo pais: ")
-                    String pais = scanner.nextLine()
+                    final String pais = scanner.nextLine()
                     empresa.pais = pais
                     break
                 case '4':
-                    print("Digite o novo CEP: ")
-                    String cep = scanner.nextLine()
-                    empresa.cep = cep
+                    final String CEP = PessoaService.pegaCep()
+                    empresa.cep = CEP
                     break
                 case '5':
                     print("Digite a nova descrição: ")
-                    String descricao = scanner.nextLine()
+                    final String descricao = scanner.nextLine()
                     empresa.descricao = descricao
                     break
                 case '6':
                     print("Digite a nova senha: ")
-                    String senha = scanner.nextLine()
+                    final String senha = scanner.nextLine()
                     empresa.senha = senha
                     break
                 case '7':
