@@ -6,7 +6,7 @@ import com.igor.linketinder.entity.Competencia
 @TypeChecked
 class CompetenciaService {
 
-    static ArrayList<Competencia> choiseCompetencia() {
+    static ArrayList<Competencia> escolherCompetencias() {
         boolean end = true
         List<Competencia> aux = new ArrayList<>()
         Scanner scanner = new Scanner(System.in)
@@ -78,7 +78,7 @@ class CompetenciaService {
             case "Node":
                 return Competencia.Node
             default:
-                return null
+                throw new IllegalArgumentException("Competencia não encontrada")
         }
     }
 
