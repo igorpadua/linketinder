@@ -5,14 +5,13 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 @Canonical
-class Empresa {
-    String nome
-    String email
+class Empresa extends Pessoa {
     String cnpj
-    String pais
-    String cep
-    String descricao
-    String senha
+
+    Empresa(String nome, String email, String cnpj, String pais, String cep, String descricao, String senha) {
+        super(nome, email, pais, cep, descricao, senha)
+        this.cnpj = cnpj
+    }
 
     String toString() {
         return "Nome: ${this.nome} - " +

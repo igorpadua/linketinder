@@ -6,17 +6,19 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 @Canonical
-class Candidato {
-    String nome
+class Candidato extends Pessoa {
     String sobrenome
     Date nascimento
-    String email
     String cpf
-    String pais
-    String cep
-    String descricao
-    String senha
-    List<Competencia> competencias;
+    List<Competencia> competencias
+
+    Candidato(String nome, String sobrenome, Date nascimento, String email, String cpf, String pais, String cep, String descricao, String senha, List<Competencia> competencias) {
+        super(nome, email, pais, cep, descricao, senha)
+        this.sobrenome = sobrenome
+        this.nascimento = nascimento
+        this.cpf = cpf
+        this.competencias = competencias
+    }
 
     String toString() {
         return"Nome: ${this.nome} ${this.sobrenome} - " +
