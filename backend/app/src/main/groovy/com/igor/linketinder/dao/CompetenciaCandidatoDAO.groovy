@@ -17,7 +17,7 @@ class CompetenciaCandidatoDAO {
         final int idCandidato = CandidatoDAO.pegaId(candidato.cpf)
 
         for (Competencia competencia in candidato.competencias) {
-            int idCompetencia = CompetenciaDAO.getIdCompetencia(competencia.toString())
+            int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
@@ -31,7 +31,7 @@ class CompetenciaCandidatoDAO {
 
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
         for (Competencia competencia in candidato.competencias) {
-            int idCompetencia = CompetenciaDAO.getIdCompetencia(competencia.toString())
+            int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
