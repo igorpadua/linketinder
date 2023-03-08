@@ -14,7 +14,7 @@ class VagaService {
         print("Digite o local da vaga: ")
         String local_vaga = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.choiseCompetencia()
+        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
         new Vaga(nome, descricao, local_vaga , competencias)
     }
@@ -61,7 +61,7 @@ class VagaService {
                     vaga.local_vaga = local_vaga
                     break
                 case '4':
-                    List<Competencia> competencias = CompetenciaService.choiseCompetencia()
+                    List<Competencia> competencias = CompetenciaService.escolherCompetencias()
                     vaga.competencias = competencias
                     break
                 case '5':
