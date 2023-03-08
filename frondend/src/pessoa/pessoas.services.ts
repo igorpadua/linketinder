@@ -6,11 +6,7 @@ import desenharCompetenciaCandidatos from "../grafico/competenciaCandidatos";
 
 export default class PessoasServices {
 
-    static addPessoa() {
-        let pessoa: Pessoa
-        // Radio button
-        const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
-
+    private static pegaDadosPessoa() : string [] {
         const nome: string = (<HTMLInputElement>document.getElementById("idNome")).value
         const email: string = (<HTMLInputElement>document.getElementById("idEmail")).value
         const descricao: string = (<HTMLInputElement>document.getElementById("idDescricao")).value
@@ -18,13 +14,24 @@ export default class PessoasServices {
         const estado: string = (<HTMLInputElement>document.getElementById("idEstado")).value
         const cidade: string = (<HTMLInputElement>document.getElementById("idCidade")).value
         const cep: string = (<HTMLInputElement>document.getElementById("idCep")).value
-        // Competencias checkbox
+        return [nome, email, descricao, pais, estado, cidade, cep]
+    }
+
+    private static pegaCompetencias() : string [] {
         const competencias: string[] = []
         const competencias_selecionadas: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="competencias"]:checked')
 
         competencias_selecionadas.forEach((competencia) => {
             competencias.push(competencia.value)
         })
+
+        return competencias
+    }
+
+    static addPessoa() {
+        const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
+        const [nome, email, descricao, pais, estado, cidade, cep] = PessoasServices.pegaDadosPessoa()
+        const competencias: string[] = PessoasServices.pegaCompetencias()
 
         if (radio_selecionado == "Candidato") {
             const cpf: string = (<HTMLInputElement>document.getElementById("idCpf")).value
