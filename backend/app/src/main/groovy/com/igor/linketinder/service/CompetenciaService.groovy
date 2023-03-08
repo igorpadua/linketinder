@@ -7,54 +7,54 @@ import com.igor.linketinder.entity.Competencia
 class CompetenciaService {
 
     static ArrayList<Competencia> escolherCompetencias() {
-        boolean end = true
-        List<Competencia> aux = new ArrayList<>()
+        boolean finalizarEscolhas = true
+        List<Competencia> listasCompetencias = new ArrayList<>()
         Scanner scanner = new Scanner(System.in)
 
-        while (end) {
+        while (finalizarEscolhas) {
             menuEscolhaCompetencias()
             int opc = scanner.nextInt()
             switch (opc) {
                 case 1:
-                    aux.add(Competencia.Python)
+                   listasCompetencias.add(Competencia.Python)
                     break
                 case 2:
-                    aux.add(Competencia.Java)
+                    listasCompetencias.add(Competencia.Java)
                     break
                 case 3:
-                    aux.add(Competencia.SpringFramework)
+                    listasCompetencias.add(Competencia.SpringFramework)
                     break
                 case 4:
-                    aux.add(Competencia.Angular)
+                    listasCompetencias.add(Competencia.Angular)
                     break
                 case 5:
-                    aux.add(Competencia.cplusplus)
+                    listasCompetencias.add(Competencia.cplusplus)
                     break
                 case 6:
-                    aux.add(Competencia.c)
+                    listasCompetencias.add(Competencia.c)
                     break
                 case 7:
-                    aux.add(Competencia.JavaScript)
+                    listasCompetencias.add(Competencia.JavaScript)
                     break
                 case 8:
-                    aux.add(Competencia.Html)
+                    listasCompetencias.add(Competencia.Html)
                     break
                 case 9:
-                    aux.add(Competencia.Node)
+                    listasCompetencias.add(Competencia.Node)
                     break
                 case 10:
-                    if (aux.isEmpty()) {
+                    if (listasCompetencias.isEmpty()) {
                         println("Nenhuma competencia adicionada")
                         break
                     }
-                    end = false
+                    finalizarEscolhas = false
                     break
                 default:
                     println("Opção incorreta")
             }
 
         }
-        return aux
+        return listasCompetencias
     }
 
     static Competencia transformaString(String competencia) {
