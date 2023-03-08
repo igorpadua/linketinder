@@ -19,10 +19,12 @@ class VagaService {
         new Vaga(nome, descricao, local_vaga , competencias)
     }
 
+    private static Boolean listaEstaValida(List<Vaga> vagas) {
+        return vagas != null && !vagas.isEmpty()
+    }
+
     static void printVagas(List<Vaga> vagas) {
-        if (vagas.isEmpty()) {
-            println("Não existe vagas")
-        }
+        if (!listaEstaValida(vagas)) return
 
         for (vaga in vagas) {
             println(vaga)
@@ -40,8 +42,8 @@ class VagaService {
 
     static void atualizarVaga(Vaga vaga) {
         Scanner scanner = new Scanner(System.in)
-        boolean sair = true
-        while (sair) {
+        boolean finalizarAtualizacoes = true
+        while (finalizarAtualizacoes) {
             menuAtualizar()
             String opcao = scanner.nextLine()
             switch (opcao) {
@@ -65,7 +67,7 @@ class VagaService {
                     vaga.competencias = competencias
                     break
                 case '5':
-                    sair = false
+                    finalizarAtualizacoes = false
                     break
                 default:
                     println("Opção inválida")
