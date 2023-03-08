@@ -28,7 +28,7 @@ class VagaDAO {
                         	INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
                         	INNER JOIN competencias c ON c.id = cv.competencia_id
                         	GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             Vaga vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
             result.add(vaga)
             }
@@ -59,7 +59,7 @@ class VagaDAO {
 	                   INNER JOIN competencias c ON c.id = cv.competencia_id
 	                   WHERE nome = ${nome} and empresa_id = ${id} 
 	                   GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             vaga = new Vaga(rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
         sql.close()

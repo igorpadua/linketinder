@@ -56,7 +56,7 @@ class CandidatoDAO {
                             INNER JOIN competencias competencia ON competencia.id = cc.competencia_id
                             WHERE c.cpf = ${cpf}
                             GROUP BY c.id;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             // Transforma a data de String para Date
             Date data = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString('data_nascimento'))
             aux = new Candidato(rs.getString('nome'), rs.getString('sobrenome'), data, rs.getString('email'),
@@ -76,7 +76,7 @@ class CandidatoDAO {
                             INNER JOIN competencias_candidato cc ON cc.candidatos_id = c.id
                             INNER JOIN competencias competencia ON competencia.id = cc.competencia_id
                             GROUP BY c.id;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.arrayCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             Candidato candidato = new Candidato(rs.getString('nome').trim(), rs.getString('sobrenome'),
                     rs.getDate('data_nascimento'), rs.getString('email'), rs.getString('cpf'),
                     rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),

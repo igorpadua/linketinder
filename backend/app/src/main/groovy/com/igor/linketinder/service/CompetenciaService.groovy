@@ -5,13 +5,14 @@ import com.igor.linketinder.entity.Competencia
 
 @TypeChecked
 class CompetenciaService {
+
     static ArrayList<Competencia> choiseCompetencia() {
         boolean end = true
         List<Competencia> aux = new ArrayList<>()
         Scanner scanner = new Scanner(System.in)
 
         while (end) {
-            menu()
+            menuEscolhaCompetencias()
             int opc = scanner.nextInt()
             switch (opc) {
                 case 1:
@@ -42,10 +43,13 @@ class CompetenciaService {
                     aux.add(Competencia.Node)
                     break
                 case 10:
+                    if (aux.isEmpty()) {
+                        println("Nenhuma competencia adicionada")
+                        break
+                    }
                     end = false
                     break
                 default:
-                    menu()
                     println("Opção incorreta")
             }
 
@@ -78,7 +82,7 @@ class CompetenciaService {
         }
     }
 
-    private static void menu() {
+    private static void menuEscolhaCompetencias() {
         println("Escolhas as competencias: ")
         println("1 - Python")
         println("2 - Java")
@@ -92,15 +96,12 @@ class CompetenciaService {
         println("10 - Sair")
     }
 
-    static List<Competencia> arrayCompetencia(String competencias) {
-        // Remove os {} do array de competencias
-        String remover = competencias.replace('{', '').replace('}', '')
-        // Separa as competencias por virgula
-        String[] competenciasArray = remover.split(',')
-        // Transforma cada competencia
+    static List<Competencia> transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(String competencias) {
+        String removeChaves = competencias.replace('{', '').replace('}', '')
+        String[] separaPorVirgula = removeChaves.split(',')
         List<Competencia> competenciasList = new ArrayList<>()
-        for (String competencia in competenciasArray) {
-            competenciasList.add(CompetenciaService.transformaString(competencia))
+        for (String competencia in separaPorVirgula) {
+            competenciasList.add(transformaString(competencia))
         }
         return competenciasList
     }
