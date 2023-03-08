@@ -1,6 +1,5 @@
 package com.igor.linketinder.service
 
-import com.igor.linketinder.entity.Empresa
 import com.igor.linketinder.entity.Pessoa
 
 import java.util.regex.Pattern
