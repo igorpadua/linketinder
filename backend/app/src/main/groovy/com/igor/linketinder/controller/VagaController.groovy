@@ -16,7 +16,7 @@ class VagaController {
         Vaga vaga = VagaService.adicionaVaga()
         VagaDAO.inserirVaga(vaga, id)
         // Adiciona as competencias da vaga
-        CompetenciaVagasDAO.inserirCompetenciaVaga(vaga, id)
+        CompetenciaVagasDAO.adicionar(vaga, id)
         println("\nAdicionado com sucesso\n")
     }
 
@@ -33,7 +33,7 @@ class VagaController {
         // Atualiza a vaga no banco de dados
         VagaDAO.atualizarVaga(vaga, nome, id)
         // Atualiza as competencias da vaga
-        CompetenciaVagasDAO.atualizarCompetenciaVaga(vaga, id)
+        CompetenciaVagasDAO.atualizar(vaga, id)
     }
 
     static void remover() {
@@ -44,7 +44,7 @@ class VagaController {
         final int id = EmpresaDAO.getIdEmpresa(cnpj)
         // Pega o ID Vagas
         final int idVaga = VagaDAO.getIdVaga(nome, id)
-        CompetenciaVagasDAO.removeCompetenciaVaga(idVaga)
+        CompetenciaVagasDAO.remove(idVaga)
         VagaDAO.removeVaga(nome, id)
         println("\nRemovido com sucesso\n")
     }

@@ -10,7 +10,7 @@ class CompetenciaVagasDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
-    static void inserirCompetenciaVaga(Vaga vaga, int id) {
+    static void adicionar(Vaga vaga, int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         final int idVaga = VagaDAO.getIdVaga(vaga.nome, id)
 
@@ -23,17 +23,17 @@ class CompetenciaVagasDAO {
         sql.close()
     }
 
-    static void removeCompetenciaVaga(int id) {
+    static void remove(int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${id}")
         sql.close()
     }
 
-    static void atualizarCompetenciaVaga(Vaga vaga, int id) {
+    static void atualizar(Vaga vaga, int id) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         final int idVaga = VagaDAO.getIdVaga(vaga.nome, id)
 
-        sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${idVaga}")
+        remove(idVaga)
         for (Competencia competencia in vaga.competencias) {
             int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
