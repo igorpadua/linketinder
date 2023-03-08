@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 @TypeChecked
 class EmpresaService {
 
-    private static Boolean validaCNPJ(String cnpj) {
+    static Boolean validaCNPJ(String cnpj) {
         if (cnpj == null || cnpj.isEmpty()) return false
         if (cnpj.length() != 18) return false
         Pattern cnpjRegex = ~/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
@@ -28,8 +28,6 @@ class EmpresaService {
         return cnpj
     }
 
-
-
     static Empresa criar() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome da nova empresa: ")
@@ -39,8 +37,7 @@ class EmpresaService {
         final String CNPJ = pegaCnpj()
         print("Digite o pais da empresa: ")
         final String pais = scanner.nextLine()
-        print("Digite o CEP  da empresa: ")
-        final String cep = scanner.nextLine()
+        final String cep = PessoaService.pegaCep()
         print("Digite uma descrição da empresa: ")
         final String descricao = scanner.nextLine()
         print("Digite a senha da empresa: ")
