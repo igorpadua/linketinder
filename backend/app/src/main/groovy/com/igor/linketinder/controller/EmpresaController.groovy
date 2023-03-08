@@ -13,13 +13,9 @@ class EmpresaController {
     }
 
     static void atualizar() {
-        // Atualizar uma empresa
         final String cnpj = EmpresaService.pegaCnpj()
-        // Pega a empresa do banco de dados
         Empresa empresa = EmpresaDAO.pega(cnpj)
-        // Atualiza a empresa
         EmpresaService.atualizar(empresa)
-        // Atualiza a empresa no banco de dados
         EmpresaDAO.atualiza(empresa)
         println("\nAtualizado com sucesso\n")
     }

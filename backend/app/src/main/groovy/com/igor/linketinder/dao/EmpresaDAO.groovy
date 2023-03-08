@@ -11,6 +11,12 @@ class EmpresaDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
+    private static validaEmpresas(Empresa empresa)  {
+        if (empresa == null) {
+            throw new IllegalArgumentException("Não existe empresa com esse CNPJ")
+        }
+    }
+
     static void adicionar(Empresa empresa) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('INSERT INTO empresas ' +
@@ -34,6 +40,7 @@ class EmpresaDAO {
 
     static void remove(String cnpj) {
         Sql sql = Sql.newInstance(url, user, password, drive)
+        validaEmpresas(pega(cnpj))
         sql.execute("DELETE FROM empresas WHERE cnpj = ${cnpj}")
         sql.close()
     }
@@ -46,6 +53,7 @@ class EmpresaDAO {
                     rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'), rs.getString('senha'))
         }
         sql.close()
+        validaEmpresas(empresa)
         return empresa
     }
 
