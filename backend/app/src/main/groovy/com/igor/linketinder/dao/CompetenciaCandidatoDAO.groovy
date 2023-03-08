@@ -12,33 +12,39 @@ class CompetenciaCandidatoDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
-    static void inserirCompetenciaCandidato(Candidato candidato) {
+    static void adicionar(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        final int idCandidato = CandidatoDAO.getIdCandidato(candidato.cpf)
+        final int idCandidato = CandidatoDAO.pegaId(candidato.cpf)
+
         for (Competencia competencia in candidato.competencias) {
             int idCompetencia = CompetenciaDAO.getIdCompetencia(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
+
         sql.close()
     }
 
-    static void atualizarCompetenciaCandidato(Candidato candidato) {
+    static void atualizar(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        final int idCandidato = CandidatoDAO.getIdCandidato(candidato.cpf)
+        final int idCandidato = CandidatoDAO.pegaId(candidato.cpf)
+
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
         for (Competencia competencia in candidato.competencias) {
             int idCompetencia = CompetenciaDAO.getIdCompetencia(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
+
         sql.close()
     }
 
-    static void removeCompetenciaCandidato(String cpf) {
+    static void remove(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        final int idCandidato = CandidatoDAO.getIdCandidato(cpf)
+        final int idCandidato = CandidatoDAO.pegaId(cpf)
+
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
+
         sql.close()
     }
 }

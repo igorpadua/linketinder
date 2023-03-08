@@ -10,7 +10,7 @@ class CandidatoController {
     static void adicionar() {
         Candidato candidato = CandidatoService.newCandidato()
         CandidatoDAO.adiciona(candidato)
-        CompetenciaCandidatoDAO.inserirCompetenciaCandidato(candidato)
+        CompetenciaCandidatoDAO.adicionar(candidato)
         println("\nAdicionado com sucesso\n")
     }
 
@@ -24,13 +24,13 @@ class CandidatoController {
         // Atualiza o candidato no banco de dados
         CandidatoDAO.atualiza(candidato)
         // Atualiza as competencias do candidato
-        CompetenciaCandidatoDAO.atualizarCompetenciaCandidato(candidato)
+        CompetenciaCandidatoDAO.atualizar(candidato)
         println("\nAtualizado com sucesso\n")
     }
 
     static void remover() {
         final String cpf = CandidatoService.pegaCPF()
-        CompetenciaCandidatoDAO.removeCompetenciaCandidato(cpf)
+        CompetenciaCandidatoDAO.remove(cpf)
         CandidatoDAO.remove(cpf)
         println("\nRemovido com sucesso\n")
     }
