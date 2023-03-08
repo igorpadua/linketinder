@@ -65,7 +65,7 @@ class App {
                     break
                 case 4:
                     // Atualizar um candidato
-                    final String cpf = CandidatoService.pegaCpfCandidado()
+                    final String cpf = CandidatoService.pegaCPF()
                     // Pega o candidato do banco de dados
                     Candidato candidato = CandidatoDAO.getCandidato(cpf)
                     // Atualiza o candidato
@@ -104,7 +104,7 @@ class App {
                     break
                 case 7:
                     // Remover um candidato
-                    final String cpf = CandidatoService.pegaCpfCandidado()
+                    final String cpf = CandidatoService.pegaCPF()
                     CompetenciaCandidatoDAO.removeCompetenciaCandidato(cpf)
                     CandidatoDAO.removeCandidato(cpf)
                     println("\nRemovido com sucesso\n")

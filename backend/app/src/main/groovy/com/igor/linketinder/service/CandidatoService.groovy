@@ -5,6 +5,7 @@ import com.igor.linketinder.entity.Candidato
 import com.igor.linketinder.entity.Competencia
 
 import java.text.SimpleDateFormat
+import java.util.regex.Pattern
 
 @TypeChecked
 class CandidatoService {
@@ -22,46 +23,47 @@ class CandidatoService {
         }
     }
 
+    static Boolean validaCPF(String cpf) {
+        if (cpf == null || cpf.isEmpty()) return false
+        if (cpf.length() != 14) return false
+        final Pattern cpfRegex = ~/^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+        if (!cpfRegex.matcher(cpf).matches()) return false
+        return true
+    }
+
+    static String pegaCPF() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CPF do candidato: ")
+        String cpf = scanner.nextLine()
+        while (!validaCPF(cpf)) {
+            println("CPF inválido")
+            print("Digite o CPF do candidato: ")
+            cpf = scanner.nextLine()
+        }
+        return cpf
+    }
+
     static Candidato newCandidato() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome do novo candidato: ")
-        String nome = scanner.nextLine()
+        final String nome = scanner.nextLine()
         print("Digite o sobrenome do novo candidato: ")
-        String sobrenome = scanner.nextLine()
+        final String sobrenome = scanner.nextLine()
         Date nascimento = pegaNascimento()
         print("Digite o email do candidato: ")
-        String email = scanner.nextLine()
-        print("Digite o CPF do candidato: ")
-        String cpf = scanner.nextLine()
+        final String email = scanner.nextLine()
+        final String cpf = pegaCPF()
         print("Digite o país do candidato: ")
-        String pais = scanner.nextLine()
-        String cep = PessoaService.pegaCep()
+        final String pais = scanner.nextLine()
+        final String cep = PessoaService.pegaCep()
         print("Digite uma descrição do candidato: ")
-        String desc = scanner.nextLine()
+        final String desc = scanner.nextLine()
         print("Digite a senha do candidato: ")
-        String senha = scanner.nextLine()
+        final String senha = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.choiseCompetencia()
+        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
         return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha,competencias)
-    }
-
-    static void printCandidatos(List<Candidato> pessoas) {
-
-        if (pessoas.isEmpty()) {
-            println("Não existe candidatos")
-        }
-
-        for (candidato in pessoas) {
-            println(candidato)
-        }
-    }
-
-    static String pegaCpfCandidado() {
-        Scanner scanner = new Scanner(System.in)
-        print("Digite o CPF do candidato: ")
-        String cpf = scanner.nextLine()
-        return cpf
     }
 
     static private void menuAtualizar() {
@@ -78,58 +80,55 @@ class CandidatoService {
     }
 
     static void atualizarCandidato(Candidato candidato) {
-        boolean end = true
+        boolean finalizarAtualizacao = true
         Scanner scanner = new Scanner(System.in)
-        while (end) {
+        while (finalizarAtualizacao) {
             menuAtualizar()
             String opc = scanner.nextLine()
             switch (opc) {
                 case '1':
                     print("Digite o novo nome: ")
-                    String nome = scanner.nextLine()
+                    final String nome = scanner.nextLine()
                     candidato.nome = nome
                     break
                 case '2':
                     print("Digite o novo sobrenome: ")
-                    String sobrenome = scanner.nextLine()
+                    final String sobrenome = scanner.nextLine()
                     candidato.sobrenome = sobrenome
                     break
                 case '3':
-                    print("Digite a nova data de nascimento: ")
-                    String nascimento = scanner.nextLine()
-                    Date data = new SimpleDateFormat("dd/MM/yyyy").parse(nascimento)
-                    candidato.nascimento = data
+                    final Date nascimento = pegaNascimento()
+                    candidato.nascimento = nascimento
                     break
                 case '4':
                     print("Digite o novo email: ")
-                    String email = scanner.nextLine()
+                    final String email = scanner.nextLine()
                     candidato.email = email
                     break
                 case '5':
                     print("Digite o novo país: ")
-                    String pais = scanner.nextLine()
+                    final String pais = scanner.nextLine()
                     candidato.pais = pais
                     break
                 case '6':
-                    print("Digite o novo CEP: ")
-                    String cep = scanner.nextLine()
+                    final String cep = PessoaService.pegaCep()
                     candidato.cep = cep
                     break
                 case '7':
                     print("Digite a nova descrição: ")
-                    String desc = scanner.nextLine()
+                    final String desc = scanner.nextLine()
                     candidato.descricao = desc
                     break
                 case '8':
                     print("Digite a nova senha: ")
-                    String senha = scanner.nextLine()
+                    final String senha = scanner.nextLine()
                     candidato.senha = senha
                     break
                 case '9':
-                    candidato.competencias = CompetenciaService.choiseCompetencia()
+                    candidato.competencias = CompetenciaService.escolherCompetencias()
                     break
                 case '10':
-                    end = false
+                    finalizarAtualizacao = false
                     break
                 default:
                     menuAtualizar()
