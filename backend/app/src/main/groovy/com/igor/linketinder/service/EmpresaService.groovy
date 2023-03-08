@@ -3,26 +3,50 @@ package com.igor.linketinder.service
 import groovy.transform.TypeChecked
 import com.igor.linketinder.entity.Empresa
 
+import java.util.regex.Pattern
+
 @TypeChecked
 class EmpresaService {
+
+    private static Boolean validaCNPJ(String cnpj) {
+        if (cnpj == null || cnpj.isEmpty()) return false
+        if (cnpj.length() != 18) return false
+        Pattern cnpjRegex = ~/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
+        if (!cnpjRegex.matcher(cnpj).matches()) return false
+        return true
+    }
+
+    static String pegaCnpj() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CNPJ da empresa: ")
+        String cnpj = scanner.nextLine()
+        while (!validaCNPJ(cnpj)) {
+            println("CNPJ inválido")
+            print("Digite o CNPJ da empresa: ")
+            cnpj = scanner.nextLine()
+        }
+        return cnpj
+    }
+
+
+
     static Empresa criar() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome da nova empresa: ")
-        String nome = scanner.nextLine()
+        final String nome = scanner.nextLine()
         print("Digite o email da empresa: ")
-        String email = scanner.nextLine()
-        print("Digite o CNPJ da empresa: ")
-        String cnpj = scanner.nextLine()
+        final String email = scanner.nextLine()
+        final String CNPJ = pegaCnpj()
         print("Digite o pais da empresa: ")
-        String pais = scanner.nextLine()
+        final String pais = scanner.nextLine()
         print("Digite o CEP  da empresa: ")
-        String cep = scanner.nextLine()
+        final String cep = scanner.nextLine()
         print("Digite uma descrição da empresa: ")
-        String descricao = scanner.nextLine()
+        final String descricao = scanner.nextLine()
         print("Digite a senha da empresa: ")
-        String senha = scanner.nextLine()
+        final String senha = scanner.nextLine()
 
-        new Empresa(nome, email, cnpj, pais, cep, descricao, senha)
+        new Empresa(nome, email, CNPJ, pais, cep, descricao, senha)
     }
 
     private static Boolean listaEstaValida(List<Empresa> empresas) {
@@ -35,13 +59,6 @@ class EmpresaService {
         for (empresa in empresas) {
             println(empresa)
         }
-    }
-
-    static String pegaCnpj() {
-        Scanner scanner = new Scanner(System.in)
-        print("Digite o CNPJ da empresa: ")
-        String cnpj = scanner.nextLine()
-        return cnpj
     }
 
     static private void menuAtualizar() {
@@ -95,7 +112,6 @@ class EmpresaService {
                     end = false
                     break
                 default:
-                    menuAtualizar()
                     println("Opção inválida")
                     break
             }
