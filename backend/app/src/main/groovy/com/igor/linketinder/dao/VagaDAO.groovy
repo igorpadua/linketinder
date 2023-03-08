@@ -12,6 +12,12 @@ class VagaDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
+    static validaVaga(Vaga vaga) {
+        if (vaga == null) {
+            throw new RuntimeException("Não foi possível encontrar uma vaga com o ID fornecido.")
+        }
+    }
+
     static void adicionar(Vaga vaga, int idEmpresa) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('INSERT INTO vagas ' +
@@ -63,6 +69,7 @@ class VagaDAO {
             vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
         sql.close()
+        validaVaga(vaga)
         return vaga
     }
 }
