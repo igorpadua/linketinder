@@ -12,7 +12,7 @@ class VagaController {
         // Adicionar uma vaga
         final String cnpj = EmpresaService.pegaCnpj()
         // Pega o ID
-        final int id = EmpresaDAO.getIdEmpresa(cnpj)
+        final int id = EmpresaDAO.pegaId(cnpj)
         Vaga vaga = VagaService.adicionaVaga()
         VagaDAO.inserirVaga(vaga, id)
         // Adiciona as competencias da vaga
@@ -25,7 +25,7 @@ class VagaController {
         final String nome = VagaService.pegaNomeVaga()
         final String cnpj = EmpresaService.pegaCnpj()
         // Pega o ID Empresa
-        final int id = EmpresaDAO.getIdEmpresa(cnpj)
+        final int id = EmpresaDAO.pegaId(cnpj)
         // Pega a vaga do banco de dados
         Vaga vaga = VagaDAO.getVaga(nome, id)
         // Atualiza a vaga
@@ -41,7 +41,7 @@ class VagaController {
         final String nome = VagaService.pegaNomeVaga()
         final String cnpj = EmpresaService.pegaCnpj()
         // Pega o ID Empresas
-        final int id = EmpresaDAO.getIdEmpresa(cnpj)
+        final int id = EmpresaDAO.pegaId(cnpj)
         // Pega o ID Vagas
         final int idVaga = VagaDAO.getIdVaga(nome, id)
         CompetenciaVagasDAO.remove(idVaga)

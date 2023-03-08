@@ -11,7 +11,7 @@ class EmpresaDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
-    static void inserirEmpresa(Empresa empresa) {
+    static void adicionar(Empresa empresa) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeInsert('INSERT INTO empresas ' +
                 '(nome, email, cnpj, pais, cep, descricao, senha) ' +
@@ -20,7 +20,7 @@ class EmpresaDAO {
         sql.close()
     }
 
-    static List<Empresa> listarEmpresas() {
+    static List<Empresa> listaComTodasEmpresas() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         List<Empresa> result = new ArrayList<>()
         sql.eachRow('SELECT * FROM empresas') { rs ->
@@ -32,13 +32,13 @@ class EmpresaDAO {
         return result
     }
 
-    static void removeEmpresa(String cnpj) {
+    static void remove(String cnpj) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.execute("DELETE FROM empresas WHERE cnpj = ${cnpj}")
         sql.close()
     }
 
-    static Empresa getEmpresa(String cnpj) {
+    static Empresa pega(String cnpj) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         Empresa empresa = null
         sql.eachRow("SELECT * FROM empresas WHERE cnpj = ${cnpj}") { rs ->
@@ -49,7 +49,7 @@ class EmpresaDAO {
         return empresa
     }
 
-    static void atualizarEmpresa(Empresa empresa) {
+    static void atualiza(Empresa empresa) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeUpdate('UPDATE empresas ' +
                 "SET nome = '${empresa.nome}', email = '${empresa.email}', cnpj = '${empresa.cnpj}', pais = '${empresa.pais}', " +
@@ -57,7 +57,7 @@ class EmpresaDAO {
         sql.close()
     }
 
-    static int getIdEmpresa(String cnpj) {
+    static int pegaId(String cnpj) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         int id = 0
         sql.eachRow("SELECT id FROM empresas WHERE cnpj = ${cnpj}") { rs ->

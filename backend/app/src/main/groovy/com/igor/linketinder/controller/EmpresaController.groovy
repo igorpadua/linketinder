@@ -8,7 +8,7 @@ import com.igor.linketinder.service.PessoaService
 class EmpresaController {
     static void adicionar() {
         Empresa empresa = EmpresaService.criar()
-        EmpresaDAO.inserirEmpresa(empresa)
+        EmpresaDAO.adicionar(empresa)
         println("\nAdiciona com sucesso\n")
     }
 
@@ -16,21 +16,21 @@ class EmpresaController {
         // Atualizar uma empresa
         final String cnpj = EmpresaService.pegaCnpj()
         // Pega a empresa do banco de dados
-        Empresa empresa = EmpresaDAO.getEmpresa(cnpj)
+        Empresa empresa = EmpresaDAO.pega(cnpj)
         // Atualiza a empresa
         EmpresaService.atualizar(empresa)
         // Atualiza a empresa no banco de dados
-        EmpresaDAO.atualizarEmpresa(empresa)
+        EmpresaDAO.atualiza(empresa)
         println("\nAtualizado com sucesso\n")
     }
 
     static void remover() {
         final String cnpj = EmpresaService.pegaCnpj()
-        EmpresaDAO.removeEmpresa(cnpj)
+        EmpresaDAO.remove(cnpj)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
-        PessoaService.imprimir(EmpresaDAO.listarEmpresas())
+        PessoaService.imprimir(EmpresaDAO.listaComTodasEmpresas())
     }
 }
