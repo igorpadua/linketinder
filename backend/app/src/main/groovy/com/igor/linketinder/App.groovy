@@ -47,12 +47,13 @@ class App {
                     break
                 case 2:
                     // Adicionar uma empresa
-                    Empresa empresa = EmpresaService.newEmpresa()
-                    EmpresaDAO.inserirEmpresa(empresa) println("\nAdiciona com sucesso\n")
+                    Empresa empresa = EmpresaService.criar()
+                    EmpresaDAO.inserirEmpresa(empresa)
+                    println("\nAdiciona com sucesso\n")
                     break
                 case 3:
                     // Adicionar uma vaga
-                    final String cnpj = EmpresaService.pegaCnpjEmpresa()
+                    final String cnpj = EmpresaService.pegaCnpj()
                     // Pega o ID
                     final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     Vaga vaga = VagaService.adicionaVaga()
@@ -76,11 +77,11 @@ class App {
                     break
                 case 5:
                     // Atualizar uma empresa
-                    final String cnpj = EmpresaService.pegaCnpjEmpresa()
+                    final String cnpj = EmpresaService.pegaCnpj()
                     // Pega a empresa do banco de dados
                     Empresa empresa = EmpresaDAO.getEmpresa(cnpj)
                     // Atualiza a empresa
-                    EmpresaService.atualizarEmpresa(empresa)
+                    EmpresaService.atualizar(empresa)
                     // Atualiza a empresa no banco de dados
                     EmpresaDAO.atualizarEmpresa(empresa)
                     println("\nAtualizado com sucesso\n")
@@ -88,7 +89,7 @@ class App {
                 case 6:
                     // Atualizar uma vaga
                     final String nome = VagaService.pegaNomeVaga()
-                    final String cnpj = EmpresaService.pegaCnpjEmpresa()
+                    final String cnpj = EmpresaService.pegaCnpj()
                     // Pega o ID Empresa
                     final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     // Pega a vaga do banco de dados
@@ -109,14 +110,14 @@ class App {
                     break
                 case 8:
                     // Remover uma empresa
-                    final String cnpj = EmpresaService.pegaCnpjEmpresa()
+                    final String cnpj = EmpresaService.pegaCnpj()
                     EmpresaDAO.removeEmpresa(cnpj)
                     println("\nRemovido com sucesso\n")
                     break
                 case 9:
                     // Remover uma vaga
                     final String nome = VagaService.pegaNomeVaga()
-                    final String cnpj = EmpresaService.pegaCnpjEmpresa()
+                    final String cnpj = EmpresaService.pegaCnpj()
                     // Pega o ID Empresas
                     final int id = EmpresaDAO.getIdEmpresa(cnpj)
                     // Pega o ID Vagas
@@ -131,7 +132,7 @@ class App {
                     break
                 case 11:
                     // Listar empresas
-                    EmpresaService.printEmpresas(EmpresaDAO.listarEmpresas())
+                    EmpresaService.imprimir(EmpresaDAO.listarEmpresas())
                     break
                 case 12:
                     // Listar vagas

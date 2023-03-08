@@ -16,7 +16,7 @@ class EmpresaDAO {
         sql.executeInsert('INSERT INTO empresas ' +
                 '(nome, email, cnpj, pais, cep, descricao, senha) ' +
                 "VALUES ('${empresa.nome}', '${empresa.email}', '${empresa.cnpj}', " +
-                "'${empresa.pais}', '${empresa.cep}', '${empresa.desc}', '${empresa.senha}')")
+                "'${empresa.pais}', '${empresa.cep}', '${empresa.descricao}', '${empresa.senha}')")
         sql.close()
     }
 
@@ -53,7 +53,7 @@ class EmpresaDAO {
         Sql sql = Sql.newInstance(url, user, password, drive)
         sql.executeUpdate('UPDATE empresas ' +
                 "SET nome = '${empresa.nome}', email = '${empresa.email}', cnpj = '${empresa.cnpj}', pais = '${empresa.pais}', " +
-                "cep = '${empresa.cep}', descricao = '${empresa.desc}', senha = '${empresa.senha}' WHERE cnpj = '${empresa.cnpj}'")
+                "cep = '${empresa.cep}', descricao = '${empresa.descricao}', senha = '${empresa.senha}' WHERE cnpj = '${empresa.cnpj}'")
         sql.close()
     }
 

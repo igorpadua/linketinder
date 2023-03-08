@@ -40,7 +40,7 @@ class EmpresaTest {
 
     @Test
     void getDescTest() {
-        Assertions.assertEquals("Sou uma empresa legal", empresa.desc)
+        Assertions.assertEquals("Sou uma empresa legal", empresa.descricao)
     }
 
     @Test
@@ -80,8 +80,8 @@ class EmpresaTest {
 
     @Test
     void setDescTest() {
-        empresa.desc = "Sou uma empresa legal 2"
-        Assertions.assertEquals("Sou uma empresa legal 2", empresa.desc)
+        empresa.descricao = "Sou uma empresa legal 2"
+        Assertions.assertEquals("Sou uma empresa legal 2", empresa.descricao)
     }
 
     @Test

@@ -5,7 +5,7 @@ import com.igor.linketinder.entity.Empresa
 
 @TypeChecked
 class EmpresaService {
-    static Empresa newEmpresa() {
+    static Empresa criar() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome da nova empresa: ")
         String nome = scanner.nextLine()
@@ -18,14 +18,14 @@ class EmpresaService {
         print("Digite o CEP  da empresa: ")
         String cep = scanner.nextLine()
         print("Digite uma descrição da empresa: ")
-        String desc = scanner.nextLine()
+        String descricao = scanner.nextLine()
         print("Digite a senha da empresa: ")
         String senha = scanner.nextLine()
 
-        new Empresa(nome, email, cnpj, pais, cep, desc, senha)
+        new Empresa(nome, email, cnpj, pais, cep, descricao, senha)
     }
 
-    static void printEmpresas(List<Empresa> empresas) {
+    static void imprimir(List<Empresa> empresas) {
 
         if (empresas.isEmpty()) {
             println("Não existe candidatos")
@@ -36,7 +36,7 @@ class EmpresaService {
         }
     }
 
-    static String pegaCnpjEmpresa() {
+    static String pegaCnpj() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o CNPJ da empresa: ")
         String cnpj = scanner.nextLine()
@@ -53,7 +53,7 @@ class EmpresaService {
         println("7 - Sair")
     }
 
-    static void atualizarEmpresa(Empresa empresa) {
+    static void atualizar(Empresa empresa) {
         boolean end = true
         Scanner scanner = new Scanner(System.in)
         while (end) {
@@ -82,8 +82,8 @@ class EmpresaService {
                     break
                 case '5':
                     print("Digite a nova descrição: ")
-                    String desc = scanner.nextLine()
-                    empresa.desc = desc
+                    String descricao = scanner.nextLine()
+                    empresa.descricao = descricao
                     break
                 case '6':
                     print("Digite a nova senha: ")

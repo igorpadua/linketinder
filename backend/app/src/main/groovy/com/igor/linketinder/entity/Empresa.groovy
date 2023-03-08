@@ -11,7 +11,7 @@ class Empresa {
     String cnpj
     String pais
     String cep
-    String desc
+    String descricao
     String senha
 
     String toString() {
@@ -20,7 +20,7 @@ class Empresa {
                 "CNPJ: ${this.cnpj} - " +
                 "Pais: ${this.pais} - " +
                 "CEP: ${this.cep} - " +
-                "Descrição: ${this.desc} - " +
+                "Descrição: ${this.descricao} - " +
                 "Senha: ${this.senha}"
     }
 }
