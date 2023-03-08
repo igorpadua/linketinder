@@ -52,7 +52,7 @@ class CandidatoTest {
 
     @Test
     void getDescTest() {
-        Assertions.assertEquals("Sou um cara legal", candidato.desc)
+        Assertions.assertEquals("Sou um cara legal", candidato.descricao)
     }
 
     @Test
@@ -109,8 +109,8 @@ class CandidatoTest {
 
     @Test
     void setDescTest() {
-        candidato.desc = "Sou uma pessoa legal"
-        Assertions.assertEquals("Sou uma pessoa legal", candidato.desc)
+        candidato.descricao = "Sou uma pessoa legal"
+        Assertions.assertEquals("Sou uma pessoa legal", candidato.descricao)
     }
 
     @Test

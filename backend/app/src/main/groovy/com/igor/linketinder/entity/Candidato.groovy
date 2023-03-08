@@ -14,7 +14,7 @@ class Candidato {
     String cpf
     String pais
     String cep
-    String desc
+    String descricao
     String senha
     List<Competencia> competencias;
 
@@ -25,7 +25,7 @@ class Candidato {
                 "CPF: ${this.cpf} - " +
                 "Pais: ${this.pais} - " +
                 "CEP: ${this.cep} - " +
-                "Descrição: ${this.desc} - " +
+                "Descrição: ${this.descricao} - " +
                 "Competencias: ${this.competencias}"
     }
 }

@@ -108,7 +108,7 @@ class CandidatoService {
                 case '7':
                     print("Digite a nova descrição: ")
                     String desc = scanner.nextLine()
-                    candidato.desc = desc
+                    candidato.descricao = desc
                     break
                 case '8':
                     print("Digite a nova senha: ")

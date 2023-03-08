@@ -22,7 +22,7 @@ class CandidatoDAO {
                 '(nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha) ' +
                 "VALUES ('${candidato.nome}', '${candidato.sobrenome}', '${nascimento}', " +
                 "'${candidato.email}', '${candidato.cpf}', '${candidato.pais}', '${candidato.cep}', " +
-                "'${candidato.desc}', '${candidato.senha}')")
+                "'${candidato.descricao}', '${candidato.senha}')")
         sql.close()
     }
 
@@ -33,7 +33,7 @@ class CandidatoDAO {
                 "SET nome = '${candidato.nome}', sobrenome = '${candidato.sobrenome}', " +
                 "data_nascimento = '${nascimento}', email = '${candidato.email}', " +
                 "cpf = '${candidato.cpf}', pais = '${candidato.pais}', cep = '${candidato.cep}', " +
-                "descricao = '${candidato.desc}', senha = '${candidato.senha}' " +
+                "descricao = '${candidato.descricao}', senha = '${candidato.senha}' " +
                 "WHERE cpf = '${candidato.cpf}'")
         sql.close()
     }
