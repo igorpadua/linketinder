@@ -9,7 +9,7 @@ import com.igor.linketinder.service.PessoaService
 class CandidatoController {
     static void adicionar() {
         Candidato candidato = CandidatoService.newCandidato()
-        CandidatoDAO.inserirCandidato(candidato)
+        CandidatoDAO.adiciona(candidato)
         CompetenciaCandidatoDAO.inserirCompetenciaCandidato(candidato)
         println("\nAdicionado com sucesso\n")
     }
@@ -18,11 +18,11 @@ class CandidatoController {
         // Atualizar um candidato
         final String cpf = CandidatoService.pegaCPF()
         // Pega o candidato do banco de dados
-        Candidato candidato = CandidatoDAO.getCandidato(cpf)
+        Candidato candidato = CandidatoDAO.pega(cpf)
         // Atualiza o candidato
         CandidatoService.atualizarCandidato(candidato)
         // Atualiza o candidato no banco de dados
-        CandidatoDAO.atualizarCandidato(candidato)
+        CandidatoDAO.atualiza(candidato)
         // Atualiza as competencias do candidato
         CompetenciaCandidatoDAO.atualizarCompetenciaCandidato(candidato)
         println("\nAtualizado com sucesso\n")
@@ -31,11 +31,11 @@ class CandidatoController {
     static void remover() {
         final String cpf = CandidatoService.pegaCPF()
         CompetenciaCandidatoDAO.removeCompetenciaCandidato(cpf)
-        CandidatoDAO.removeCandidato(cpf)
+        CandidatoDAO.remove(cpf)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
-        PessoaService.imprimir(CandidatoDAO.listaTodosCandidatos())
+        PessoaService.imprimir(CandidatoDAO.listaComTodosCandidatos())
     }
 }
