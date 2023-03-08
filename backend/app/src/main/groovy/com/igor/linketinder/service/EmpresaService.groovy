@@ -25,11 +25,12 @@ class EmpresaService {
         new Empresa(nome, email, cnpj, pais, cep, descricao, senha)
     }
 
-    static void imprimir(List<Empresa> empresas) {
+    private static Boolean listaEstaValida(List<Empresa> empresas) {
+        return empresas != null && !empresas.isEmpty()
+    }
 
-        if (empresas.isEmpty()) {
-            println("Não existe candidatos")
-        }
+    static void imprimir(List<Empresa> empresas) {
+        if (!listaEstaValida(empresas)) return
 
         for (empresa in empresas) {
             println(empresa)
