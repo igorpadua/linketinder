@@ -15,7 +15,7 @@ class CandidatoDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
-    private static validaCandidato(candidato) {
+    private static validaCandidato(Candidato candidato) {
         if (candidato == null) {
             throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
         }
@@ -51,8 +51,7 @@ class CandidatoDAO {
     static void remove(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
 
-        Candidato candidato = pega(cpf)
-        validaCandidato(candidato)
+        validaCandidato(pega(cpf))
 
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
