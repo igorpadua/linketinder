@@ -15,15 +15,10 @@ class CandidatoController {
     }
 
     static void atualizar() {
-        // Atualizar um candidato
         final String cpf = CandidatoService.pegaCPF()
-        // Pega o candidato do banco de dados
         Candidato candidato = CandidatoDAO.pega(cpf)
-        // Atualiza o candidato
         CandidatoService.atualizarCandidato(candidato)
-        // Atualiza o candidato no banco de dados
         CandidatoDAO.atualiza(candidato)
-        // Atualiza as competencias do candidato
         CompetenciaCandidatoDAO.atualizar(candidato)
         println("\nAtualizado com sucesso\n")
     }

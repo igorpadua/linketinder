@@ -15,6 +15,12 @@ class CandidatoDAO {
     static final password= '123456'
     static final drive= "org.postgresql.Driver"
 
+    private static validaCandidato(candidato) {
+        if (candidato == null) {
+            throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
+        }
+    }
+
     static void adiciona(Candidato candidato) {
         Sql sql = Sql.newInstance(url, user, password, drive)
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
@@ -45,6 +51,9 @@ class CandidatoDAO {
     static void remove(String cpf) {
         Sql sql = Sql.newInstance(url, user, password, drive)
 
+        Candidato candidato = pega(cpf)
+        validaCandidato(candidato)
+
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
 
@@ -70,7 +79,9 @@ class CandidatoDAO {
                     rs.getString('cpf'), rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),
                     rs.getString('senha'), competenciasList)
         }
+
         sql.close()
+        validaCandidato(candidato)
         return candidato
     }
 

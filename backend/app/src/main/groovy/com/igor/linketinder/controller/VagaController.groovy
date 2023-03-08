@@ -25,7 +25,6 @@ class VagaController {
         final int id = VagaService.pegaID()
         // Pega a vaga do banco de dados
         Vaga vaga = VagaDAO.pega(id)
-        println(vaga)
         // Atualiza a vaga
         VagaService.atualizarVaga(vaga)
         // Atualiza a vaga no banco de dados
