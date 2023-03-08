@@ -46,18 +46,6 @@ class EmpresaService {
         new Empresa(nome, email, CNPJ, pais, cep, descricao, senha)
     }
 
-    private static Boolean listaEstaValida(List<Empresa> empresas) {
-        return empresas != null && !empresas.isEmpty()
-    }
-
-    static void imprimir(List<Empresa> empresas) {
-        if (!listaEstaValida(empresas)) return
-
-        for (empresa in empresas) {
-            println(empresa)
-        }
-    }
-
     static private void menuAtualizar() {
         println("1 - Atualizar nome")
         println("2 - Atualizar email")
