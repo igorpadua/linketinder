@@ -1,6 +1,7 @@
 package com.igor.linketinder
 
 import com.igor.linketinder.controller.CandidatoController
+import com.igor.linketinder.controller.EmpresaController
 import com.igor.linketinder.dao.CandidatoDAO
 import com.igor.linketinder.dao.CompetenciaCandidatoDAO
 import com.igor.linketinder.dao.CompetenciaVagasDAO
@@ -43,10 +44,7 @@ class App {
                     CandidatoController.adicionar()
                     break
                 case 2:
-                    // Adicionar uma empresa
-                    Empresa empresa = EmpresaService.criar()
-                    EmpresaDAO.inserirEmpresa(empresa)
-                    println("\nAdiciona com sucesso\n")
+                    EmpresaController.adicionar()
                     break
                 case 3:
                     // Adicionar uma vaga
@@ -63,15 +61,7 @@ class App {
                     CandidatoController.atualizar()
                     break
                 case 5:
-                    // Atualizar uma empresa
-                    final String cnpj = EmpresaService.pegaCnpj()
-                    // Pega a empresa do banco de dados
-                    Empresa empresa = EmpresaDAO.getEmpresa(cnpj)
-                    // Atualiza a empresa
-                    EmpresaService.atualizar(empresa)
-                    // Atualiza a empresa no banco de dados
-                    EmpresaDAO.atualizarEmpresa(empresa)
-                    println("\nAtualizado com sucesso\n")
+                    EmpresaController.atualizar()
                     break
                 case 6:
                     // Atualizar uma vaga
@@ -92,10 +82,7 @@ class App {
                     CandidatoController.remover()
                     break
                 case 8:
-                    // Remover uma empresa
-                    final String cnpj = EmpresaService.pegaCnpj()
-                    EmpresaDAO.removeEmpresa(cnpj)
-                    println("\nRemovido com sucesso\n")
+                    EmpresaController.remover()
                     break
                 case 9:
                     // Remover uma vaga
@@ -113,8 +100,7 @@ class App {
                     CandidatoController.listar()
                     break
                 case 11:
-                    // Listar empresas
-                    PessoaService.imprimir(EmpresaDAO.listarEmpresas())
+                    EmpresaController.listar()
                     break
                 case 12:
                     // Listar vagas
