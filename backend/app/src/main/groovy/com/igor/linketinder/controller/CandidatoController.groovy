@@ -8,7 +8,7 @@ import com.igor.linketinder.view.PessoaView
 
 class CandidatoController {
     static void adicionar() {
-        Candidato candidato = CandidatoView.newCandidato()
+        Candidato candidato = CandidatoView.cria()
         CandidatoDAO.adiciona(candidato)
         CompetenciaCandidatoDAO.adicionar(candidato)
         println("\nAdicionado com sucesso\n")
@@ -17,7 +17,7 @@ class CandidatoController {
     static void atualizar() {
         final String cpf = CandidatoView.pegaCPF()
         Candidato candidato = CandidatoDAO.pega(cpf)
-        CandidatoView.atualizarCandidato(candidato)
+        CandidatoView.atualizar(candidato)
         CandidatoDAO.atualiza(candidato)
         CompetenciaCandidatoDAO.atualizar(candidato)
         println("\nAtualizado com sucesso\n")

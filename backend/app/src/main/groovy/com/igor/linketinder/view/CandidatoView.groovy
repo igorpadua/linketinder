@@ -43,7 +43,7 @@ class CandidatoView {
         return cpf
     }
 
-    static Candidato newCandidato() {
+    static Candidato cria() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome do novo candidato: ")
         final String nome = scanner.nextLine()
@@ -79,7 +79,7 @@ class CandidatoView {
         println("10 - Sair")
     }
 
-    static void atualizarCandidato(Candidato candidato) {
+    static void atualizar(Candidato candidato) {
         boolean finalizarAtualizacao = true
         Scanner scanner = new Scanner(System.in)
         while (finalizarAtualizacao) {
@@ -131,7 +131,6 @@ class CandidatoView {
                     finalizarAtualizacao = false
                     break
                 default:
-                    menuAtualizar()
                     println("Opção incorreta")
             }
         }
