@@ -12,7 +12,7 @@ class CandidatoTest {
     void setup() {
         candidato = new Candidato("João", "Silva", new Date(1998 - 10 - 10),
                 "joao@gmail.com", "123456789", "Brasil", "12345678", "Sou um cara legal",
-                "123456", [Competencia.Java, Competencia.JavaScript])
+                "123456", [Competencia.java, Competencia.javascript])
     }
 
     @Test
@@ -62,7 +62,7 @@ class CandidatoTest {
 
     @Test
     void getCompetenciasTest() {
-        Assertions.assertEquals([Competencia.Java, Competencia.JavaScript], candidato.competencias)
+        Assertions.assertEquals([Competencia.java, Competencia.javascript], candidato.competencias)
     }
 
     @Test
@@ -121,8 +121,8 @@ class CandidatoTest {
 
     @Test
     void setCompetenciasTest() {
-        candidato.competencias = [Competencia.Java, Competencia.JavaScript, Competencia.Python]
-        Assertions.assertEquals([Competencia.Java, Competencia.JavaScript, Competencia.Python], candidato.competencias)
+        candidato.competencias = [Competencia.java, Competencia.javascript, Competencia.python]
+        Assertions.assertEquals([Competencia.java, Competencia.javascript, Competencia.python], candidato.competencias)
     }
 
 }
