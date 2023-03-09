@@ -1,7 +1,6 @@
 package com.igor.linketinder.dao
 
 import com.igor.linketinder.service.CompetenciaService
-import com.igor.linketinder.view.CompetenciaView
 import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
