@@ -1,9 +1,9 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
 
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class VagaService {
+class VagaView {
 
     static Vaga adicionaVaga() {
         Scanner scanner = new Scanner(System.in)
@@ -14,7 +14,7 @@ class VagaService {
         print("Digite o local da vaga: ")
         String local_vaga = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
 
         new Vaga(0, nome, descricao, local_vaga , competencias)
     }
@@ -63,7 +63,7 @@ class VagaService {
                     vaga.local_vaga = local_vaga
                     break
                 case '4':
-                    List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+                    List<Competencia> competencias = CompetenciaView.escolherCompetencias()
                     vaga.competencias = competencias
                     break
                 case '5':

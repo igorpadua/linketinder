@@ -1,10 +1,10 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
 
 import com.igor.linketinder.entity.Pessoa
 
 import java.util.regex.Pattern
 
-class PessoaService {
+class PessoaView {
     static boolean validaCEP(String cep) {
         if (cep == null || cep.isEmpty()) return false
         if (cep.length() != 9) return false

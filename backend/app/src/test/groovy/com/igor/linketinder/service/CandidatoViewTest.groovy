@@ -2,13 +2,14 @@ package com.igor.linketinder.service
 
 import com.igor.linketinder.entity.Candidato
 import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.view.CandidatoView
 import groovy.transform.TypeChecked
 import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertEquals
 
 @TypeChecked
-class CandidatoServiceTest {
+class CandidatoViewTest {
     @Test
     void testAdicionaCandidato() {
         List<Candidato> pessoas = new ArrayList<>()
@@ -20,28 +21,28 @@ class CandidatoServiceTest {
     @Test
     void validaCPFTest() {
         String cpf = "000.000.000-00"
-        Boolean resul = CandidatoService.validaCPF(cpf)
+        Boolean resul = CandidatoView.validaCPF(cpf)
         assertEquals(true, resul)
     }
 
     @Test
     void cpfInvalidoLetraTest() {
         String cpf = "000.000.000-0A"
-        Boolean resul = CandidatoService.validaCPF(cpf)
+        Boolean resul = CandidatoView.validaCPF(cpf)
         assertEquals(false, resul)
     }
 
     @Test
     void cpfInvalidoPequenoTest() {
         String cpf = "000.000.000-0"
-        Boolean resul = CandidatoService.validaCPF(cpf)
+        Boolean resul = CandidatoView.validaCPF(cpf)
         assertEquals(false, resul)
     }
 
     @Test
     void cpfNulo() {
         String cpf = null
-        Boolean resul = CandidatoService.validaCPF(cpf)
+        Boolean resul = CandidatoView.validaCPF(cpf)
         assertEquals(false, resul)
     }
 }

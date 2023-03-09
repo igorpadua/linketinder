@@ -1,7 +1,7 @@
 package com.igor.linketinder.dao
 
 
-import com.igor.linketinder.service.CompetenciaService
+import com.igor.linketinder.view.CompetenciaView
 import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
@@ -34,7 +34,7 @@ class VagaDAO {
                         	INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
                         	INNER JOIN competencias c ON c.id = cv.competencia_id
                         	GROUP BY v.id, v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaView.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             Vaga vaga = new Vaga(rs.getInt('id'),rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
             listaVagas.add(vaga)
             }
@@ -65,7 +65,7 @@ class VagaDAO {
 	                   INNER JOIN competencias c ON c.id = cv.competencia_id
 	                   WHERE v.id = ${id} 
 	                   GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            List<Competencia> competenciasList = new ArrayList<>(CompetenciaView.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
         sql.close()

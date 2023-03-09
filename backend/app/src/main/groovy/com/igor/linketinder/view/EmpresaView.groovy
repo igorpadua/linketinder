@@ -1,4 +1,5 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
+
 
 import groovy.transform.TypeChecked
 import com.igor.linketinder.entity.Empresa
@@ -6,7 +7,7 @@ import com.igor.linketinder.entity.Empresa
 import java.util.regex.Pattern
 
 @TypeChecked
-class EmpresaService {
+class EmpresaView {
 
     static Boolean validaCNPJ(String cnpj) {
         if (cnpj == null || cnpj.isEmpty()) return false
@@ -37,7 +38,7 @@ class EmpresaService {
         final String CNPJ = pegaCnpj()
         print("Digite o pais da empresa: ")
         final String pais = scanner.nextLine()
-        final String cep = PessoaService.pegaCep()
+        final String cep = PessoaView.pegaCep()
         print("Digite uma descrição da empresa: ")
         final String descricao = scanner.nextLine()
         print("Digite a senha da empresa: ")
@@ -79,7 +80,7 @@ class EmpresaService {
                     empresa.pais = pais
                     break
                 case '4':
-                    final String CEP = PessoaService.pegaCep()
+                    final String CEP = PessoaView.pegaCep()
                     empresa.cep = CEP
                     break
                 case '5':

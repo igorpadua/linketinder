@@ -1,10 +1,10 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
 
 import groovy.transform.TypeChecked
 import com.igor.linketinder.entity.Competencia
 
 @TypeChecked
-class CompetenciaService {
+class CompetenciaView {
 
     static ArrayList<Competencia> escolherCompetencias() {
         boolean finalizarEscolhas = true

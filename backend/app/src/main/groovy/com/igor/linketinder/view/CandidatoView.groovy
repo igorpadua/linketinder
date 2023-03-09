@@ -1,4 +1,5 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
+
 
 import groovy.transform.TypeChecked
 import com.igor.linketinder.entity.Candidato
@@ -8,7 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
 @TypeChecked
-class CandidatoService {
+class CandidatoView {
 
     static Date pegaNascimento() {
         Scanner scanner = new Scanner(System.in)
@@ -55,13 +56,13 @@ class CandidatoService {
         final String cpf = pegaCPF()
         print("Digite o país do candidato: ")
         final String pais = scanner.nextLine()
-        final String cep = PessoaService.pegaCep()
+        final String cep = PessoaView.pegaCep()
         print("Digite uma descrição do candidato: ")
         final String desc = scanner.nextLine()
         print("Digite a senha do candidato: ")
         final String senha = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
 
         return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha,competencias)
     }
@@ -111,7 +112,7 @@ class CandidatoService {
                     candidato.pais = pais
                     break
                 case '6':
-                    final String cep = PessoaService.pegaCep()
+                    final String cep = PessoaView.pegaCep()
                     candidato.cep = cep
                     break
                 case '7':
@@ -125,7 +126,7 @@ class CandidatoService {
                     candidato.senha = senha
                     break
                 case '9':
-                    candidato.competencias = CompetenciaService.escolherCompetencias()
+                    candidato.competencias = CompetenciaView.escolherCompetencias()
                     break
                 case '10':
                     finalizarAtualizacao = false

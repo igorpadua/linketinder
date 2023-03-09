@@ -1,12 +1,12 @@
 package com.igor.linketinder
 
 import com.igor.linketinder.entity.Empresa
-import com.igor.linketinder.service.EmpresaService
+import com.igor.linketinder.view.EmpresaView
 import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertEquals
 
-class EmpresaServiceTest {
+class EmpresaViewTest {
     @Test
     void testAdicionaEmpresa() {
         List<Empresa> empresas = new ArrayList<>()
@@ -18,28 +18,28 @@ class EmpresaServiceTest {
     @Test
     void cnpjValidoTest() {
         String cnpj = "50.000.000/0000-00"
-        Boolean resul = EmpresaService.validaCNPJ(cnpj)
+        Boolean resul = EmpresaView.validaCNPJ(cnpj)
         assertEquals(true, resul)
     }
 
     @Test
     void cnpjNulo() {
         String cnpj = null
-        Boolean resul = EmpresaService.validaCNPJ(cnpj)
+        Boolean resul = EmpresaView.validaCNPJ(cnpj)
         assertEquals(false, resul)
     }
 
     @Test
     void cnpjInvalidoLetraTest() {
         String cnpj = "50.000.000/0000-0A"
-        Boolean resul = EmpresaService.validaCNPJ(cnpj)
+        Boolean resul = EmpresaView.validaCNPJ(cnpj)
         assertEquals(false, resul)
     }
 
     @Test
     void cnpjPequenoTest() {
         String cnpj = "50.000.000/0000-0"
-        Boolean resul = EmpresaService.validaCNPJ(cnpj)
+        Boolean resul = EmpresaView.validaCNPJ(cnpj)
         assertEquals(false, resul)
     }
 }
