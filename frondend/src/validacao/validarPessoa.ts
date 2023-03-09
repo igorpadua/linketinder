@@ -1,15 +1,33 @@
 import Pessoa from "../pessoa/entities/pessoa.entity";
 
-export default class ValidaPessoa {
-    static nomeRegex: RegExp = /^[a-zA-Z ]{2,30}$/
-    static emailRegex: RegExp = /^\S+@\w+\.\w{2,6}(\.\w{2})?$/
-    static descRegex: RegExp = /^(?=.*[A-Za-z])([0-9])*.{3,100}$/
-    static cepRegex: RegExp = /^\d{5}-\d{3}$/
+export default abstract class ValidaPessoa {
+    nomeRegex: RegExp = /^[a-zA-Z ]{2,30}$/
+    emailRegex: RegExp = /^\S+@\w+\.\w{2,6}(\.\w{2})?$/
+    descRegex: RegExp = /^(?=.*[A-Za-z])([0-9])*.{3,100}$/
+    cepRegex: RegExp = /^\d{5}-\d{3}$/
 
-    protected static dadosForamPreenchidos(pessoa: Pessoa) : boolean {
-        return !(pessoa.nome && pessoa.email && pessoa.desc && pessoa.pais && pessoa.estado && pessoa.cidade && pessoa.cep)
+    protected abstract dadosPreenchidos(pessoa: Pessoa) : boolean
+    protected abstract validacaoDadosFilhos(pessoa: Pessoa) : boolean
+
+    protected dadosForamPreenchidos(pessoa: Pessoa) : boolean {
+        return !(pessoa.nome && pessoa.email && pessoa.desc && pessoa.pais &&
+            pessoa.estado && pessoa.cidade && pessoa.cep && pessoa.competencias.toString() && !this.dadosPreenchidos(pessoa))
     }
-    protected static dadosPrincipais(pessoa: Pessoa) : boolean {
+
+    validacao(pessoa: Pessoa) {
+       if (this.dadosForamPreenchidos(pessoa)) {
+           alert("Preencha todos os campos!")
+           return false
+       }
+
+        if (!this.validacaoDadosPessoa(pessoa)) {
+            return false
+        }
+
+        return this.validacaoDadosFilhos(pessoa);
+    }
+
+    protected validacaoDadosPessoa(pessoa: Pessoa) : boolean {
         if (!this.nomeRegex.test(pessoa.nome)) {
             alert("Nome inválido!")
             return false
@@ -39,9 +57,8 @@ export default class ValidaPessoa {
             alert("CEP inválido!")
             return false
         }
+
         return true
     }
-
-
 }
 

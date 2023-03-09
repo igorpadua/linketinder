@@ -37,7 +37,7 @@ if (window.location.pathname == '/cadastro.html') {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
         if (radio_selecionado == 'Candidato') {
             const candidato: Candidato = PessoasServices.addPessoa() as Candidato
-            if (ValidaCandidato.validacao(candidato)) {
+            if (new ValidaCandidato().validacao(candidato)) {
                 candidatos.push(candidato)
                 localStorage.setItem('candidatos', JSON.stringify(candidatos))
                 alert('Candidato cadastrado com sucesso!')
@@ -45,7 +45,7 @@ if (window.location.pathname == '/cadastro.html') {
             }
         } else {
             const empresa: Empresa = PessoasServices.addPessoa() as Empresa
-            if (ValidaEmpresa.validacao(empresa)) {
+            if (new ValidaEmpresa().validacao(empresa)) {
                 empresas.push(empresa)
                 localStorage.setItem('empresas', JSON.stringify(empresas))
                 alert('Empresa cadastrada com sucesso!')
