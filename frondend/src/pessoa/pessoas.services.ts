@@ -1,9 +1,6 @@
 import Pessoa from "./entities/pessoa.entity";
 import Candidato from "./entities/candidato.entity";
 import Empresa from "./entities/empresa.entity";
-import validaPessoa from "../validacao/validarPessoa";
-import desenharCompetenciaCandidatos from "../grafico/competenciaCandidatos";
-
 export default class PessoasServices {
 
     private static pegaDadosPessoa() : string [] {
@@ -43,10 +40,6 @@ export default class PessoasServices {
         return new Empresa(nome, email, cnpj, descricao, pais, estado, cidade, cep, competencias)
     }
 
-    static validarPessoa(pessoa: Pessoa): boolean {
-        return validaPessoa(pessoa)
-    }
-
     static listarPessoas(pessoas: Pessoa[]) {
         let lista_pessoa = ''
         if ((pessoas.at(0) as Candidato).cpf != undefined) {
@@ -70,10 +63,6 @@ export default class PessoasServices {
         } else {
             document.getElementById('listarEmpresas')!.innerHTML = lista_pessoa
         }
-    }
-
-    static graficoCompetencias(pessoas: Pessoa[]) {
-        desenharCompetenciaCandidatos(pessoas)
     }
 }
 
