@@ -1,4 +1,4 @@
-package com.igor.linketinder
+package com.igor.linketinder.view
 
 import com.igor.linketinder.entity.Empresa
 import com.igor.linketinder.view.EmpresaView

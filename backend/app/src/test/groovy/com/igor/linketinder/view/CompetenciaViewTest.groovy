@@ -1,4 +1,4 @@
-package com.igor.linketinder.service
+package com.igor.linketinder.view
 
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.view.CompetenciaView
