@@ -7,7 +7,6 @@ import java.util.regex.Pattern
 class PessoaView {
     static boolean validaCEP(String cep) {
         if (cep == null || cep.isEmpty()) return false
-        if (cep.length() != 9) return false
         Pattern cepRegex = ~/^\d{5}-\d{3}$/
         if (!cepRegex.matcher(cep).matches()) return false
         return true
