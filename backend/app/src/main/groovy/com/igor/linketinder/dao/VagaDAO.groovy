@@ -5,11 +5,7 @@ import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class VagaDAO {
-    static final url = 'jdbc:postgresql://localhost/liketinder'
-    static final user= 'postgres'
-    static final password= '123456'
-    static final drive= "org.postgresql.Driver"
+class VagaDAO extends ConectarBanco {
 
     static validaVaga(Vaga vaga) {
         if (vaga == null) {
@@ -18,15 +14,15 @@ class VagaDAO {
     }
 
     static void adicionar(Vaga vaga, int idEmpresa) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         sql.executeInsert('INSERT INTO vagas ' +
                 '(nome, descricao, local_vaga, empresa_id) ' +
                 "VALUES ('${vaga.nome}', '${vaga.descricao}', '${vaga.local_vaga}', '${idEmpresa}')")
-        sql.close()
+        desconectar(sql)
     }
 
     static List<Vaga> listaComTodasVagas() {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         List<Vaga> listaVagas = []
         sql.eachRow("""select v.id, v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
 	                        from vagas as v
@@ -37,26 +33,26 @@ class VagaDAO {
             Vaga vaga = new Vaga(rs.getInt('id'),rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
             listaVagas.add(vaga)
             }
-        sql.close()
+        desconectar(sql)
         return listaVagas
     }
 
     static void remove(int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         sql.execute("DELETE FROM vagas WHERE id = ${id}")
-        sql.close()
+        desconectar(sql)
     }
 
     static void atualiza(Vaga vaga, int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         sql.executeUpdate('UPDATE vagas ' +
                 "SET nome = '${vaga.nome}', descricao = '${vaga.descricao}', local_vaga = '${vaga.local_vaga}' " +
                 "WHERE id = '${id}'")
-        sql.close()
+        desconectar(sql)
     }
 
     static Vaga pega(int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         Vaga vaga = null
         sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
 	                   from vagas as v
@@ -67,7 +63,7 @@ class VagaDAO {
             List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
-        sql.close()
+        desconectar(sql)
         validaVaga(vaga)
         return vaga
     }

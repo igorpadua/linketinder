@@ -6,14 +6,10 @@ import groovy.sql.Sql
 import groovy.transform.TypeChecked
 
 @TypeChecked
-class CompetenciaCandidatoDAO {
-    static final url = 'jdbc:postgresql://localhost/liketinder'
-    static final user= 'postgres'
-    static final password= '123456'
-    static final drive= "org.postgresql.Driver"
+class CompetenciaCandidatoDAO extends ConectarBanco {
 
     static void adicionar(Candidato candidato) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         final int idCandidato = CandidatoDAO.pegaId(candidato.cpf)
 
         for (Competencia competencia in candidato.competencias) {
@@ -22,11 +18,11 @@ class CompetenciaCandidatoDAO {
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
 
-        sql.close()
+        desconectar(sql)
     }
 
     static void atualizar(Candidato candidato) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         final int idCandidato = CandidatoDAO.pegaId(candidato.cpf)
 
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
@@ -36,15 +32,15 @@ class CompetenciaCandidatoDAO {
                                     VALUES (${idCandidato}, ${idCompetencia});""")
         }
 
-        sql.close()
+        desconectar(sql)
     }
 
     static void remove(String cpf) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         final int idCandidato = CandidatoDAO.pegaId(cpf)
 
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
 
-        sql.close()
+        desconectar(sql)
     }
 }

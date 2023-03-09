@@ -9,12 +9,7 @@ import groovy.transform.TypeChecked
 import java.text.SimpleDateFormat
 
 @TypeChecked
-class CandidatoDAO {
-    static final url = 'jdbc:postgresql://localhost/liketinder'
-    static final user= 'postgres'
-    static final password= '123456'
-    static final drive= "org.postgresql.Driver"
-
+class CandidatoDAO extends ConectarBanco {
     private static validaCandidato(Candidato candidato) {
         if (candidato == null) {
             throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
@@ -22,7 +17,7 @@ class CandidatoDAO {
     }
 
     static void adiciona(Candidato candidato) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
         sql.executeInsert('INSERT INTO candidatos ' +
@@ -31,11 +26,11 @@ class CandidatoDAO {
                 "'${candidato.email}', '${candidato.cpf}', '${candidato.pais}', '${candidato.cep}', " +
                 "'${candidato.descricao}', '${candidato.senha}')")
 
-        sql.close()
+        desconectar(sql)
     }
 
     static void atualiza(Candidato candidato) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
         sql.executeInsert('UPDATE candidatos ' +
@@ -45,23 +40,23 @@ class CandidatoDAO {
                 "descricao = '${candidato.descricao}', senha = '${candidato.senha}' " +
                 "WHERE cpf = '${candidato.cpf}'")
 
-        sql.close()
+        desconectar(sql)
     }
 
     static void remove(String cpf) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
 
         validaCandidato(pega(cpf))
 
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
 
-        sql.close()
+        desconectar(sql)
     }
 
 
     static Candidato pega(String cpf) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
 
         Candidato candidato = null
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -79,13 +74,13 @@ class CandidatoDAO {
                     rs.getString('senha'), competenciasList)
         }
 
-        sql.close()
+        desconectar(sql)
         validaCandidato(candidato)
         return candidato
     }
 
     static List<Candidato> listaComTodosCandidatos() {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         List<Candidato> listaCandidato = new ArrayList<>()
 
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -102,20 +97,20 @@ class CandidatoDAO {
             listaCandidato.add(candidato)
         }
 
-        sql.close()
+        desconectar(sql)
 
         return listaCandidato
     }
 
     static int pegaId(String cpf) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
-        int id = 0
+        Sql sql = conectar()
+        int idCandidato = 0
         sql.eachRow("""SELECT c.id
                             FROM candidatos c
                             WHERE c.cpf = ${cpf};""") { rs ->
-            id = rs.getInt('id')
+            idCandidato = rs.getInt('id')
         }
-        sql.close()
-        return id
+        desconectar(sql)
+        return idCandidato
     }
 }

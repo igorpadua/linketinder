@@ -4,14 +4,10 @@ import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class CompetenciaVagasDAO {
-    static final url = 'jdbc:postgresql://localhost/liketinder'
-    static final user= 'postgres'
-    static final password= '123456'
-    static final drive= "org.postgresql.Driver"
+class CompetenciaVagasDAO extends ConectarBanco {
 
     static void adicionar(Vaga vaga, int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
 
         for (Competencia competencia in vaga.competencias) {
             int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
@@ -19,17 +15,17 @@ class CompetenciaVagasDAO {
                                     VALUES (${id}, ${idCompetencia});""")
         }
 
-        sql.close()
+        desconectar(sql)
     }
 
     static void remove(int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
         sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${id}")
-        sql.close()
+        desconectar(sql)
     }
 
     static void atualizar(Vaga vaga, int id) {
-        Sql sql = Sql.newInstance(url, user, password, drive)
+        Sql sql = conectar()
 
         remove(id)
         for (Competencia competencia in vaga.competencias) {
@@ -38,6 +34,6 @@ class CompetenciaVagasDAO {
                                     VALUES (${id}, ${idCompetencia});""")
         }
 
-        sql.close()
+        desconectar(sql)
     }
 }
