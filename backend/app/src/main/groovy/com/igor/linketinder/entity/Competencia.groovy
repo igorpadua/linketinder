@@ -1,13 +1,13 @@
 package com.igor.linketinder.entity
 
 enum Competencia {
-    Python,
-    Java,
-    SpringFramework,
-    Angular,
+    python,
+    java,
+    springframework,
+    angular,
     cplusplus,
     c,
-    JavaScript,
-    Html,
-    Node,
+    javascript,
+    html,
+    node,
 }

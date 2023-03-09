@@ -16,16 +16,16 @@ class CompetenciaView {
             int opc = scanner.nextInt()
             switch (opc) {
                 case 1:
-                   listasCompetencias.add(Competencia.Python)
+                   listasCompetencias.add(Competencia.python)
                     break
                 case 2:
-                    listasCompetencias.add(Competencia.Java)
+                    listasCompetencias.add(Competencia.java)
                     break
                 case 3:
-                    listasCompetencias.add(Competencia.SpringFramework)
+                    listasCompetencias.add(Competencia.springframework)
                     break
                 case 4:
-                    listasCompetencias.add(Competencia.Angular)
+                    listasCompetencias.add(Competencia.angular)
                     break
                 case 5:
                     listasCompetencias.add(Competencia.cplusplus)
@@ -34,13 +34,13 @@ class CompetenciaView {
                     listasCompetencias.add(Competencia.c)
                     break
                 case 7:
-                    listasCompetencias.add(Competencia.JavaScript)
+                    listasCompetencias.add(Competencia.javascript)
                     break
                 case 8:
-                    listasCompetencias.add(Competencia.Html)
+                    listasCompetencias.add(Competencia.html)
                     break
                 case 9:
-                    listasCompetencias.add(Competencia.Node)
+                    listasCompetencias.add(Competencia.node)
                     break
                 case 10:
                     if (listasCompetencias.isEmpty()) {
@@ -57,31 +57,6 @@ class CompetenciaView {
         return listasCompetencias
     }
 
-    static Competencia transformaString(String competencia) {
-        switch (competencia) {
-            case "Python":
-                return Competencia.Python
-            case "Java":
-                return Competencia.Java
-            case "SpringFramework":
-                return Competencia.SpringFramework
-            case "Angular":
-                return Competencia.Angular
-            case "cplusplus":
-                return Competencia.cplusplus
-            case "c":
-                return Competencia.c
-            case "JavaScript":
-                return Competencia.JavaScript
-            case "Html":
-                return Competencia.Html
-            case "Node":
-                return Competencia.Node
-            default:
-                throw new IllegalArgumentException("Competencia não encontrada")
-        }
-    }
-
     private static void menuEscolhaCompetencias() {
         println("Escolhas as competencias: ")
         println("1 - Python")
@@ -96,13 +71,4 @@ class CompetenciaView {
         println("10 - Sair")
     }
 
-    static List<Competencia> transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(String competencias) {
-        String removeChaves = competencias.replace('{', '').replace('}', '')
-        String[] separaPorVirgula = removeChaves.split(',')
-        List<Competencia> competenciasList = new ArrayList<>()
-        for (String competencia in separaPorVirgula) {
-            competenciasList.add(transformaString(competencia))
-        }
-        return competenciasList
-    }
 }
