@@ -5,7 +5,7 @@ import groovy.transform.TypeChecked
 
 @TypeChecked
 @Canonical
-class Pessoa {
+abstract class Pessoa {
     String nome
     String email
     String pais
