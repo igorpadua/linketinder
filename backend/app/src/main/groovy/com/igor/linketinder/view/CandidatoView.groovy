@@ -26,7 +26,6 @@ class CandidatoView {
 
     static Boolean validaCPF(String cpf) {
         if (cpf == null || cpf.isEmpty()) return false
-        if (cpf.length() != 14) return false
         final Pattern cpfRegex = ~/^\d{3}\.\d{3}\.\d{3}-\d{2}$/
         if (!cpfRegex.matcher(cpf).matches()) return false
         return true
