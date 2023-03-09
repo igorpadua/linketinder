@@ -9,40 +9,30 @@ import com.igor.linketinder.view.VagaView
 
 class VagaController {
     static void adicionar() {
-        // Adicionar uma vaga
         final String cnpj = EmpresaView.pegaCnpj()
-        // Pega o ID
         final int idEmpresa = EmpresaDAO.pegaId(cnpj)
         Vaga vaga = VagaView.adicionaVaga()
         VagaDAO.adicionar(vaga, idEmpresa)
-        // Adiciona as competencias da vaga
         CompetenciaVagasDAO.adicionar(vaga, idEmpresa)
         println("\nAdicionado com sucesso\n")
     }
 
     static void atualizar() {
-        // Atualizar uma vaga
-        final int id = VagaView.pegaID()
-        // Pega a vaga do banco de dados
-        Vaga vaga = VagaDAO.pega(id)
-        // Atualiza a vaga
+        final int idVaga = VagaView.pegaID()
+        Vaga vaga = VagaDAO.pega(idVaga)
         VagaView.atualizarVaga(vaga)
-        // Atualiza a vaga no banco de dados
-        VagaDAO.atualiza(vaga, id)
-        // Atualiza as competencias da vaga
-        CompetenciaVagasDAO.atualizar(vaga, id)
+        VagaDAO.atualiza(vaga, idVaga)
+        CompetenciaVagasDAO.atualizar(vaga, idVaga)
     }
 
     static void remover() {
-        // Remover uma vaga
-        final int id = VagaView.pegaID()
-        CompetenciaVagasDAO.remove(id)
-        VagaDAO.remove(id)
+        final int idVaga = VagaView.pegaID()
+        CompetenciaVagasDAO.remove(idVaga)
+        VagaDAO.remove(idVaga)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
-        // Listar todas as vagas
         VagaView.printVagas(VagaDAO.listaComTodasVagas())
     }
 }
