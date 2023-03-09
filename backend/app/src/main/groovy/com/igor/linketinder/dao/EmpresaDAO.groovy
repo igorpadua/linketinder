@@ -67,11 +67,11 @@ class EmpresaDAO {
 
     static int pegaId(String cnpj) {
         Sql sql = Sql.newInstance(url, user, password, drive)
-        int id = 0
+        int idEmpresa = 0
         sql.eachRow("SELECT id FROM empresas WHERE cnpj = ${cnpj}") { rs ->
-            id = rs.getInt('id')
+            idEmpresa = rs.getInt('id')
         }
         sql.close()
-        return id
+        return idEmpresa
     }
 }
