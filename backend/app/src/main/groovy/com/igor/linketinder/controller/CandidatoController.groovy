@@ -16,7 +16,7 @@ class CandidatoController {
 
     static void adicionar() {
         Candidato candidato = CandidatoView.cria()
-        new CandidatoDAO(fabricaBanco).adiciona(candidato)
+        candidatoDAO.adiciona(candidato)
         competenciaCandidatoDAO.adicionar(candidato)
         println("\nAdicionado com sucesso\n")
     }
