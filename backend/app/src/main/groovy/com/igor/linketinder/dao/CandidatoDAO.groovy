@@ -2,6 +2,7 @@ package com.igor.linketinder.dao
 
 import com.igor.linketinder.entity.Candidato
 import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.fabricaBanco.FabricaBanco
 import com.igor.linketinder.service.CompetenciaService
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
@@ -9,15 +10,22 @@ import groovy.transform.TypeChecked
 import java.text.SimpleDateFormat
 
 @TypeChecked
-class CandidatoDAO extends ConectarBanco {
-    private static validaCandidato(Candidato candidato) {
+class CandidatoDAO {
+
+    private Sql sql
+
+    CandidatoDAO(FabricaBanco fabricaBanco) {
+        sql = fabricaBanco.iniciarBancoDeDados().conectar()
+    }
+
+    // valida candidato
+    static private void validaCandidato(Candidato candidato) {
         if (candidato == null) {
             throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
         }
     }
 
-    static void adiciona(Candidato candidato) {
-        Sql sql = conectar()
+    void adiciona(Candidato candidato) {
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
         sql.executeInsert('INSERT INTO candidatos ' +
@@ -25,12 +33,9 @@ class CandidatoDAO extends ConectarBanco {
                 "VALUES ('${candidato.nome}', '${candidato.sobrenome}', '${nascimento}', " +
                 "'${candidato.email}', '${candidato.cpf}', '${candidato.pais}', '${candidato.cep}', " +
                 "'${candidato.descricao}', '${candidato.senha}')")
-
-        desconectar(sql)
     }
 
-    static void atualiza(Candidato candidato) {
-        Sql sql = conectar()
+    void atualiza(Candidato candidato) {
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
         sql.executeInsert('UPDATE candidatos ' +
@@ -39,24 +44,17 @@ class CandidatoDAO extends ConectarBanco {
                 "cpf = '${candidato.cpf}', pais = '${candidato.pais}', cep = '${candidato.cep}', " +
                 "descricao = '${candidato.descricao}', senha = '${candidato.senha}' " +
                 "WHERE cpf = '${candidato.cpf}'")
-
-        desconectar(sql)
     }
 
-    static void remove(String cpf) {
-        Sql sql = conectar()
+    void remove(String cpf) {
 
         validaCandidato(pega(cpf))
-
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
-
-        desconectar(sql)
     }
 
 
-    static Candidato pega(String cpf) {
-        Sql sql = conectar()
+    Candidato pega(String cpf) {
 
         Candidato candidato = null
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -73,14 +71,11 @@ class CandidatoDAO extends ConectarBanco {
                     rs.getString('cpf'), rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),
                     rs.getString('senha'), competenciasList)
         }
-
-        desconectar(sql)
         validaCandidato(candidato)
         return candidato
     }
 
-    static List<Candidato> listaComTodosCandidatos() {
-        Sql sql = conectar()
+    List<Candidato> listaComTodosCandidatos() {
         List<Candidato> listaCandidato = new ArrayList<>()
 
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,
@@ -96,21 +91,16 @@ class CandidatoDAO extends ConectarBanco {
                     rs.getString('senha'), competenciasList)
             listaCandidato.add(candidato)
         }
-
-        desconectar(sql)
-
         return listaCandidato
     }
 
-    static int pegaId(String cpf) {
-        Sql sql = conectar()
+    int pegaId(String cpf) {
         int idCandidato = 0
         sql.eachRow("""SELECT c.id
                             FROM candidatos c
                             WHERE c.cpf = ${cpf};""") { rs ->
             idCandidato = rs.getInt('id')
         }
-        desconectar(sql)
         return idCandidato
     }
 }

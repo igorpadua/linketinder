@@ -1,28 +1,32 @@
 package com.igor.linketinder.dao
 
+import com.igor.linketinder.fabricaBanco.FabricaBanco
 import com.igor.linketinder.service.CompetenciaService
 import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class VagaDAO extends ConectarBanco {
+class VagaDAO {
 
-    static validaVaga(Vaga vaga) {
+    private Sql sql
+
+    VagaDAO(FabricaBanco fabricaBanco) {
+        sql = fabricaBanco.iniciarBancoDeDados().conectar()
+    }
+
+    static void validaVaga(Vaga vaga) {
         if (vaga == null) {
             throw new RuntimeException("Não foi possível encontrar uma vaga com o ID fornecido.")
         }
     }
 
-    static void adicionar(Vaga vaga, int idEmpresa) {
-        Sql sql = conectar()
+    void adicionar(Vaga vaga, int idEmpresa) {
         sql.executeInsert('INSERT INTO vagas ' +
                 '(nome, descricao, local_vaga, empresa_id) ' +
                 "VALUES ('${vaga.nome}', '${vaga.descricao}', '${vaga.local_vaga}', '${idEmpresa}')")
-        desconectar(sql)
     }
 
-    static List<Vaga> listaComTodasVagas() {
-        Sql sql = conectar()
+    List<Vaga> listaComTodasVagas() {
         List<Vaga> listaVagas = []
         sql.eachRow("""select v.id, v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
 	                        from vagas as v
@@ -33,26 +37,20 @@ class VagaDAO extends ConectarBanco {
             Vaga vaga = new Vaga(rs.getInt('id'),rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
             listaVagas.add(vaga)
             }
-        desconectar(sql)
         return listaVagas
     }
 
-    static void remove(int id) {
-        Sql sql = conectar()
+    void remove(int id) {
         sql.execute("DELETE FROM vagas WHERE id = ${id}")
-        desconectar(sql)
     }
 
-    static void atualiza(Vaga vaga, int id) {
-        Sql sql = conectar()
+    void atualiza(Vaga vaga, int id) {
         sql.executeUpdate('UPDATE vagas ' +
                 "SET nome = '${vaga.nome}', descricao = '${vaga.descricao}', local_vaga = '${vaga.local_vaga}' " +
                 "WHERE id = '${id}'")
-        desconectar(sql)
     }
 
-    static Vaga pega(int id) {
-        Sql sql = conectar()
+    Vaga pega(int id) {
         Vaga vaga = null
         sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
 	                   from vagas as v
@@ -63,7 +61,6 @@ class VagaDAO extends ConectarBanco {
             List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
         }
-        desconectar(sql)
         validaVaga(vaga)
         return vaga
     }

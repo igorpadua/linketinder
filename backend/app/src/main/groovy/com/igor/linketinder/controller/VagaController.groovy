@@ -4,35 +4,43 @@ import com.igor.linketinder.dao.CompetenciaVagasDAO
 import com.igor.linketinder.dao.EmpresaDAO
 import com.igor.linketinder.dao.VagaDAO
 import com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.fabricaBanco.FabricaBanco
+import com.igor.linketinder.fabricaBanco.PostgesFabric
 import com.igor.linketinder.view.EmpresaView
 import com.igor.linketinder.view.VagaView
 
 class VagaController {
+
+    private static final FabricaBanco fabricaBanco = new PostgesFabric()
+    private static final VagaDAO vagaDAO = new VagaDAO(fabricaBanco)
+    private static final CompetenciaVagasDAO competenciaVagasDAO = new CompetenciaVagasDAO(fabricaBanco)
+    private static final EmpresaDAO empresaDAO = new EmpresaDAO(fabricaBanco)
+
     static void adicionar() {
         final String cnpj = EmpresaView.pegaCnpj()
-        final int idEmpresa = EmpresaDAO.pegaId(cnpj)
+        final int idEmpresa = empresaDAO.pegaId(cnpj)
         Vaga vaga = VagaView.adicionaVaga()
-        VagaDAO.adicionar(vaga, idEmpresa)
-        CompetenciaVagasDAO.adicionar(vaga, idEmpresa)
+        vagaDAO.adicionar(vaga, idEmpresa)
+        competenciaVagasDAO.adicionar(vaga, idEmpresa)
         println("\nAdicionado com sucesso\n")
     }
 
     static void atualizar() {
         final int idVaga = VagaView.pegaID()
-        Vaga vaga = VagaDAO.pega(idVaga)
+        Vaga vaga = vagaDAO.pega(idVaga)
         VagaView.atualizarVaga(vaga)
-        VagaDAO.atualiza(vaga, idVaga)
-        CompetenciaVagasDAO.atualizar(vaga, idVaga)
+        vagaDAO.atualiza(vaga, idVaga)
+        competenciaVagasDAO.atualizar(vaga, idVaga)
     }
 
     static void remover() {
         final int idVaga = VagaView.pegaID()
-        CompetenciaVagasDAO.remove(idVaga)
-        VagaDAO.remove(idVaga)
+        competenciaVagasDAO.remove(idVaga)
+        vagaDAO.remove(idVaga)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
-        VagaView.printVagas(VagaDAO.listaComTodasVagas())
+        VagaView.printVagas(vagaDAO.listaComTodasVagas())
     }
 }

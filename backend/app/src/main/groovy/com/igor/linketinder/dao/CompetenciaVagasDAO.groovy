@@ -1,39 +1,40 @@
 package com.igor.linketinder.dao
 
+import com.igor.linketinder.fabricaBanco.FabricaBanco
 import groovy.sql.Sql
 import com.igor.linketinder.entity.Competencia
 import com.igor.linketinder.entity.Vaga
 
-class CompetenciaVagasDAO extends ConectarBanco {
+class CompetenciaVagasDAO {
 
-    static void adicionar(Vaga vaga, int id) {
-        Sql sql = conectar()
+    private Sql sql
+    private FabricaBanco fabricaBanco
+    private CompetenciaDAO competenciaDAO = new CompetenciaDAO(fabricaBanco)
 
+
+    CompetenciaVagasDAO(FabricaBanco fabricaBanco) {
+        this.fabricaBanco = fabricaBanco
+        sql = fabricaBanco.iniciarBancoDeDados().conectar()
+    }
+
+    void adicionar(Vaga vaga, int id) {
         for (Competencia competencia in vaga.competencias) {
-            int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
+            int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
                                     VALUES (${id}, ${idCompetencia});""")
         }
-
-        desconectar(sql)
     }
 
-    static void remove(int id) {
-        Sql sql = conectar()
+    void remove(int id) {
         sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${id}")
-        desconectar(sql)
     }
 
-    static void atualizar(Vaga vaga, int id) {
-        Sql sql = conectar()
-
+    void atualizar(Vaga vaga, int id) {
         remove(id)
         for (Competencia competencia in vaga.competencias) {
-            int idCompetencia = CompetenciaDAO.pegaId(competencia.toString())
+            int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
                                     VALUES (${id}, ${idCompetencia});""")
         }
-
-        desconectar(sql)
     }
 }

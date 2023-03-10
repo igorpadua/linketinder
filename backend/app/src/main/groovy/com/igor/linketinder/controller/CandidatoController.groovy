@@ -3,34 +3,41 @@ package com.igor.linketinder.controller
 import com.igor.linketinder.dao.CandidatoDAO
 import com.igor.linketinder.dao.CompetenciaCandidatoDAO
 import com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.fabricaBanco.FabricaBanco
+import com.igor.linketinder.fabricaBanco.PostgesFabric
 import com.igor.linketinder.view.CandidatoView
 import com.igor.linketinder.view.PessoaView
 
 class CandidatoController {
+
+    private static final FabricaBanco fabricaBanco = new PostgesFabric()
+    private static final CandidatoDAO candidatoDAO = new CandidatoDAO(fabricaBanco)
+    private static final CompetenciaCandidatoDAO competenciaCandidatoDAO = new CompetenciaCandidatoDAO(fabricaBanco)
+
     static void adicionar() {
         Candidato candidato = CandidatoView.cria()
-        CandidatoDAO.adiciona(candidato)
-        CompetenciaCandidatoDAO.adicionar(candidato)
+        new CandidatoDAO(fabricaBanco).adiciona(candidato)
+        competenciaCandidatoDAO.adicionar(candidato)
         println("\nAdicionado com sucesso\n")
     }
 
     static void atualizar() {
         final String cpf = CandidatoView.pegaCPF()
-        Candidato candidato = CandidatoDAO.pega(cpf)
+        Candidato candidato = candidatoDAO.pega(cpf)
         CandidatoView.atualizar(candidato)
-        CandidatoDAO.atualiza(candidato)
-        CompetenciaCandidatoDAO.atualizar(candidato)
+        candidatoDAO.atualiza(candidato)
+        competenciaCandidatoDAO.atualizar(candidato)
         println("\nAtualizado com sucesso\n")
     }
 
     static void remover() {
         final String cpf = CandidatoView.pegaCPF()
-        CompetenciaCandidatoDAO.remove(cpf)
-        CandidatoDAO.remove(cpf)
+        competenciaCandidatoDAO.remove(cpf)
+        candidatoDAO.remove(cpf)
         println("\nRemovido com sucesso\n")
     }
 
     static void listar() {
-        PessoaView.imprimir(CandidatoDAO.listaComTodosCandidatos())
+        PessoaView.imprimir(candidatoDAO.listaComTodosCandidatos())
     }
 }
