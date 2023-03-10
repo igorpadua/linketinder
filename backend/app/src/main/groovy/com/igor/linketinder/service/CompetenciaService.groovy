@@ -12,8 +12,8 @@ class CompetenciaService {
         for (String competencia in separaPorVirgula) {
             try {
                 competenciasList.add(Competencia.valueOf(competencia.toLowerCase()))
-            } catch (IllegalArgumentException ignored) {
-                //não faz nada
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Não foi possível encontrar uma competência com o nome fornecido.", e)
             }
         }
         return competenciasList
