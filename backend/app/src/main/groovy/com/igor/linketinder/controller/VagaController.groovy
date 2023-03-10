@@ -11,7 +11,7 @@ import com.igor.linketinder.view.VagaView
 
 class VagaController {
 
-    private static final FabricaBanco fabricaBanco = new PostgesFabric()
+    private static final FabricaBanco fabricaBanco = FabricaBanco.criaInstancia(new PostgesFabric())
     private static final VagaDAO vagaDAO = new VagaDAO(fabricaBanco)
     private static final CompetenciaVagasDAO competenciaVagasDAO = new CompetenciaVagasDAO(fabricaBanco)
     private static final EmpresaDAO empresaDAO = new EmpresaDAO(fabricaBanco)

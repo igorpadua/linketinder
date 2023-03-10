@@ -5,7 +5,7 @@ import com.igor.linketinder.database.PostgreSql
 
 class PostgesFabric extends FabricaBanco {
     @Override
-    BancoDados criarBanco() {
+    protected BancoDados criarBanco() {
         return new PostgreSql()
     }
 }
