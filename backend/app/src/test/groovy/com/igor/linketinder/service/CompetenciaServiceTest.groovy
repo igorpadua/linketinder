@@ -1,6 +1,6 @@
 package com.igor.linketinder.service
 
-import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.model.Competencia
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

@@ -1,6 +1,6 @@
 package com.igor.linketinder.view
 
-import com.igor.linketinder.entity.Pessoa
+import com.igor.linketinder.model.Pessoa
 
 import java.util.regex.Pattern
 

@@ -1,4 +1,4 @@
-package com.igor.linketinder.entity
+package com.igor.linketinder.model
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach

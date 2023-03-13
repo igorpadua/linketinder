@@ -1,7 +1,7 @@
 package com.igor.linketinder.view
 
 import groovy.transform.TypeChecked
-import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.model.Competencia
 
 @TypeChecked
 class CompetenciaView {

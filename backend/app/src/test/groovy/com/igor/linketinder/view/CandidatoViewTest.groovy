@@ -1,7 +1,7 @@
 package com.igor.linketinder.view
 
-import com.igor.linketinder.entity.Candidato
-import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.model.Candidato
+import com.igor.linketinder.model.Competencia
 import groovy.transform.TypeChecked
 import org.junit.jupiter.api.Test
 

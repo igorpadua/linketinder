@@ -1,4 +1,4 @@
-package com.igor.linketinder.entity
+package com.igor.linketinder.model
 
 enum Competencia {
     python,

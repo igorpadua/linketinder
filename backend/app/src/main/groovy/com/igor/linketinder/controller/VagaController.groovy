@@ -3,7 +3,7 @@ package com.igor.linketinder.controller
 import com.igor.linketinder.dao.CompetenciaVagasDAO
 import com.igor.linketinder.dao.EmpresaDAO
 import com.igor.linketinder.dao.VagaDAO
-import com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.model.Vaga
 import com.igor.linketinder.fabricaBanco.FabricaBanco
 import com.igor.linketinder.fabricaBanco.PostgesFabric
 import com.igor.linketinder.view.EmpresaView

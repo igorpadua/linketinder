@@ -2,7 +2,7 @@ package com.igor.linketinder.view
 
 
 import groovy.transform.TypeChecked
-import com.igor.linketinder.entity.Empresa
+import com.igor.linketinder.model.Empresa
 
 import java.util.regex.Pattern
 

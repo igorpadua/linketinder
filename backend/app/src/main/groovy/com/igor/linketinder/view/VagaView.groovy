@@ -1,7 +1,7 @@
 package com.igor.linketinder.view
 
-import com.igor.linketinder.entity.Competencia
-import com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.Vaga
 
 class VagaView {
 

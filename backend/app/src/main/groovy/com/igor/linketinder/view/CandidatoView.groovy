@@ -2,8 +2,8 @@ package com.igor.linketinder.view
 
 
 import groovy.transform.TypeChecked
-import com.igor.linketinder.entity.Candidato
-import com.igor.linketinder.entity.Competencia
+import com.igor.linketinder.model.Candidato
+import com.igor.linketinder.model.Competencia
 
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern

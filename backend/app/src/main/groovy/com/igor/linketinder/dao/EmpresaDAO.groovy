@@ -3,7 +3,7 @@ package com.igor.linketinder.dao
 import com.igor.linketinder.fabricaBanco.FabricaBanco
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
-import com.igor.linketinder.entity.Empresa
+import com.igor.linketinder.model.Empresa
 
 @TypeChecked
 class EmpresaDAO {

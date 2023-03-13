@@ -2,7 +2,7 @@ package com.igor.linketinder.controller
 
 import com.igor.linketinder.dao.CandidatoDAO
 import com.igor.linketinder.dao.CompetenciaCandidatoDAO
-import com.igor.linketinder.entity.Candidato
+import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.fabricaBanco.FabricaBanco
 import com.igor.linketinder.fabricaBanco.PostgesFabric
 import com.igor.linketinder.view.CandidatoView

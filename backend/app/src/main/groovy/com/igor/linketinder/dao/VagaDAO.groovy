@@ -3,8 +3,8 @@ package com.igor.linketinder.dao
 import com.igor.linketinder.fabricaBanco.FabricaBanco
 import com.igor.linketinder.service.CompetenciaService
 import groovy.sql.Sql
-import com.igor.linketinder.entity.Competencia
-import com.igor.linketinder.entity.Vaga
+import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.Vaga
 
 class VagaDAO {
 

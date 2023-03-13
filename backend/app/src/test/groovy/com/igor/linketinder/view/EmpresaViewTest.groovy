@@ -1,7 +1,6 @@
 package com.igor.linketinder.view
 
-import com.igor.linketinder.entity.Empresa
-import com.igor.linketinder.view.EmpresaView
+import com.igor.linketinder.model.Empresa
 import org.junit.jupiter.api.Test
 
 import static org.junit.jupiter.api.Assertions.assertEquals
