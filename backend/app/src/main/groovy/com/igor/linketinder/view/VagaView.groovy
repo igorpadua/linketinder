@@ -32,7 +32,7 @@ class VagaView {
         print("Digite o local da vaga: ")
         String local_vaga = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
 
         new Vaga(0, nome, descricao, local_vaga , competencias, empresa)
     }
@@ -81,7 +81,7 @@ class VagaView {
                     vaga.local_vaga = local_vaga
                     break
                 case '4':
-                    List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+                    List<Competencia> competencias = CompetenciaView.escolherCompetencias()
                     vaga.competencias = competencias
                     break
                 case '5':

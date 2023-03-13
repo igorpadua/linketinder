@@ -61,7 +61,7 @@ class CandidatoView {
         print("Digite a senha do candidato: ")
         final String senha = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
 
         return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha,competencias)
     }
@@ -126,7 +126,7 @@ class CandidatoView {
                     candidato.senha = senha
                     break
                 case '9':
-                    candidato.competencias = CompetenciaService.escolherCompetencias()
+                    candidato.competencias = CompetenciaView.escolherCompetencias()
                     break
                 case '10':
                     finalizarAtualizacao = false
