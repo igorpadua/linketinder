@@ -1,6 +1,6 @@
 import Chart from "chart.js/auto";
-import Pessoa from "../pessoa/entities/pessoa.entity";
-import contarCompetencia from "./contaCompetencia";
+import Pessoa from "../model/pessoa.entity";
+import contarCompetencia from "../util/contaCompetencia";
 
 export default function desenharCompetencia(pessoas: Pessoa[]) {
     const python = contarCompetencia(pessoas, 'python')

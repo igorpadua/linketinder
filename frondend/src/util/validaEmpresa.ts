@@ -1,4 +1,4 @@
-import Empresa from "../pessoa/entities/empresa.entity";
+import Empresa from "../model/empresa.entity";
 import ValidaPessoa from "./validarPessoa";
 
 export default class ValidaEmpresa extends ValidaPessoa {

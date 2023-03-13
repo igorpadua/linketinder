@@ -1,10 +1,10 @@
-import PessoasServices from "./pessoa/pessoas.services";
-import Candidato from "./pessoa/entities/candidato.entity";
-import Empresa from "./pessoa/entities/empresa.entity";
-import graficoCompetencia from "./grafico/graficoCompetencia";
-import {mostrarCandidato, mostrarEmpresa} from "./Cadastro";
-import ValidaEmpresa from "./validacao/validaEmpresa";
-import {ValidaCandidato} from "./validacao/validaCandidato";
+import PessoasView from "./view/pessoas.view";
+import Candidato from "./model/candidato.entity";
+import Empresa from "./model/empresa.entity";
+import graficoCompetencia from "./view/graficoCompetencia";
+import {mostrarCandidato, mostrarEmpresa} from "./view/Cadastro";
+import ValidaEmpresa from "./util/validaEmpresa";
+import {ValidaCandidato} from "./util/validaCandidato";
 
 let candidatos: Candidato[] = []
 let empresas: Empresa[] = []
@@ -36,7 +36,7 @@ if (window.location.pathname == '/cadastro.html') {
     document.getElementById('addCadastro')!.onclick = () => {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
         if (radio_selecionado == 'Candidato') {
-            const candidato: Candidato = PessoasServices.addPessoa() as Candidato
+            const candidato: Candidato = PessoasView.addPessoa() as Candidato
             if (new ValidaCandidato().validacao(candidato)) {
                 candidatos.push(candidato)
                 localStorage.setItem('candidatos', JSON.stringify(candidatos))
@@ -44,7 +44,7 @@ if (window.location.pathname == '/cadastro.html') {
                 window.location.href = '/index.html'
             }
         } else {
-            const empresa: Empresa = PessoasServices.addPessoa() as Empresa
+            const empresa: Empresa = PessoasView.addPessoa() as Empresa
             if (new ValidaEmpresa().validacao(empresa)) {
                 empresas.push(empresa)
                 localStorage.setItem('empresas', JSON.stringify(empresas))
@@ -56,10 +56,10 @@ if (window.location.pathname == '/cadastro.html') {
 }
 
 if (window.location.pathname == '/lista_empresa.html') {
-    PessoasServices.listarPessoas(empresas)
+    PessoasView.listarPessoas(empresas)
 }
 
 if (window.location.pathname == '/lista_candidato.html') {
-    PessoasServices.listarPessoas(candidatos)
+    PessoasView.listarPessoas(candidatos)
     graficoCompetencia(candidatos)
 }

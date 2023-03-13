@@ -1,4 +1,4 @@
-import Candidato from "../pessoa/entities/candidato.entity";
+import Candidato from "../model/candidato.entity";
 import ValidaPessoa from "./validarPessoa";
 
 export class ValidaCandidato extends ValidaPessoa {

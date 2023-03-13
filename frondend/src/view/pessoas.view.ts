@@ -1,7 +1,7 @@
-import Pessoa from "./entities/pessoa.entity";
-import Candidato from "./entities/candidato.entity";
-import Empresa from "./entities/empresa.entity";
-export default class PessoasServices {
+import Pessoa from "../model/pessoa.entity";
+import Candidato from "../model/candidato.entity";
+import Empresa from "../model/empresa.entity";
+export default class PessoasView {
 
     private static pegaDadosPessoa() : string [] {
         const nome: string = (<HTMLInputElement>document.getElementById("idNome")).value
@@ -27,8 +27,8 @@ export default class PessoasServices {
 
     static addPessoa() {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
-        const [nome, email, descricao, pais, estado, cidade, cep] = PessoasServices.pegaDadosPessoa()
-        const competencias: string[] = PessoasServices.pegaCompetencias()
+        const [nome, email, descricao, pais, estado, cidade, cep] = PessoasView.pegaDadosPessoa()
+        const competencias: string[] = PessoasView.pegaCompetencias()
 
         if (radio_selecionado == "Candidato") {
             const cpf: string = (<HTMLInputElement>document.getElementById("idCpf")).value

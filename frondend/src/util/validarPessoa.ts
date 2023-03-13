@@ -1,4 +1,4 @@
-import Pessoa from "../pessoa/entities/pessoa.entity";
+import Pessoa from "../model/pessoa.entity";
 
 export default abstract class ValidaPessoa {
     nomeRegex: RegExp = /^[a-zA-Z ]{2,30}$/
