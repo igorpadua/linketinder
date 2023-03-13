@@ -4,30 +4,8 @@ package com.igor.linketinder.view
 import groovy.transform.TypeChecked
 import com.igor.linketinder.model.Empresa
 
-import java.util.regex.Pattern
-
 @TypeChecked
 class EmpresaView {
-
-    static Boolean validaCNPJ(String cnpj) {
-        if (cnpj == null || cnpj.isEmpty()) return false
-        if (cnpj.length() != 18) return false
-        final Pattern cnpjRegex = ~/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/
-        if (!cnpjRegex.matcher(cnpj).matches()) return false
-        return true
-    }
-
-    static String pegaCnpj() {
-        Scanner scanner = new Scanner(System.in)
-        print("Digite o CNPJ da empresa: ")
-        String cnpj = scanner.nextLine()
-        while (!validaCNPJ(cnpj)) {
-            println("CNPJ inválido")
-            print("Digite o CNPJ da empresa: ")
-            cnpj = scanner.nextLine()
-        }
-        return cnpj
-    }
 
     static Empresa criar() {
         Scanner scanner = new Scanner(System.in)
@@ -35,10 +13,12 @@ class EmpresaView {
         final String nome = scanner.nextLine()
         print("Digite o email da empresa: ")
         final String email = scanner.nextLine()
-        final String CNPJ = pegaCnpj()
+        print("Digite o CNPJ da empresa: ")
+        final String CNPJ = scanner.nextLine()
         print("Digite o pais da empresa: ")
         final String pais = scanner.nextLine()
-        final String cep = PessoaView.pegaCep()
+        print("Digite o CEP da empresa: ")
+        final String cep = scanner.nextLine()
         print("Digite uma descrição da empresa: ")
         final String descricao = scanner.nextLine()
         print("Digite a senha da empresa: ")
@@ -80,7 +60,8 @@ class EmpresaView {
                     empresa.pais = pais
                     break
                 case '4':
-                    final String CEP = PessoaView.pegaCep()
+                    print("Digite o novo CEP: ")
+                    final String CEP = scanner.nextLine()
                     empresa.cep = CEP
                     break
                 case '5':
