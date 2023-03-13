@@ -17,7 +17,7 @@ class CompetenciaVagasDAO {
         sql = fabricaBanco.iniciarBancoDeDados().conectar()
     }
 
-    void adicionar(Vaga vaga, int id) {
+    void salvar(Vaga vaga, int id) {
         for (Competencia competencia in vaga.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)

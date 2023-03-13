@@ -19,7 +19,7 @@ class CompetenciaCandidatoDAO {
         sql = fabricaBanco.iniciarBancoDeDados().conectar()
     }
 
-    void adicionar(Candidato candidato) {
+    void salvar(Candidato candidato) {
         final int idCandidato = candidatoDAO.pegaId(candidato.cpf)
 
         for (Competencia competencia in candidato.competencias) {

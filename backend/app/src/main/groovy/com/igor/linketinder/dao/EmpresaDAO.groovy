@@ -20,7 +20,7 @@ class EmpresaDAO {
         }
     }
 
-    void adicionar(Empresa empresa) {
+    void salvar(Empresa empresa) {
 
         sql.executeInsert('INSERT INTO empresas ' +
                 '(nome, email, cnpj, pais, cep, descricao, senha) ' +
@@ -41,11 +41,11 @@ class EmpresaDAO {
 
     void remove(String cnpj) {
 
-        validaEmpresas(pega(cnpj))
+        validaEmpresas(pegar(cnpj))
         sql.execute("DELETE FROM empresas WHERE cnpj = ${cnpj}")
     }
 
-    Empresa pega(String cnpj) {
+    Empresa pegar(String cnpj) {
 
         Empresa empresa = null
         sql.eachRow("SELECT * FROM empresas WHERE cnpj = ${cnpj}") { rs ->

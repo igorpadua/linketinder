@@ -2,6 +2,7 @@ package com.igor.linketinder.view
 
 import com.igor.linketinder.model.Competencia
 import com.igor.linketinder.model.Vaga
+import com.igor.linketinder.service.CompetenciaService
 
 class VagaView {
 
@@ -14,7 +15,7 @@ class VagaView {
         print("Digite o local da vaga: ")
         String local_vaga = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
         new Vaga(0, nome, descricao, local_vaga , competencias)
     }
@@ -63,7 +64,7 @@ class VagaView {
                     vaga.local_vaga = local_vaga
                     break
                 case '4':
-                    List<Competencia> competencias = CompetenciaView.escolherCompetencias()
+                    List<Competencia> competencias = CompetenciaService.escolherCompetencias()
                     vaga.competencias = competencias
                     break
                 case '5':

@@ -20,8 +20,8 @@ class VagaController {
         final String cnpj = EmpresaView.pegaCnpj()
         final int idEmpresa = empresaDAO.pegaId(cnpj)
         Vaga vaga = VagaView.adicionaVaga()
-        vagaDAO.adicionar(vaga, idEmpresa)
-        competenciaVagasDAO.adicionar(vaga, idEmpresa)
+        vagaDAO.salvar(vaga, idEmpresa)
+        competenciaVagasDAO.salvar(vaga, idEmpresa)
         println("\nAdicionado com sucesso\n")
     }
 

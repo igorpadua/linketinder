@@ -25,7 +25,7 @@ class CandidatoDAO {
         }
     }
 
-    void adiciona(Candidato candidato) {
+    void salvar(Candidato candidato) {
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
         sql.executeInsert('INSERT INTO candidatos ' +
@@ -48,13 +48,13 @@ class CandidatoDAO {
 
     void remove(String cpf) {
 
-        validaCandidato(pega(cpf))
+        validaCandidato(pegar(cpf))
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
     }
 
 
-    Candidato pega(String cpf) {
+    Candidato pegar(String cpf) {
 
         Candidato candidato = null
         sql.eachRow("""SELECT c.nome, c.sobrenome, c.data_nascimento, c.email, c.cpf,

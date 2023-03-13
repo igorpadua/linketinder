@@ -20,7 +20,7 @@ class VagaDAO {
         }
     }
 
-    void adicionar(Vaga vaga, int idEmpresa) {
+    void salvar(Vaga vaga, int idEmpresa) {
         sql.executeInsert('INSERT INTO vagas ' +
                 '(nome, descricao, local_vaga, empresa_id) ' +
                 "VALUES ('${vaga.nome}', '${vaga.descricao}', '${vaga.local_vaga}', '${idEmpresa}')")
