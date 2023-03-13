@@ -16,14 +16,14 @@ class CandidatoController {
 
     static void adicionar() {
         Candidato candidato = CandidatoView.cria()
-        candidatoDAO.adiciona(candidato)
-        competenciaCandidatoDAO.adicionar(candidato)
+        candidatoDAO.salvar(candidato)
+        competenciaCandidatoDAO.salvar(candidato)
         println("\nAdicionado com sucesso\n")
     }
 
     static void atualizar() {
         final String cpf = CandidatoView.pegaCPF()
-        Candidato candidato = candidatoDAO.pega(cpf)
+        Candidato candidato = candidatoDAO.pegar(cpf)
         CandidatoView.atualizar(candidato)
         candidatoDAO.atualiza(candidato)
         competenciaCandidatoDAO.atualizar(candidato)

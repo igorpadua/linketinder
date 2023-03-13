@@ -14,13 +14,13 @@ class EmpresaController {
 
     static void adicionar() {
         Empresa empresa = EmpresaView.criar()
-        empresaDAO.adicionar(empresa)
+        empresaDAO.salvar(empresa)
         println("\nAdiciona com sucesso\n")
     }
 
     static void atualizar() {
         final String cnpj = EmpresaView.pegaCnpj()
-        Empresa empresa = empresaDAO.pega(cnpj)
+        Empresa empresa = empresaDAO.pegar(cnpj)
         EmpresaView.atualizar(empresa)
         empresaDAO.atualiza(empresa)
         println("\nAtualizado com sucesso\n")
