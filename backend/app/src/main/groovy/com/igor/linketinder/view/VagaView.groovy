@@ -20,12 +20,12 @@ class VagaView {
         new Vaga(0, nome, descricao, local_vaga , competencias)
     }
 
-    private static Boolean listaEstaValida(List<Vaga> vagas) {
-        return vagas != null && !vagas.isEmpty()
-    }
-
     static void printVagas(List<Vaga> vagas) {
-        if (!listaEstaValida(vagas)) return
+
+        if (vagas.isEmpty()) {
+            println("Não há vagas cadastradas")
+            return
+        }
 
         for (vaga in vagas) {
             println(vaga)
