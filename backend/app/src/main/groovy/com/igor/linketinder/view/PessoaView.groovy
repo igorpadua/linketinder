@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 
 class PessoaView {
 
-    static void imprimir(List<Pessoa> pessoas) {
+    static void lista(List<Pessoa> pessoas) {
         if (pessoas.isEmpty()) {
             println("Nenhuma pessoa cadastrada")
             return

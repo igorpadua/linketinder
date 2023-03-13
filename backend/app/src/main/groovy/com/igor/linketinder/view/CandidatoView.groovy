@@ -10,6 +10,24 @@ import java.text.SimpleDateFormat
 @TypeChecked
 class CandidatoView {
 
+    static String pegaCpf() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CPF do candidato: ")
+        return scanner.nextLine()
+    }
+
+    static void adicionadoComSucesso() {
+        println("Candidato adicionado com sucesso")
+    }
+
+    static void atualizadoComSucesso() {
+        println("Candidato atualizado com sucesso")
+    }
+
+    static void removidoComSucesso() {
+        println("Candidato removido com sucesso")
+    }
+
     static Date pegaNascimento() {
         Scanner scanner = new Scanner(System.in)
         print("Digite a data de nascimento do candidato: ")
@@ -23,7 +41,7 @@ class CandidatoView {
         }
     }
 
-    static Candidato cria() {
+    static Candidato cadastro() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome do novo candidato: ")
         final String nome = scanner.nextLine()
@@ -61,7 +79,7 @@ class CandidatoView {
         println("10 - Sair")
     }
 
-    static void atualizar(Candidato candidato) {
+    static void atualiza(Candidato candidato) {
         boolean finalizarAtualizacao = true
         Scanner scanner = new Scanner(System.in)
         while (finalizarAtualizacao) {

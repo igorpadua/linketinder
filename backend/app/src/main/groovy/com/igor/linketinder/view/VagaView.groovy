@@ -1,13 +1,30 @@
 package com.igor.linketinder.view
 
+import com.igor.linketinder.controller.EmpresaController
 import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.Empresa
 import com.igor.linketinder.model.Vaga
 import com.igor.linketinder.service.CompetenciaService
 
 class VagaView {
 
-    static Vaga adicionaVaga() {
+    static void adicionadoComSucesso() {
+        println("Vaga adicionada com sucesso")
+    }
+
+    static void atualizadoComSucesso() {
+        println("Vaga atualizada com sucesso")
+    }
+
+    static void removidoComSucesso() {
+        println("Vaga removida com sucesso")
+    }
+
+    static Vaga cadastro() {
         Scanner scanner = new Scanner(System.in)
+        print("Digite o CNPJ da empresa: ")
+        String CNPJ = scanner.nextLine()
+        Empresa empresa = EmpresaController.pegaEmpresaPeloCnpj(CNPJ)
         print("Digite o nome da vaga: ")
         String nome = scanner.nextLine()
         print("Digite a descrição da vaga: ")
@@ -17,10 +34,10 @@ class VagaView {
 
         List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
-        new Vaga(0, nome, descricao, local_vaga , competencias)
+        new Vaga(0, nome, descricao, local_vaga , competencias, empresa)
     }
 
-    static void printVagas(List<Vaga> vagas) {
+    static void lista(List<Vaga> vagas) {
 
         if (vagas.isEmpty()) {
             println("Não há vagas cadastradas")
@@ -41,7 +58,7 @@ class VagaView {
         print("Digite a opção desejada: ")
     }
 
-    static void atualizarVaga(Vaga vaga) {
+    static void atualiza(Vaga vaga) {
         Scanner scanner = new Scanner(System.in)
         boolean finalizarAtualizacoes = true
         while (finalizarAtualizacoes) {

@@ -7,7 +7,25 @@ import com.igor.linketinder.model.Empresa
 @TypeChecked
 class EmpresaView {
 
-    static Empresa criar() {
+    static String pegaCnpj() {
+        Scanner scanner = new Scanner(System.in)
+        print("Digite o CNPJ da empresa: ")
+        return scanner.nextLine()
+    }
+
+    static void adicionadoComSucesso() {
+        println("Empresa adicionada com sucesso")
+    }
+
+    static void atualizadoComSucesso() {
+        println("Empresa atualizada com sucesso")
+    }
+
+    static void removidoComSucesso() {
+        println("Empresa removida com sucesso")
+    }
+
+    static Empresa cadastro() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome da nova empresa: ")
         final String nome = scanner.nextLine()
