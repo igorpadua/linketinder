@@ -1,4 +1,4 @@
-package com.igor.linketinder.database
+package com.igor.linketinder.dao.database
 
 import groovy.sql.Sql
 import groovy.transform.TypeChecked

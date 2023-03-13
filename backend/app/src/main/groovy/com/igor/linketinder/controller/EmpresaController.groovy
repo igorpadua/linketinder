@@ -2,8 +2,8 @@ package com.igor.linketinder.controller
 
 import com.igor.linketinder.dao.EmpresaDAO
 import com.igor.linketinder.model.Empresa
-import com.igor.linketinder.fabricaBanco.FabricaBanco
-import com.igor.linketinder.fabricaBanco.PostgesFabric
+import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
+import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Pessoa
 import com.igor.linketinder.util.Validacoes
 import com.igor.linketinder.view.EmpresaView

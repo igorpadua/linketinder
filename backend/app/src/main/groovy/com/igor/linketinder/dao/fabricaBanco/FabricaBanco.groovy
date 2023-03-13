@@ -1,6 +1,6 @@
-package com.igor.linketinder.fabricaBanco
+package com.igor.linketinder.dao.fabricaBanco
 
-import com.igor.linketinder.database.BancoDados
+import com.igor.linketinder.dao.database.BancoDados
 
 abstract class FabricaBanco {
     private static FabricaBanco instancia = null

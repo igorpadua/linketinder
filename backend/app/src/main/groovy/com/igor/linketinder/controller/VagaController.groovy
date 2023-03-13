@@ -3,8 +3,8 @@ package com.igor.linketinder.controller
 import com.igor.linketinder.dao.CompetenciaVagasDAO
 import com.igor.linketinder.dao.VagaDAO
 import com.igor.linketinder.model.Vaga
-import com.igor.linketinder.fabricaBanco.FabricaBanco
-import com.igor.linketinder.fabricaBanco.PostgesFabric
+import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
+import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.view.VagaView
 import groovy.transform.TypeChecked
 

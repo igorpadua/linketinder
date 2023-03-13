@@ -1,6 +1,6 @@
 package com.igor.linketinder.dao
 
-import com.igor.linketinder.fabricaBanco.FabricaBanco
+import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
 

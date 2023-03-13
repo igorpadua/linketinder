@@ -3,8 +3,8 @@ package com.igor.linketinder.controller
 import com.igor.linketinder.dao.CandidatoDAO
 import com.igor.linketinder.dao.CompetenciaCandidatoDAO
 import com.igor.linketinder.model.Candidato
-import com.igor.linketinder.fabricaBanco.FabricaBanco
-import com.igor.linketinder.fabricaBanco.PostgesFabric
+import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
+import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Pessoa
 import com.igor.linketinder.util.Validacoes
 import com.igor.linketinder.view.CandidatoView

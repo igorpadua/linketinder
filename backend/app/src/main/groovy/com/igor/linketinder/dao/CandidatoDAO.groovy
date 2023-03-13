@@ -2,7 +2,7 @@ package com.igor.linketinder.dao
 
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
-import com.igor.linketinder.fabricaBanco.FabricaBanco
+import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import com.igor.linketinder.service.CompetenciaService
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
