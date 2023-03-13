@@ -10,14 +10,14 @@ class Candidato extends Pessoa {
     String sobrenome
     Date nascimento
     String cpf
-    List<Competencia> competencias
+    Competencia competencia
 
-    Candidato(String nome, String sobrenome, Date nascimento, String email, String cpf, String pais, String cep, String descricao, String senha, List<Competencia> competencias) {
+    Candidato(String nome, String sobrenome, Date nascimento, String email, String cpf, String pais, String cep, String descricao, String senha, Competencia competencia) {
         super(nome, email, pais, cep, descricao, senha)
         this.sobrenome = sobrenome
         this.nascimento = nascimento
         this.cpf = cpf
-        this.competencias = competencias
+        this.competencia = competencia
     }
 
     String toString() {
@@ -28,6 +28,6 @@ class Candidato extends Pessoa {
                 "Pais: ${this.pais} - " +
                 "CEP: ${this.cep} - " +
                 "Descrição: ${this.descricao} - " +
-                "Competencias: ${this.competencias}"
+                "Competencias: ${this.competencia.competencias}"
     }
 }

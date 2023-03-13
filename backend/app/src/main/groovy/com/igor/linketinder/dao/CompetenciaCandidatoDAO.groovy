@@ -1,7 +1,7 @@
 package com.igor.linketinder.dao
 
 import com.igor.linketinder.model.Candidato
-import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.TipoCompetencia
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
@@ -22,7 +22,7 @@ class CompetenciaCandidatoDAO {
     void salvar(Candidato candidato) {
         final int idCandidato = candidatoDAO.pegaId(candidato.cpf)
 
-        for (Competencia competencia in candidato.competencias) {
+        for (TipoCompetencia competencia in candidato.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")
@@ -33,7 +33,7 @@ class CompetenciaCandidatoDAO {
         final int idCandidato = candidatoDAO.pegaId(candidato.cpf)
 
         sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
-        for (Competencia competencia in candidato.competencias) {
+        for (TipoCompetencia competencia in candidato.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)
                                     VALUES (${idCandidato}, ${idCompetencia});""")

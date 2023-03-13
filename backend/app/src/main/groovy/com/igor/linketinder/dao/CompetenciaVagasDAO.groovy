@@ -2,7 +2,7 @@ package com.igor.linketinder.dao
 
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import groovy.sql.Sql
-import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.TipoCompetencia
 import com.igor.linketinder.model.Vaga
 
 class CompetenciaVagasDAO {
@@ -18,7 +18,7 @@ class CompetenciaVagasDAO {
     }
 
     void salvar(Vaga vaga, int id) {
-        for (Competencia competencia in vaga.competencias) {
+        for (TipoCompetencia competencia in vaga.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
                                     VALUES (${id}, ${idCompetencia});""")
@@ -31,7 +31,7 @@ class CompetenciaVagasDAO {
 
     void atualizar(Vaga vaga, int id) {
         remove(id)
-        for (Competencia competencia in vaga.competencias) {
+        for (TipoCompetencia competencia in vaga.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
                                     VALUES (${id}, ${idCompetencia});""")

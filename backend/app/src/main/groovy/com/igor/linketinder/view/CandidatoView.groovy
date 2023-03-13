@@ -1,9 +1,9 @@
 package com.igor.linketinder.view
 
-import com.igor.linketinder.service.CompetenciaService
+import com.igor.linketinder.model.Competencia
 import groovy.transform.TypeChecked
 import com.igor.linketinder.model.Candidato
-import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.TipoCompetencia
 
 import java.text.SimpleDateFormat
 
@@ -61,9 +61,11 @@ class CandidatoView {
         print("Digite a senha do candidato: ")
         final String senha = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
+        Competencia competencia = new Competencia()
+        List<TipoCompetencia> competenciasLista = CompetenciaView.escolherCompetencias()
+        competencia.competencias = competenciasLista
 
-        return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha,competencias)
+        return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha, competencia)
     }
 
     static private void menuAtualizar() {
@@ -126,7 +128,8 @@ class CandidatoView {
                     candidato.senha = senha
                     break
                 case '9':
-                    candidato.competencias = CompetenciaView.escolherCompetencias()
+                    List<TipoCompetencia> competenciasLista = CompetenciaView.escolherCompetencias()
+                    candidato.competencia.competencias = competenciasLista
                     break
                 case '10':
                     finalizarAtualizacao = false

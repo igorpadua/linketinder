@@ -1,9 +1,9 @@
 package com.igor.linketinder.dao
 
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
-import com.igor.linketinder.service.CompetenciaService
-import groovy.sql.Sql
 import com.igor.linketinder.model.Competencia
+import groovy.sql.Sql
+import com.igor.linketinder.model.TipoCompetencia
 import com.igor.linketinder.model.Vaga
 
 class VagaDAO {
@@ -33,8 +33,10 @@ class VagaDAO {
                         	INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
                         	INNER JOIN competencias c ON c.id = cv.competencia_id
                         	GROUP BY v.id, v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
-            Vaga vaga = new Vaga(rs.getInt('id'),rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
+            Competencia competencia = new Competencia()
+            List<TipoCompetencia> competenciasList = new ArrayList<>(Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            competencia.competencias = competenciasList
+            Vaga vaga = new Vaga(rs.getInt('id'),rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competencia)
             listaVagas.add(vaga)
             }
         return listaVagas
@@ -58,8 +60,10 @@ class VagaDAO {
 	                   INNER JOIN competencias c ON c.id = cv.competencia_id
 	                   WHERE v.id = ${id} 
 	                   GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
-            vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competenciasList)
+            Competencia competencia = new Competencia()
+            List<TipoCompetencia> competenciasList = new ArrayList<>(Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            competencia.competencias = competenciasList
+            vaga = new Vaga(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('descricao').trim(), rs.getString('local_vaga'), competencia)
         }
         validaVaga(vaga)
         return vaga

@@ -2,8 +2,8 @@ package com.igor.linketinder.dao
 
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.TipoCompetencia
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
-import com.igor.linketinder.service.CompetenciaService
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
 
@@ -18,7 +18,6 @@ class CandidatoDAO {
         sql = fabricaBanco.iniciarBancoDeDados().conectar()
     }
 
-    // valida candidato
     static private void validaCandidato(Candidato candidato) {
         if (candidato == null) {
             throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
@@ -64,12 +63,14 @@ class CandidatoDAO {
                             INNER JOIN competencias competencia ON competencia.id = cc.competencia_id
                             WHERE c.cpf = ${cpf}
                             GROUP BY c.id;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            List<TipoCompetencia> competenciasList = new ArrayList<>(Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            Competencia competencia = new Competencia()
+            competencia.competencias = competenciasList
             Date data = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString('data_nascimento'))
 
             candidato = new Candidato(rs.getString('nome'), rs.getString('sobrenome'), data, rs.getString('email'),
                     rs.getString('cpf'), rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),
-                    rs.getString('senha'), competenciasList)
+                    rs.getString('senha'), competencia)
         }
         validaCandidato(candidato)
         return candidato
@@ -84,11 +85,13 @@ class CandidatoDAO {
                             INNER JOIN competencias_candidato cc ON cc.candidatos_id = c.id
                             INNER JOIN competencias competencia ON competencia.id = cc.competencia_id
                             GROUP BY c.id;""") { rs ->
-            List<Competencia> competenciasList = new ArrayList<>(CompetenciaService.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            Competencia competencia = new Competencia()
+            List<TipoCompetencia> competenciasList = new ArrayList<>(Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
+            competencia.competencias = competenciasList
             Candidato candidato = new Candidato(rs.getString('nome').trim(), rs.getString('sobrenome'),
                     rs.getDate('data_nascimento'), rs.getString('email'), rs.getString('cpf'),
                     rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),
-                    rs.getString('senha'), competenciasList)
+                    rs.getString('senha'), competencia)
             listaCandidato.add(candidato)
         }
         return listaCandidato
