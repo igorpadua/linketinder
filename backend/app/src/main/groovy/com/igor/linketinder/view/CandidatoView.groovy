@@ -1,12 +1,11 @@
 package com.igor.linketinder.view
 
-
+import com.igor.linketinder.service.CompetenciaService
 import groovy.transform.TypeChecked
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
 
 import java.text.SimpleDateFormat
-import java.util.regex.Pattern
 
 @TypeChecked
 class CandidatoView {
@@ -24,25 +23,6 @@ class CandidatoView {
         }
     }
 
-    static Boolean validaCPF(String cpf) {
-        if (cpf == null || cpf.isEmpty()) return false
-        final Pattern cpfRegex = ~/^\d{3}\.\d{3}\.\d{3}-\d{2}$/
-        if (!cpfRegex.matcher(cpf).matches()) return false
-        return true
-    }
-
-    static String pegaCPF() {
-        Scanner scanner = new Scanner(System.in)
-        print("Digite o CPF do candidato: ")
-        String cpf = scanner.nextLine()
-        while (!validaCPF(cpf)) {
-            println("CPF inválido")
-            print("Digite o CPF do candidato: ")
-            cpf = scanner.nextLine()
-        }
-        return cpf
-    }
-
     static Candidato cria() {
         Scanner scanner = new Scanner(System.in)
         print("Digite o nome do novo candidato: ")
@@ -52,16 +32,18 @@ class CandidatoView {
         Date nascimento = pegaNascimento()
         print("Digite o email do candidato: ")
         final String email = scanner.nextLine()
-        final String cpf = pegaCPF()
+        print("Digite o CPF do candidato: ")
+        final String cpf = scanner.nextLine()
         print("Digite o país do candidato: ")
         final String pais = scanner.nextLine()
-        final String cep = PessoaView.pegaCep()
+        print("Digite o CEP do candidato: ")
+        final String cep = scanner.nextLine()
         print("Digite uma descrição do candidato: ")
         final String desc = scanner.nextLine()
         print("Digite a senha do candidato: ")
         final String senha = scanner.nextLine()
 
-        List<Competencia> competencias = CompetenciaView.escolherCompetencias()
+        List<Competencia> competencias = CompetenciaService.escolherCompetencias()
 
         return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, desc, senha,competencias)
     }
@@ -111,7 +93,8 @@ class CandidatoView {
                     candidato.pais = pais
                     break
                 case '6':
-                    final String cep = PessoaView.pegaCep()
+                    print("Digite o novo CEP: ")
+                    final String cep = scanner.nextLine()
                     candidato.cep = cep
                     break
                 case '7':
@@ -125,7 +108,7 @@ class CandidatoView {
                     candidato.senha = senha
                     break
                 case '9':
-                    candidato.competencias = CompetenciaView.escolherCompetencias()
+                    candidato.competencias = CompetenciaService.escolherCompetencias()
                     break
                 case '10':
                     finalizarAtualizacao = false
