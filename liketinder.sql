@@ -70,14 +70,14 @@ CREATE TABLE curtida_candidato (
 
 -- Competencias
 INSERT INTO competencias (competencia) VALUES ('cplusplus');
-INSERT INTO competencias (competencia) VALUES ('JavaScript');
-INSERT INTO competencias (competencia) VALUES ('Angular');
-INSERT INTO competencias (competencia) VALUES ('Node');
-INSERT INTO competencias (competencia) VALUES ('Java');
-INSERT INTO competencias (competencia) VALUES ('Html');
+INSERT INTO competencias (competencia) VALUES ('javaScript');
+INSERT INTO competencias (competencia) VALUES ('angular');
+INSERT INTO competencias (competencia) VALUES ('node');
+INSERT INTO competencias (competencia) VALUES ('java');
+INSERT INTO competencias (competencia) VALUES ('html');
 INSERT INTO competencias (competencia) VALUES ('c');
-INSERT INTO competencias (competencia) VALUES ('Python');
-INSERT INTO competencias (competencia) VALUES ('SpringFramework');
+INSERT INTO competencias (competencia) VALUES ('python');
+INSERT INTO competencias (competencia) VALUES ('springframework');
 
 -- Candidatos
 INSERT INTO candidatos (nome, sobrenome, data_nascimento, email, cpf, pais, cep, descricao, senha)
