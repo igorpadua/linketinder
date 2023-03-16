@@ -29,12 +29,12 @@ class CompetenciaVagasDAO {
         sql.executeInsert("DELETE FROM competencia_vagas WHERE vagas_id = ${id}")
     }
 
-    void atualizar(Vaga vaga, int id) {
-        remove(id)
+    void atualizar(Vaga vaga) {
+        remove(vaga.id)
         for (TipoCompetencia competencia in vaga.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
-                                    VALUES (${id}, ${idCompetencia});""")
+                                    VALUES (${vaga.id}, ${idCompetencia});""")
         }
     }
 }

@@ -27,8 +27,7 @@ class VagaController {
         final Vaga vaga = pega(id_vaga)
         if (vaga == null) throw new IllegalArgumentException("Vaga não encontrada")
         VagaView.atualiza(vaga)
-        final int id_empresa = EmpresaController.pegaId(vaga.empresa.cnpj)
-        atualizarNoBanco(vaga, id_empresa)
+        atualizarNoBanco(vaga)
         VagaView.atualizadoComSucesso()
     }
 
@@ -54,9 +53,9 @@ class VagaController {
         competenciaVagasDAO.salvar(vaga, idEmpresa)
     }
 
-    static void atualizarNoBanco(Vaga vaga, int idVaga) {
-        vagaDAO.atualiza(vaga, idVaga)
-        competenciaVagasDAO.atualizar(vaga, idVaga)
+    static void atualizarNoBanco(Vaga vaga) {
+        vagaDAO.atualiza(vaga)
+        competenciaVagasDAO.atualizar(vaga)
     }
 
     static void removeDoBanco(int idVaga) {

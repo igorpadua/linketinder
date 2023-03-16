@@ -46,20 +46,20 @@ class VagaDAO {
         sql.execute("DELETE FROM vagas WHERE id = ${id}")
     }
 
-    void atualiza(Vaga vaga, int id) {
+    void atualiza(Vaga vaga) {
         sql.executeUpdate('UPDATE vagas ' +
                 "SET nome = '${vaga.nome}', descricao = '${vaga.descricao}', local_vaga = '${vaga.local_vaga}' " +
-                "WHERE id = '${id}'")
+                "WHERE id = '${vaga.id}'")
     }
 
     Vaga pega(int id) {
         Vaga vaga = null
-        sql.eachRow("""select v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
+        sql.eachRow("""select v.id, v.nome, v.descricao, v.local_vaga, array_agg(c.competencia) as competencias
 	                   from vagas as v
 	                   INNER JOIN competencia_vagas cv ON cv.vagas_id = v.id
 	                   INNER JOIN competencias c ON c.id = cv.competencia_id
 	                   WHERE v.id = ${id} 
-	                   GROUP BY v.nome, v.descricao, v.local_vaga;""") { rs ->
+	                   GROUP BY v.id, v.nome, v.descricao, v.local_vaga;""") { rs ->
             Competencia competencia = new Competencia()
             List<TipoCompetencia> competenciasList = new ArrayList<>(Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(rs.getString('competencias')))
             competencia.competencias = competenciasList
