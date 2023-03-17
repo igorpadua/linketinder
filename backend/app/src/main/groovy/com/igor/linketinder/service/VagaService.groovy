@@ -95,13 +95,13 @@ class VagaService extends HttpServlet {
     }
 
     private Vaga criaVaga(def jsonMap) {
-        Vaga vaga = new Vaga()
-        vaga.nome = jsonMap.nome
-        vaga.descricao = jsonMap.descricao
-        vaga.local_vaga = jsonMap.local_vaga
-        vaga.competencia = new Competencia()
-        vaga.competencia.competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(jsonMap.competencias)
-        return vaga
+        String nome = jsonMap.nome
+        String descricao = jsonMap.descricao
+        String local_vaga = jsonMap.local_vaga
+        String competencias = jsonMap.competencias
+        Competencia competencia = new Competencia()
+        competencia.competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
+        return new Vaga(0, nome, descricao, local_vaga, competencia)
     }
 
 }
