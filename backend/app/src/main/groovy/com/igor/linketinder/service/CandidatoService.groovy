@@ -2,8 +2,6 @@ package com.igor.linketinder.service
 
 import com.google.gson.Gson
 import com.igor.linketinder.controller.CandidatoController
-import com.igor.linketinder.dao.CandidatoDAO
-import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
 import com.igor.linketinder.util.Json
@@ -22,7 +20,7 @@ class CandidatoService extends HttpServlet {
             def candidato
             if (request.getParameter("cpf") != null) {
                 String cpf = request.getParameter("cpf")
-                candidato = pegaCandidato(cpf)
+                candidato = CandidatoController.pega(cpf)
             } else {
                 candidato = CandidatoController.pegaCandidos()
             }
@@ -78,11 +76,6 @@ class CandidatoService extends HttpServlet {
             response.setStatus(500)
             e.printStackTrace()
         }
-    }
-
-    private Candidato pegaCandidato(String cpf) {
-        CandidatoDAO candidatoDAO = new CandidatoDAO(new PostgesFabric())
-        return candidatoDAO.pegar(cpf)
     }
 
     private Candidato criaCandidato(def jsonFormatado, String CPF = null) {
