@@ -1,10 +1,13 @@
 package com.igor.linketinder.util
 
 import groovy.json.JsonSlurper
+import groovy.transform.TypeChecked
 import jakarta.servlet.http.HttpServletRequest
+import org.apache.groovy.json.internal.LazyMap
 
+@TypeChecked
 class Json {
-    def formataJson(HttpServletRequest request) {
+    static LazyMap formataJson(HttpServletRequest request) {
         StringBuilder json = new StringBuilder()
         BufferedReader reader = request.getReader()
         String line
@@ -12,7 +15,7 @@ class Json {
             json.append(line)
         }
         def jsonSlurper = new JsonSlurper()
-        def jsonMap = jsonSlurper.parseText(json.toString())
+        LazyMap jsonMap = jsonSlurper.parseText(json.toString()) as LazyMap
         return jsonMap
     }
 }
