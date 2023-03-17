@@ -55,7 +55,7 @@ class EmpresaService extends HttpServlet {
             final Empresa empresa = criaEmpresa(jsonFormatado, cnpj)
             EmpresaController.atualizarNoBanco(empresa)
             response.getWriter().println("Empresa atualizada com sucesso!")
-            response.setStatus(200)
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()

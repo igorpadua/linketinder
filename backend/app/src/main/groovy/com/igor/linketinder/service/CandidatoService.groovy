@@ -27,6 +27,7 @@ class CandidatoService extends HttpServlet {
             }
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             response.getWriter().println(gson.toJson(candidato))
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()

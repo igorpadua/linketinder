@@ -81,7 +81,7 @@ class VagaService extends HttpServlet {
             VagaController.removeDoBanco(idVaga)
 
             response.getWriter().println("Vaga deletada com sucesso!")
-            response.setStatus(200)
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
