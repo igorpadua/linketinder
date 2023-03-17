@@ -2,7 +2,7 @@ import PessoasView from "./view/pessoas.view";
 import Candidato from "./model/candidato.entity";
 import Empresa from "./model/empresa.entity";
 import graficoCompetencia from "./view/graficoCompetencia";
-import {radioTipoPessoa} from "./view/Cadastro";
+import {adicionaCandidato, radioTipoPessoa} from "./view/Cadastro";
 import ValidaEmpresa from "./util/validaEmpresa";
 import {ValidaCandidato} from "./util/validaCandidato";
 import CandidatoController from "./controller/candidato.controller";
@@ -21,12 +21,7 @@ if (window.location.pathname == '/cadastro.html') {
     document.getElementById('addCadastro')!.onclick = () => {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
         if (radio_selecionado == 'Candidato') {
-            const candidato: Candidato = PessoasView.addPessoa() as Candidato
-            if (new ValidaCandidato().validacao(candidato)) {
-                CandidatoController.enviarCandidato(candidato).then()
-                alert('Candidato cadastrado com sucesso!')
-                window.location.href = '/index.html'
-            }
+            adicionaCandidato()
         } else {
             /*
             const empresa: Empresa = PessoasView.addPessoa() as Empresa

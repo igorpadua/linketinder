@@ -32,7 +32,7 @@ class CompetenciaCandidatoDAO {
     void atualizar(Candidato candidato) {
         final int idCandidato = candidatoDAO.pegaId(candidato.cpf)
 
-        sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = ${idCandidato}")
+        sql.executeInsert("DELETE FROM competencias_candidato WHERE candidatos_id = '${idCandidato}'")
         for (TipoCompetencia competencia in candidato.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencias_candidato (candidatos_id, competencia_id)

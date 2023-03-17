@@ -14,7 +14,7 @@ class CompetenciaDAO {
     }
 
     int pegaId(String competencia) {
-        List resultado = sql.rows("SELECT id FROM competencias WHERE competencia = ${competencia}")
+        List resultado = sql.rows("SELECT id FROM competencias WHERE competencia = ${competencia};")
         return resultado[0].id as int
     }
 

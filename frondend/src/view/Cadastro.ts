@@ -1,3 +1,8 @@
+import Candidato from "../model/candidato.entity";
+import PessoasView from "./pessoas.view";
+import {ValidaCandidato} from "../util/validaCandidato";
+import CandidatoController from "../controller/candidato.controller";
+
 function mostrarEmpresa() {
     document.getElementById('idAddH1')!.innerText = 'Cadastrar Empresa'
     document.getElementById('idCpf')!.style.display = 'none'
@@ -26,4 +31,14 @@ function radioTipoPessoa(radio: any) {
     }
 }
 
-export { radioTipoPessoa }
+function adicionaCandidato() {
+    const candidato: Candidato = PessoasView.addPessoa() as Candidato
+    if (new ValidaCandidato().validacao(candidato)) {
+        CandidatoController.enviarCandidato(candidato).then()
+        alert('Candidato cadastrado com sucesso!')
+        console.log(candidato)
+        // window.location.href = '/index.html'
+    }
+}
+
+export { radioTipoPessoa, adicionaCandidato }
