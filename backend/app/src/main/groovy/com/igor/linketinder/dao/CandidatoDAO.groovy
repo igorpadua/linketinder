@@ -46,8 +46,6 @@ class CandidatoDAO {
     }
 
     void remove(String cpf) {
-
-        validaCandidato(pegar(cpf))
         sql.executeInsert('DELETE FROM candidatos ' +
                 "WHERE cpf = '${cpf}'")
     }

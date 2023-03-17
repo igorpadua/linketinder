@@ -2,7 +2,6 @@ package com.igor.linketinder.service
 
 import com.google.gson.Gson
 import com.igor.linketinder.controller.VagaController
-import com.igor.linketinder.dao.CompetenciaVagasDAO
 import com.igor.linketinder.dao.VagaDAO
 import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Competencia
