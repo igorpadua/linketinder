@@ -44,7 +44,7 @@ export default class PessoasView {
         }
 
         const cnpj: string = (<HTMLInputElement>document.getElementById("idCnpj")).value
-        return new Empresa(nome, email, cnpj, descricao, pais, senha, cep, competencias)
+        return new Empresa(nome, email, cnpj, descricao, pais, senha, cep)
     }
 
     static listarPessoas(pessoas: Pessoa[]) {
@@ -60,16 +60,17 @@ export default class PessoasView {
         let lista_pessoa = ''
         if ((pessoas.at(0) as Candidato).cpf != undefined) {
             lista_pessoa = "<th>Nasceu</th>"
+            lista_pessoa += "<th>Competências</th>"
         }
-        lista_pessoa += "<th>Descrição</th><th>País</th><th>Competências</th></tr>"
+        lista_pessoa += "<th>Descrição</th><th>País</th></tr>"
         pessoas.forEach((pessoa) => {
             lista_pessoa += '<tr>'
             if ((pessoa as Candidato).nascimento != undefined) {
                 lista_pessoa += `<td>${(pessoa as Candidato).nascimento.toLocaleString().substring(0, 10)}</td>`
+                lista_pessoa += `<td>${(pessoa as Candidato).competencias}</td>`
             }
             lista_pessoa +=     `<td>${pessoa.desc}</td>`
             lista_pessoa +=     `<td>${pessoa.pais}</td>`
-            lista_pessoa +=     `<td>${pessoa.competencias}</td>`
             lista_pessoa += "</tr>"
         })
         return lista_pessoa

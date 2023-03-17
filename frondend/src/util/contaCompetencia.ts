@@ -1,9 +1,10 @@
 import Pessoa from "../model/pessoa.entity";
+import Candidato from "../model/candidato.entity";
 
-export default function contarCompetencia(pessoas: Pessoa[], competencia: string) {
+export default function contarCompetencia(candidatos: Candidato[], competencia: string) {
     let count = 0
-    pessoas.forEach((pessoa: Pessoa) => {
-        pessoa.competencias.forEach((comp: string) => {
+    candidatos.forEach((candidato: Candidato) => {
+        candidato.competencias.forEach((comp: string) => {
             if (comp === competencia) {
                 count++
             }

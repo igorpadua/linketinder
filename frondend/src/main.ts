@@ -2,11 +2,13 @@ import PessoasView from "./view/pessoas.view";
 import Candidato from "./model/candidato.entity";
 import Empresa from "./model/empresa.entity";
 import graficoCompetencia from "./view/graficoCompetencia";
-import {adicionaCandidato, radioTipoPessoa} from "./view/Cadastro";
+import {adicionaCandidato, adicionaEmpresa, radioTipoPessoa} from "./view/Cadastro";
 import ValidaEmpresa from "./util/validaEmpresa";
 import {ValidaCandidato} from "./util/validaCandidato";
 import CandidatoController from "./controller/candidato.controller";
 import CandidatoService from "./service/candidato.service";
+import EmpresaController from "./controller/empresa.controller";
+import EmpresaService from "./service/empresa.service";
 
 if (window.location.pathname == '/cadastro.html') {
 
@@ -23,21 +25,17 @@ if (window.location.pathname == '/cadastro.html') {
         if (radio_selecionado == 'Candidato') {
             adicionaCandidato()
         } else {
-            /*
-            const empresa: Empresa = PessoasView.addPessoa() as Empresa
-            if (new ValidaEmpresa().validacao(empresa)) {
-                empresas.push(empresa)
-                localStorage.setItem('empresas', JSON.stringify(empresas))
-                alert('Empresa cadastrada com sucesso!')
-                window.location.href = '/index.html'
-            }
-             */
+            adicionaEmpresa()
         }
     }
 }
 
 if (window.location.pathname == '/lista_empresa.html') {
-    //PessoasView.listarPessoas(empresas)
+    EmpresaController.listarEmpresas().then((empresas) => {
+        empresas = EmpresaService.transformarEmpresas(empresas)
+        console.log(empresas)
+        PessoasView.listarPessoas(empresas)
+    })
 }
 
 if (window.location.pathname == '/lista_candidato.html') {

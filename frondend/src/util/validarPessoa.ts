@@ -11,7 +11,7 @@ export default abstract class ValidaPessoa {
 
     protected dadosForamPreenchidos(pessoa: Pessoa) : boolean {
         return !(pessoa.nome && pessoa.email && pessoa.desc && pessoa.pais &&
-            pessoa.senha && pessoa.cep && pessoa.competencias.toString() && !this.dadosPreenchidos(pessoa))
+            pessoa.senha && pessoa.cep && !this.dadosPreenchidos(pessoa))
     }
 
     validacao(pessoa: Pessoa) {
