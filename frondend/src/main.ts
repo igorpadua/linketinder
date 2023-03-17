@@ -5,18 +5,8 @@ import graficoCompetencia from "./view/graficoCompetencia";
 import {radioTipoPessoa} from "./view/Cadastro";
 import ValidaEmpresa from "./util/validaEmpresa";
 import {ValidaCandidato} from "./util/validaCandidato";
-import CandidatoController from "./controller/Candidato.controller";
-
-let candidatos: Candidato[] = []
-let empresas: Empresa[] = []
-
-if (localStorage.getItem('candidatos')) {
-    candidatos = JSON.parse(localStorage.getItem('candidatos')!)
-}
-
-if (localStorage.getItem('empresas')) {
-    empresas = JSON.parse(localStorage.getItem('empresas')!)
-}
+import CandidatoController from "./controller/candidato.controller";
+import CandidatoService from "./service/candidato.service";
 
 if (window.location.pathname == '/cadastro.html') {
 
@@ -33,12 +23,12 @@ if (window.location.pathname == '/cadastro.html') {
         if (radio_selecionado == 'Candidato') {
             const candidato: Candidato = PessoasView.addPessoa() as Candidato
             if (new ValidaCandidato().validacao(candidato)) {
-                CandidatoController.enviarCandidato(candidato).then(r =>
-                    console.log(r))
+                CandidatoController.enviarCandidato(candidato).then()
                 alert('Candidato cadastrado com sucesso!')
                 window.location.href = '/index.html'
             }
         } else {
+            /*
             const empresa: Empresa = PessoasView.addPessoa() as Empresa
             if (new ValidaEmpresa().validacao(empresa)) {
                 empresas.push(empresa)
@@ -46,15 +36,19 @@ if (window.location.pathname == '/cadastro.html') {
                 alert('Empresa cadastrada com sucesso!')
                 window.location.href = '/index.html'
             }
+             */
         }
     }
 }
 
 if (window.location.pathname == '/lista_empresa.html') {
-    PessoasView.listarPessoas(empresas)
+    //PessoasView.listarPessoas(empresas)
 }
 
 if (window.location.pathname == '/lista_candidato.html') {
-    PessoasView.listarPessoas(candidatos)
-    graficoCompetencia(candidatos)
+    CandidatoController.listarCandidatos().then((candidatos) => {
+        candidatos = CandidatoService.transformarCandidatos(candidatos)
+        PessoasView.listarPessoas(candidatos)
+        graficoCompetencia(candidatos)
+    })
 }

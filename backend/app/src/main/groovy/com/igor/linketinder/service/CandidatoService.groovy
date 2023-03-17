@@ -1,6 +1,7 @@
 package com.igor.linketinder.service
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.igor.linketinder.controller.CandidatoController
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
@@ -24,9 +25,8 @@ class CandidatoService extends HttpServlet {
             } else {
                 candidato = CandidatoController.pegaCandidos()
             }
-            response.setContentType("application/json")
-            response.setCharacterEncoding("UTF-8")
-            response.getWriter().println(new Gson().toJson(candidato))
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            response.getWriter().println(gson.toJson(candidato))
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()

@@ -48,26 +48,30 @@ export default class PessoasView {
     }
 
     static listarPessoas(pessoas: Pessoa[]) {
-        let lista_pessoa = ''
-        if ((pessoas.at(0) as Candidato).cpf != undefined) {
-            lista_pessoa = "<th>Idade</th>"
-        }
-        lista_pessoa += "<th>Descrição</th><th>País</th><th>Estado</th><th>Cidade</th><th>Competências</th></tr>"
-        pessoas.forEach((pessoa) => {
-            lista_pessoa += '<tr>'
-            if ((pessoa as Candidato).nascimento != undefined) {
-                lista_pessoa += `<td>${(pessoa as Candidato).nascimento}</td>`
-            }
-            lista_pessoa +=     `<td>${pessoa.desc}</td>`
-            lista_pessoa +=     `<td>${pessoa.pais}</td>`
-            lista_pessoa +=     `<td>${pessoa.competencias}</td>`
-            lista_pessoa += "</tr>"
-        })
+        const lista_pessoa = PessoasView.criaLista(pessoas)
         if ((pessoas.at(0) as Candidato).cpf != undefined) {
             document.getElementById('listarCandidatos')!.innerHTML = lista_pessoa
         } else {
             document.getElementById('listarEmpresas')!.innerHTML = lista_pessoa
         }
     }
-}
 
+    private static criaLista(pessoas: Pessoa[]) {
+        let lista_pessoa = ''
+        if ((pessoas.at(0) as Candidato).cpf != undefined) {
+            lista_pessoa = "<th>Nasceu</th>"
+        }
+        lista_pessoa += "<th>Descrição</th><th>País</th><th>Competências</th></tr>"
+        pessoas.forEach((pessoa) => {
+            lista_pessoa += '<tr>'
+            if ((pessoa as Candidato).nascimento != undefined) {
+                lista_pessoa += `<td>${(pessoa as Candidato).nascimento.toLocaleString().substring(0, 10)}</td>`
+            }
+            lista_pessoa +=     `<td>${pessoa.desc}</td>`
+            lista_pessoa +=     `<td>${pessoa.pais}</td>`
+            lista_pessoa +=     `<td>${pessoa.competencias}</td>`
+            lista_pessoa += "</tr>"
+        })
+        return lista_pessoa
+    }
+}
