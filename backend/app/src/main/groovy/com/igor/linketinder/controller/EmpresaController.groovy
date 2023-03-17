@@ -5,11 +5,8 @@ import com.igor.linketinder.dao.EmpresaDAO
 import com.igor.linketinder.model.Empresa
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
-import com.igor.linketinder.model.Pessoa
 import com.igor.linketinder.util.Json
 import com.igor.linketinder.util.Validacoes
-import com.igor.linketinder.view.EmpresaView
-import com.igor.linketinder.view.PessoaView
 import groovy.transform.TypeChecked
 import jakarta.servlet.ServletException
 import jakarta.servlet.annotation.WebServlet
@@ -18,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.apache.groovy.json.internal.LazyMap
 
-@WebServlet(name = "empresa", value = "/empresa")
 @TypeChecked
+@WebServlet(name = "empresa", value = "/empresa")
 class EmpresaController extends HttpServlet {
 
     private static final FabricaBanco fabricaBanco = FabricaBanco.criaInstancia(new PostgesFabric())
@@ -67,7 +64,7 @@ class EmpresaController extends HttpServlet {
             final Empresa empresa = criaEmpresa(jsonFormatado, cnpj)
             atualizarNoBanco(empresa)
             response.getWriter().println("Empresa atualizada com sucesso!")
-            response.setStatus(201)
+            response.setStatus(200)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -80,7 +77,7 @@ class EmpresaController extends HttpServlet {
             final String cnpj = request.getParameter("cnpj")
             removeDoBanco(cnpj)
             response.getWriter().println("Empresa deletada com sucesso!")
-            response.setStatus(200)
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -96,39 +93,13 @@ class EmpresaController extends HttpServlet {
         } else {
             cnpj = jsonFormatado.cnpj
         }
+        Validacoes.validaCNPJ(cnpj)
         final String senha = jsonFormatado.senha
         final String pais = jsonFormatado.pais
         final String cep = jsonFormatado.cep
+        Validacoes.validaCEP(cep)
         final String descricao = jsonFormatado.descricao
         return new Empresa(nome, email, cnpj, pais, cep, descricao, senha)
-    }
-
-    static void adicionar() {
-        Empresa empresa = EmpresaView.cadastro()
-        salvarNoBanco(empresa)
-        EmpresaView.adicionadoComSucesso()
-    }
-
-    static void atualizar() {
-        final String CNPJ = EmpresaView.pegaCnpj()
-        final Empresa empresa = pega(CNPJ)
-        if (empresa == null) throw new IllegalArgumentException("Empresa não encontrada")
-        EmpresaView.atualizar(empresa)
-        atualizarNoBanco(empresa)
-        EmpresaView.atualizadoComSucesso()
-    }
-
-    static void remover() {
-        final String CNPJ = EmpresaView.pegaCnpj()
-        final Empresa empresa = pega(CNPJ)
-        if (empresa == null) throw new IllegalArgumentException("Empresa não encontrada")
-        removeDoBanco(CNPJ)
-        EmpresaView.removidoComSucesso()
-    }
-
-    static void listar() {
-        List<Pessoa> empresas = pegaEmpresas() as List<Pessoa>
-        PessoaView.lista(empresas)
     }
 
     static void salvarNoBanco(Empresa empresa) {
@@ -138,14 +109,6 @@ class EmpresaController extends HttpServlet {
     }
 
     static Empresa pega(String cnpj) {
-        return empresaDAO.pegar(cnpj)
-    }
-
-    static int pegaId(String cnpj) {
-        return empresaDAO.pegaId(cnpj)
-    }
-
-    static Empresa pegaEmpresaPeloCnpj(String cnpj) {
         return empresaDAO.pegar(cnpj)
     }
 

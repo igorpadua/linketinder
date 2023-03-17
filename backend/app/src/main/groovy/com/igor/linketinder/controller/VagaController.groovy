@@ -8,7 +8,6 @@ import com.igor.linketinder.model.Vaga
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.util.Json
-import com.igor.linketinder.view.VagaView
 import groovy.transform.TypeChecked
 import jakarta.servlet.ServletException
 import jakarta.servlet.annotation.WebServlet
@@ -32,7 +31,7 @@ class VagaController extends HttpServlet {
             def vaga
             if (request.getParameter("id") != null) {
                 int id = Integer.parseInt(request.getParameter("id"))
-                vaga = buscarVagaPorId(id)
+                vaga = pega(id)
             } else {
                 vaga = pegaVagas()
             }
@@ -56,7 +55,7 @@ class VagaController extends HttpServlet {
             salvarNoBanco(vaga, id_empresa)
 
             response.getWriter().println("Vaga cadastrada com sucesso!")
-            response.setStatus(200)
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -98,12 +97,6 @@ class VagaController extends HttpServlet {
         }
     }
 
-    private static Vaga buscarVagaPorId(int id) {
-        VagaDAO vagaDAO = new VagaDAO(new PostgesFabric())
-        Vaga vaga = vagaDAO.pega(id)
-        return vaga
-    }
-
     private static Vaga criaVaga(LazyMap jsonMap) {
         String nome = jsonMap.nome
         String descricao = jsonMap.descricao
@@ -114,37 +107,8 @@ class VagaController extends HttpServlet {
         return new Vaga(0, nome, descricao, local_vaga, competencia)
     }
 
-    static void adicionar() {
-        Vaga vaga = VagaView.cadastro()
-        final int id_empresa = EmpresaController.pegaId(vaga.empresa.cnpj)
-        salvarNoBanco(vaga, id_empresa)
-        VagaView.adicionadoComSucesso()
-    }
-
-    static void atualizar() {
-        int id_vaga = VagaView.pegaID()
-        final Vaga vaga = pega(id_vaga)
-        if (vaga == null) throw new IllegalArgumentException("Vaga não encontrada")
-        VagaView.atualiza(vaga)
-        atualizarNoBanco(vaga)
-        VagaView.atualizadoComSucesso()
-    }
-
-    static void remover() {
-        int id_vaga = VagaView.pegaID()
-        final Vaga vaga = pega(id_vaga)
-        if (vaga == null) throw new IllegalArgumentException("Vaga não encontrada")
-        removeDoBanco(id_vaga)
-        VagaView.removidoComSucesso()
-    }
-
     static Vaga pega(int idVaga) {
         return vagaDAO.pega(idVaga)
-    }
-
-    static void listar() {
-        List<Vaga> vagas = pegaVagas()
-        VagaView.lista(vagas)
     }
 
     static void salvarNoBanco(Vaga vaga, int idEmpresa) {

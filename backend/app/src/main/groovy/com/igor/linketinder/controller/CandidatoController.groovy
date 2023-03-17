@@ -8,13 +8,11 @@ import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Competencia
-import com.igor.linketinder.model.Pessoa
 import com.igor.linketinder.util.Json
 import com.igor.linketinder.util.Validacoes
-import com.igor.linketinder.view.CandidatoView
-import com.igor.linketinder.view.PessoaView
 import groovy.transform.TypeChecked
 import jakarta.servlet.ServletException
+import jakarta.servlet.annotation.WebServlet
 import jakarta.servlet.http.HttpServlet
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -23,6 +21,7 @@ import org.apache.groovy.json.internal.LazyMap
 import java.text.SimpleDateFormat
 
 @TypeChecked
+@WebServlet(name = "candidato", value = "/candidato")
 class CandidatoController extends HttpServlet {
 
     private static final FabricaBanco fabricaBanco = FabricaBanco.criaInstancia(new PostgesFabric())
@@ -44,7 +43,7 @@ class CandidatoController extends HttpServlet {
             response.setCharacterEncoding("UTF-8")
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create()
             response.getWriter().println(gson.toJson(candidato))
-            response.setStatus(201)
+            response.setStatus(200)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -61,7 +60,7 @@ class CandidatoController extends HttpServlet {
             salvarNoBanco(candidato)
 
             response.getWriter().println("Candidato cadastrado com sucesso!")
-            response.setStatus(200)
+            response.setStatus(201)
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -108,43 +107,16 @@ class CandidatoController extends HttpServlet {
         } else {
             cpf = jsonFormatado.cpf
         }
+        Validacoes.validaCPF(cpf)
         String pais = jsonFormatado.pais
         String cep = jsonFormatado.cep
+        Validacoes.validaCEP(cep)
         String descricao = jsonFormatado.descricao
         String senha = jsonFormatado.senha
         String competencias = jsonFormatado.competencias
         Competencia competencia = new Competencia()
         competencia.competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
         return new Candidato(nome, sobrenome, nascimento, email, cpf, pais, cep, descricao, senha, competencia)
-    }
-
-
-    static void adicionar() {
-        Candidato candidato = CandidatoView.cadastro()
-        salvarNoBanco(candidato)
-        CandidatoView.adicionadoComSucesso()
-    }
-
-    static void atualizar() {
-        final String CPF = CandidatoView.pegaCpf()
-        if (!Validacoes.validaCPF(CPF)) throw new IllegalArgumentException("CPF inválido")
-        final Candidato candidato = pega(CPF)
-        if (candidato == null) throw new IllegalArgumentException("Candidato não encontrado")
-        CandidatoView.atualiza(candidato)
-        atualizarNoBanco(candidato)
-        CandidatoView.atualizadoComSucesso()
-    }
-
-    static void remover() {
-        final String CPF = CandidatoView.pegaCpf()
-        if (!Validacoes.validaCPF(CPF)) throw new IllegalArgumentException("CPF inválido")
-        removeNoBanco(CPF)
-        CandidatoView.removidoComSucesso()
-    }
-
-    static void listar() {
-        List<Pessoa> candidatoLista = pegaCandidos() as List<Pessoa>
-        PessoaView.lista(candidatoLista)
     }
 
     static void salvarNoBanco(Candidato candidato) {

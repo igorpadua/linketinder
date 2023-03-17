@@ -1,7 +1,9 @@
 package com.igor.linketinder.dao.fabricaBanco
 
 import com.igor.linketinder.dao.database.BancoDados
+import groovy.transform.TypeChecked
 
+@TypeChecked
 abstract class FabricaBanco {
     private static FabricaBanco instancia = null
 
