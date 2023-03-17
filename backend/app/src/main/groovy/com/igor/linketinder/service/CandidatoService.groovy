@@ -1,18 +1,17 @@
-package com.igor.linketinder.service;
+package com.igor.linketinder.service
 
-import com.google.gson.Gson;
-import com.igor.linketinder.controller.CandidatoController;
-import com.igor.linketinder.dao.CandidatoDAO;
-import com.igor.linketinder.dao.fabricaBanco.PostgesFabric;
+import com.google.gson.Gson
+import com.igor.linketinder.controller.CandidatoController
+import com.igor.linketinder.dao.CandidatoDAO
+import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
 import com.igor.linketinder.model.Candidato
 import com.igor.linketinder.model.Competencia
-import com.igor.linketinder.util.Json;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import com.igor.linketinder.util.Json
+import jakarta.servlet.*
+import jakarta.servlet.http.*
+import jakarta.servlet.annotation.*
 
-import java.io.IOException
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat
 
 @WebServlet(name = "candidato", value = "/candidato")
 class CandidatoService extends HttpServlet {
@@ -89,7 +88,8 @@ class CandidatoService extends HttpServlet {
     private Candidato criaCandidato(def jsonFormatado, String CPF = null) {
         String nome = jsonFormatado.nome
         String sobrenome = jsonFormatado.sobrenome
-        Date nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(jsonFormatado.nascimento)
+        String stringData = jsonFormatado.nascimento
+        Date nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(stringData)
         String email = jsonFormatado.email
         String cpf
         if (CPF != null) {
