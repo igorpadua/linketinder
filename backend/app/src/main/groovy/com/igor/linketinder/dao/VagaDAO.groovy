@@ -47,6 +47,7 @@ class VagaDAO {
     }
 
     void atualiza(Vaga vaga) {
+        println(vaga)
         sql.executeUpdate('UPDATE vagas ' +
                 "SET nome = '${vaga.nome}', descricao = '${vaga.descricao}', local_vaga = '${vaga.local_vaga}' " +
                 "WHERE id = '${vaga.id}'")
@@ -67,5 +68,15 @@ class VagaDAO {
         }
         validaVaga(vaga)
         return vaga
+    }
+
+    int pegaId(Vaga vaga) {
+        int id = 0
+        sql.eachRow("SELECT id FROM vagas WHERE nome = ${vaga.nome}" +
+                "and descricao = ${vaga.descricao}" +
+                "and local_vaga = ${vaga.local_vaga}") { rs ->
+            id = rs.getInt('id')
+        }
+        return id
     }
 }

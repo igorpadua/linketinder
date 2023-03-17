@@ -50,7 +50,8 @@ class VagaController {
 
     static void salvarNoBanco(Vaga vaga, int idEmpresa) {
         vagaDAO.salvar(vaga, idEmpresa)
-        competenciaVagasDAO.salvar(vaga, idEmpresa)
+        vaga.id = vagaDAO.pegaId(vaga)
+        competenciaVagasDAO.salvar(vaga)
     }
 
     static void atualizarNoBanco(Vaga vaga) {
@@ -59,6 +60,7 @@ class VagaController {
     }
 
     static void removeDoBanco(int idVaga) {
+        competenciaVagasDAO.remove(idVaga)
         vagaDAO.remove(idVaga)
     }
 

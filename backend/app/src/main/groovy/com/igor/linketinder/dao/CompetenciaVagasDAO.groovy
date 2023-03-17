@@ -17,11 +17,11 @@ class CompetenciaVagasDAO {
         sql = fabricaBanco.iniciarBancoDeDados().conectar()
     }
 
-    void salvar(Vaga vaga, int id) {
+    void salvar(Vaga vaga) {
         for (TipoCompetencia competencia in vaga.competencia.competencias) {
             int idCompetencia = competenciaDAO.pegaId(competencia.toString())
             sql.executeInsert("""INSERT INTO competencia_vagas (vagas_id, competencia_id)
-                                    VALUES (${id}, ${idCompetencia});""")
+                                    VALUES (${vaga.id}, ${idCompetencia});""")
         }
     }
 
