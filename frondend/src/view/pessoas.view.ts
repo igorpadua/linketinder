@@ -8,10 +8,16 @@ export default class PessoasView {
         const email: string = (<HTMLInputElement>document.getElementById("idEmail")).value
         const descricao: string = (<HTMLInputElement>document.getElementById("idDescricao")).value
         const pais: string = (<HTMLInputElement>document.getElementById("idPais")).value
-        const estado: string = (<HTMLInputElement>document.getElementById("idEstado")).value
-        const cidade: string = (<HTMLInputElement>document.getElementById("idCidade")).value
         const cep: string = (<HTMLInputElement>document.getElementById("idCep")).value
-        return [nome, email, descricao, pais, estado, cidade, cep]
+        const senha: string = (<HTMLInputElement>document.getElementById("idSenha")).value
+        return [nome, email, descricao, pais, cep, senha]
+    }
+
+    private static pegaDadosCandidato() {
+        const cpf: string = (<HTMLInputElement>document.getElementById("idCpf")).value
+        const sobrenome: string = (<HTMLInputElement>document.getElementById("idSobrenome")).value
+        const nascimento: string = (<HTMLInputElement>document.getElementById("idNascimento")).value
+        return [cpf, sobrenome, nascimento]
     }
 
     private static pegaCompetencias() : string [] {
@@ -25,19 +31,20 @@ export default class PessoasView {
         return competencias
     }
 
-    static addPessoa() {
+    static addPessoa(): Pessoa {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
-        const [nome, email, descricao, pais, estado, cidade, cep] = PessoasView.pegaDadosPessoa()
+        const [nome, email, descricao, pais, cep, senha] = PessoasView.pegaDadosPessoa()
         const competencias: string[] = PessoasView.pegaCompetencias()
 
         if (radio_selecionado == "Candidato") {
-            const cpf: string = (<HTMLInputElement>document.getElementById("idCpf")).value
-            const idade: number = parseInt((<HTMLInputElement>document.getElementById("idIdade")).value)
-            return new Candidato(nome, email, cpf, idade, descricao, pais, estado, cidade, cep, competencias)
+            const [cpf, sobrenome, nascimento] = PessoasView.pegaDadosCandidato()
+            const date_nascimento: Date = new Date(nascimento)
+            date_nascimento.setDate(date_nascimento.getDate() + 1)
+            return new Candidato(nome, email, cpf, descricao, pais, senha, date_nascimento, cep, sobrenome, competencias)
         }
 
         const cnpj: string = (<HTMLInputElement>document.getElementById("idCnpj")).value
-        return new Empresa(nome, email, cnpj, descricao, pais, estado, cidade, cep, competencias)
+        return new Empresa(nome, email, cnpj, descricao, pais, senha, cep, competencias)
     }
 
     static listarPessoas(pessoas: Pessoa[]) {
@@ -48,13 +55,11 @@ export default class PessoasView {
         lista_pessoa += "<th>Descrição</th><th>País</th><th>Estado</th><th>Cidade</th><th>Competências</th></tr>"
         pessoas.forEach((pessoa) => {
             lista_pessoa += '<tr>'
-            if ((pessoa as Candidato).idade != undefined) {
-                lista_pessoa += `<td>${(pessoa as Candidato).idade}</td>`
+            if ((pessoa as Candidato).nascimento != undefined) {
+                lista_pessoa += `<td>${(pessoa as Candidato).nascimento}</td>`
             }
             lista_pessoa +=     `<td>${pessoa.desc}</td>`
             lista_pessoa +=     `<td>${pessoa.pais}</td>`
-            lista_pessoa +=     `<td>${pessoa.estado}</td>`
-            lista_pessoa +=     `<td>${pessoa.cidade}</td>`
             lista_pessoa +=     `<td>${pessoa.competencias}</td>`
             lista_pessoa += "</tr>"
         })

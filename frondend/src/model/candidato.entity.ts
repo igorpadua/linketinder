@@ -1,12 +1,15 @@
 import Pessoa from "./pessoa.entity";
 
 export default class Candidato extends Pessoa {
+    sobrenome: string
     cpf: string
-    idade: number
+    nascimento: Date
 
-    constructor(nome: string, email: string, cpf: string, idade: number, desc: string, pais: string, estado: string, cidade: string, cep: string, competencias: string[]) {
-        super(nome, email, desc, pais, estado, cidade, cep, competencias)
+    constructor(nome: string, email: string, cpf: string, desc: string, pais: string,
+                senha: string, nasicmento: Date, cep: string, sobrenome: string,competencias: string[]) {
+        super(nome, email, desc, pais, senha, cep, competencias)
+        this.sobrenome = sobrenome
         this.cpf = cpf
-        this.idade = idade
+        this.nascimento = nasicmento
     }
 }

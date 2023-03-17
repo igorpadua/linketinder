@@ -2,9 +2,10 @@ import PessoasView from "./view/pessoas.view";
 import Candidato from "./model/candidato.entity";
 import Empresa from "./model/empresa.entity";
 import graficoCompetencia from "./view/graficoCompetencia";
-import {mostrarCandidato, mostrarEmpresa} from "./view/Cadastro";
+import {radioTipoPessoa} from "./view/Cadastro";
 import ValidaEmpresa from "./util/validaEmpresa";
 import {ValidaCandidato} from "./util/validaCandidato";
+import CandidatoController from "./controller/Candidato.controller";
 
 let candidatos: Candidato[] = []
 let empresas: Empresa[] = []
@@ -24,13 +25,7 @@ if (window.location.pathname == '/cadastro.html') {
     document.getElementById('idLabelCnpj')!.style.display = 'none'
 
     document.getElementsByName('tipoPessoa').forEach((radio: any) => {
-        radio.onclick = () => {
-            if (radio.value == 'Candidato') {
-                mostrarCandidato()
-            } else {
-                mostrarEmpresa()
-            }
-        }
+        radio.onclick = () => { radioTipoPessoa(radio) }
     })
 
     document.getElementById('addCadastro')!.onclick = () => {
@@ -38,8 +33,8 @@ if (window.location.pathname == '/cadastro.html') {
         if (radio_selecionado == 'Candidato') {
             const candidato: Candidato = PessoasView.addPessoa() as Candidato
             if (new ValidaCandidato().validacao(candidato)) {
-                candidatos.push(candidato)
-                localStorage.setItem('candidatos', JSON.stringify(candidatos))
+                CandidatoController.enviarCandidato(candidato).then(r =>
+                    console.log(r))
                 alert('Candidato cadastrado com sucesso!')
                 window.location.href = '/index.html'
             }

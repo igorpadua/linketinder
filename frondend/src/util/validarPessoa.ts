@@ -11,7 +11,7 @@ export default abstract class ValidaPessoa {
 
     protected dadosForamPreenchidos(pessoa: Pessoa) : boolean {
         return !(pessoa.nome && pessoa.email && pessoa.desc && pessoa.pais &&
-            pessoa.estado && pessoa.cidade && pessoa.cep && pessoa.competencias.toString() && !this.dadosPreenchidos(pessoa))
+            pessoa.senha && pessoa.cep && pessoa.competencias.toString() && !this.dadosPreenchidos(pessoa))
     }
 
     validacao(pessoa: Pessoa) {
@@ -45,19 +45,10 @@ export default abstract class ValidaPessoa {
             alert("País inválido!")
             return false
         }
-        if (!this.nomeRegex.test(pessoa.estado)) {
-            alert("Estado inválido!")
-            return false
-        }
-        if (!this.nomeRegex.test(pessoa.cidade)) {
-            alert("Cidade inválida!")
-            return false
-        }
         if (!this.cepRegex.test(pessoa.cep)) {
             alert("CEP inválido!")
             return false
         }
-
         return true
     }
 }

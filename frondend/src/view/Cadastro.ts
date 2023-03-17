@@ -18,4 +18,12 @@ function mostrarCandidato() {
     document.getElementById('idLabelCnpj')!.style.display = 'none'
 }
 
-export { mostrarEmpresa, mostrarCandidato }
+function radioTipoPessoa(radio: any) {
+    if (radio.value == 'Candidato') {
+        mostrarCandidato()
+    } else {
+        mostrarEmpresa()
+    }
+}
+
+export { radioTipoPessoa }
