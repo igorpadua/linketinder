@@ -20,8 +20,8 @@ CREATE TABLE candidatos (
 
 CREATE TABLE competencias_candidato (
   id SERIAL PRIMARY KEY,
-  competencia_id int REFERENCES competencias(id) NOT NULL,
-  candidatos_id int REFERENCES candidatos(id) NOT NULL
+  competencia_id int REFERENCES competencias(id) ON DELETE CASCADE NOT NULL,
+  candidatos_id int REFERENCES candidatos(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE empresas (
@@ -40,13 +40,13 @@ CREATE TABLE vagas (
   nome varchar(50) NOT NULL,
   descricao varchar(100) NOT NULL,
   local_vaga varchar(50) NOT NULL,
-  empresa_id int REFERENCES empresas(id) NOT NULL
+  empresa_id int REFERENCES empresas(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE competencia_vagas (
   id SERIAL PRIMARY KEY,
-  competencia_id int REFERENCES competencias(id) NOT NULL,
-  vagas_id int REFERENCES vagas(id) NOT NULL
+  competencia_id int REFERENCES competencias(id) ON DELETE CASCADE NOT NULL,
+  vagas_id int REFERENCES vagas(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE curtidas (
@@ -56,14 +56,14 @@ CREATE TABLE curtidas (
 
 CREATE TABLE curtida_empresa (
   id SERIAL PRIMARY KEY,
-  empresa_id int REFERENCES empresas(id) NOT NULL,
-  cutida_id int REFERENCES curtidas(id) NOT NULL
+  empresa_id int REFERENCES empresas(id) ON DELETE CASCADE NOT NULL,
+  cutida_id int REFERENCES curtidas(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE curtida_candidato (
   id SERIAL PRIMARY KEY,
-  candidato_id int REFERENCES candidatos(id) NOT NULL,
-  cutida_id int REFERENCES curtidas(id) NOT NULL
+  candidato_id int REFERENCES candidatos(id) ON DELETE CASCADE NOT NULL,
+  cutida_id int REFERENCES curtidas(id) ON DELETE CASCADE NOT NULL
 );
 
 -- Insert
