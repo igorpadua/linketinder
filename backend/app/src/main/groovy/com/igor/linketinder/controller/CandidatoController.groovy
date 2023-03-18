@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.apache.groovy.json.internal.LazyMap
 
+import java.sql.SQLException
 import java.text.SimpleDateFormat
 
 @TypeChecked
@@ -41,9 +42,21 @@ class CandidatoController extends HttpServlet {
             }
             response.setContentType("application/json")
             response.setCharacterEncoding("UTF-8")
+
+            if (candidato == null) {
+                response.setStatus(404)
+                response.setCharacterEncoding("UTF-8")
+                response.getWriter().println("Candidato não encontrado")
+                return
+            }
+
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create()
             response.getWriter().println(gson.toJson(candidato))
             response.setStatus(200)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao buscar candidato")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -61,6 +74,10 @@ class CandidatoController extends HttpServlet {
 
             response.getWriter().println("Candidato cadastrado com sucesso!")
             response.setStatus(201)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao cadastrar candidato")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -76,6 +93,10 @@ class CandidatoController extends HttpServlet {
             atualizarNoBanco(candidato)
             response.getWriter().println("Candidato atualizado com sucesso!")
             response.setStatus(200)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao atualizar candidato")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -89,6 +110,10 @@ class CandidatoController extends HttpServlet {
             removeNoBanco(cpf)
             response.getWriter().println("Candidato deletado com sucesso!")
             response.setStatus(200)
+        }  catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao deletar candidato")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -126,7 +151,6 @@ class CandidatoController extends HttpServlet {
         competenciaCandidatoDAO.salvar(candidato)
     }
 
-
     static Candidato pega(String cpf) {
         return candidatoDAO.pegar(cpf)
     }
@@ -137,7 +161,6 @@ class CandidatoController extends HttpServlet {
     }
 
     static void removeNoBanco(String cpf) {
-        competenciaCandidatoDAO.remove(cpf)
         candidatoDAO.remove(cpf)
     }
 

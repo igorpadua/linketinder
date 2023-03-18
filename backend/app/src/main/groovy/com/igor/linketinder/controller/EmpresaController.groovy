@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.apache.groovy.json.internal.LazyMap
 
+import java.sql.SQLException
+
 @TypeChecked
 @WebServlet(name = "empresa", value = "/empresa")
 class EmpresaController extends HttpServlet {
@@ -35,7 +37,19 @@ class EmpresaController extends HttpServlet {
             }
             response.setContentType("application/json")
             response.setCharacterEncoding("UTF-8")
+
+            if (empresa == null) {
+                response.setStatus(404)
+                response.setCharacterEncoding("UTF-8")
+                response.getWriter().println("Empresa não encontrada")
+                return
+            }
+
             response.getWriter().println(new Gson().toJson(empresa))
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao buscar empresa")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -50,6 +64,10 @@ class EmpresaController extends HttpServlet {
             salvarNoBanco(empresa)
             response.getWriter().println("Empresa cadastrada com sucesso!")
             response.setStatus(200)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao cadastrar empresa")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -65,7 +83,11 @@ class EmpresaController extends HttpServlet {
             atualizarNoBanco(empresa)
             response.getWriter().println("Empresa atualizada com sucesso!")
             response.setStatus(200)
-        } catch (Exception e) {
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao atualizar empresa")
+        }  catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
         }
@@ -78,6 +100,10 @@ class EmpresaController extends HttpServlet {
             removeDoBanco(cnpj)
             response.getWriter().println("Empresa deletada com sucesso!")
             response.setStatus(201)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao deletar empresa")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()

@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.apache.groovy.json.internal.LazyMap
 
+import java.sql.SQLException
+
 @TypeChecked
 @WebServlet(name = "vaga", value = "/vaga")
 class VagaController extends HttpServlet {
@@ -38,9 +40,13 @@ class VagaController extends HttpServlet {
             response.setContentType("application/json")
             response.setCharacterEncoding("UTF-8")
             response.getWriter().println(new Gson().toJson(vaga))
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao buscar vaga")
         } catch (Exception e) {
             response.setStatus(500)
-            response.getWriter().println("Erro ao listar vagas: " + e.getMessage())
+            e.printStackTrace()
         }
     }
 
@@ -56,6 +62,10 @@ class VagaController extends HttpServlet {
 
             response.getWriter().println("Vaga cadastrada com sucesso!")
             response.setStatus(201)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao cadastrar vaga")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -76,7 +86,11 @@ class VagaController extends HttpServlet {
 
             response.getWriter().println("Vaga atualizada com sucesso!")
             response.setStatus(200)
-        } catch (Exception e) {
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao atualizar vaga")
+        }  catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
         }
@@ -86,11 +100,13 @@ class VagaController extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             final int idVaga = Integer.parseInt(request.getParameter("id"))
-
             removeDoBanco(idVaga)
-
             response.getWriter().println("Vaga deletada com sucesso!")
             response.setStatus(201)
+        } catch (SQLException ignored) {
+            response.setStatus(500)
+            response.setCharacterEncoding("UTF-8")
+            response.getWriter().println("Erro ao deletar vaga")
         } catch (Exception e) {
             response.setStatus(500)
             e.printStackTrace()
@@ -123,7 +139,6 @@ class VagaController extends HttpServlet {
     }
 
     static void removeDoBanco(int idVaga) {
-        competenciaVagasDAO.remove(idVaga)
         vagaDAO.remove(idVaga)
     }
 

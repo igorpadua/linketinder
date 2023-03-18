@@ -18,12 +18,6 @@ class CandidatoDAO {
         sql = fabricaBanco.iniciarBancoDeDados().conectar()
     }
 
-    static private void validaCandidato(Candidato candidato) {
-        if (candidato == null) {
-            throw new RuntimeException("Não foi possível encontrar um candidato com o CPF fornecido.")
-        }
-    }
-
     void salvar(Candidato candidato) {
         String nascimento = new SimpleDateFormat("yyyy-MM-dd").format(candidato.nascimento)
 
@@ -46,8 +40,7 @@ class CandidatoDAO {
     }
 
     void remove(String cpf) {
-        sql.executeInsert('DELETE FROM candidatos ' +
-                "WHERE cpf = '${cpf}'")
+        sql.executeInsert("DELETE FROM candidatos WHERE cpf = ${cpf}")
     }
 
 
@@ -70,7 +63,6 @@ class CandidatoDAO {
                     rs.getString('cpf'), rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'),
                     rs.getString('senha'), competencia)
         }
-        validaCandidato(candidato)
         return candidato
     }
 
