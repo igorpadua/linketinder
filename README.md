@@ -43,4 +43,4 @@ Para verificarmos o match é necessario consultar a tabela curtida e curtida_emp
 npm start
 
 ## Back-end
-gradle run
+gradle appRun
