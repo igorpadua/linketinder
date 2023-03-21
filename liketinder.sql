@@ -119,22 +119,22 @@ INSERT INTO empresas (nome, cnpj, email, descricao, pais, cep, senha)
 
 -- Vagas
 INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
-	VALUES('Vaga 1', 'Descrição 1', 'São Paulo', 1);
+	VALUES('Vaga junior', 'Para desenvolvedores back-end', 'São Paulo', 1);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (1,1);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (4,1);
 
 INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
-	VALUES('Vaga 2', 'Descrição 2', 'Rio de Janeiro', 2);
+	VALUES('Vaga senior', 'Para desenvolvedores front-end', 'Rio de Janeiro', 2);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (3,2);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (6,2);
 
 INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
-	VALUES('Vaga 3', 'Descrição 3', 'Salvador', 3);
+	VALUES('Vaga Plenio', 'Para desenvolvedores front-end', 'Salvador', 3);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (3,3);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (6,3);
 
 INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
-	VALUES('Vaga 4', 'Descrição 4', 'Goiânia', 4);
+	VALUES('Vaga junior', 'Para desenvolvedores back-end', 'Goiânia', 4);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (1,4);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (4,4);
 
@@ -172,7 +172,6 @@ FROM candidatos c
 INNER JOIN curtida_candidato cc ON cc.candidato_id = c.id
 INNER JOIN vagas v ON v.id = cc.vaga_id
 INNER JOIN curtida_vaga cv ON cv.vaga_id = v.id
-INNER JOIN candidatos c2 ON c2.id = cv.candidato_id
-WHERE c.id = c2.id;
+WHERE c.id = cv.candidato_id;
 
 
