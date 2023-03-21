@@ -49,21 +49,17 @@ CREATE TABLE competencia_vagas (
   vagas_id int REFERENCES vagas(id) ON DELETE CASCADE NOT NULL
 );
 
-CREATE TABLE curtidas (
-  id SERIAL PRIMARY KEY,
-  curtiu int NOT NULL
-);
 
-CREATE TABLE curtida_empresa (
+CREATE TABLE curtida_vaga (
   id SERIAL PRIMARY KEY,
-  empresa_id int REFERENCES empresas(id) ON DELETE CASCADE NOT NULL,
-  cutida_id int REFERENCES curtidas(id) ON DELETE CASCADE NOT NULL
+  vaga_id int REFERENCES vagas(id) ON DELETE CASCADE NOT NULL,
+  candidato_id int REFERENCES candidatos(id) ON DELETE CASCADE NOT NULL
 );
 
 CREATE TABLE curtida_candidato (
   id SERIAL PRIMARY KEY,
   candidato_id int REFERENCES candidatos(id) ON DELETE CASCADE NOT NULL,
-  cutida_id int REFERENCES curtidas(id) ON DELETE CASCADE NOT NULL
+  vaga_id int REFERENCES vagas(id) ON DELETE CASCADE NOT NULL
 );
 
 -- Insert
@@ -131,3 +127,41 @@ INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
 	VALUES('Vaga senior', 'Para desenvolvedores front-end', 'Rio de Janeiro', 2);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (3,2);
 INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (6,2);
+
+INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
+	VALUES('Vaga Plenio', 'Para desenvolvedores front-end', 'Salvador', 3);
+INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (3,3);
+INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (6,3);
+
+INSERT INTO vagas (nome, descricao, local_vaga, empresa_id)
+	VALUES('Vaga junior', 'Para desenvolvedores back-end', 'Goiânia', 4);
+INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (1,4);
+INSERT INTO competencia_vagas (competencia_id, vagas_id) VALUES (4,4);
+
+
+-- Curtidas candidatos
+INSERT INTO curtida_candidato (candidato_id, vaga_id)
+  VALUES (1, 3);
+
+INSERT INTO curtida_candidato (candidato_id, vaga_id)
+  VALUES (2, 1);
+
+INSERT INTO curtida_candidato (candidato_id, vaga_id)
+  VALUES (2, 4);
+
+INSERT INTO curtida_candidato (candidato_id, vaga_id)
+  VALUES (4, 2);
+
+-- Curtidas empresas
+
+INSERT INTO curtida_vaga (vaga_id, candidato_id)
+  VALUES (1, 2);
+
+INSERT INTO curtida_vaga (vaga_id, candidato_id)
+  VALUES (3, 4);
+
+INSERT INTO curtida_vaga (vaga_id, candidato_id)
+  VALUES (4, 2);
+
+INSERT INTO curtida_vaga (vaga_id, candidato_id)
+  VALUES (4, 1);
