@@ -56,7 +56,7 @@ function adicionaEmpresa() {
     if (new ValidaEmpresa().validacao(empresa)) {
         EmpresaController.enviarEmpresa(empresa).then()
         alert('Empresa cadastrada com sucesso!')
-        // window.location.href = '/index.html'
+        window.location.href = '/index.html'
     }
 }
 
