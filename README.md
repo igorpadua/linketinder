@@ -20,7 +20,7 @@ Feito por Igor Moreira Pádua.
 * postgresql
 
 ### Modelagem:
-![liketinder](https://user-images.githubusercontent.com/40117861/220912573-1ca8f999-ccf2-4a46-acc4-542138c07783.png)
+![liketinder](https://user-images.githubusercontent.com/40117861/226634252-99506f9a-aa23-44ca-83d8-8c4cf183f489.png)
 _Feito com a ferramenta dbdiagram_
 
 ### Match Explicação
