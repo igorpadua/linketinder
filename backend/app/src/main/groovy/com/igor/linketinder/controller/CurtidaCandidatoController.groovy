@@ -20,7 +20,7 @@ import java.sql.SQLException
 @WebServlet(name = "curtidaCandidato", value = "/curtidaCandidato")
 class CurtidaCandidatoController extends HttpServlet {
 
-    private static final FabricaBanco fabricaBanco = FabricaBanco.criaInstancia(new PostgesFabric())
+    private static final FabricaBanco fabricaBanco = new PostgesFabric()
     private static final CurtidaCandidatoDAO curtidaCandidatoDAO = new CurtidaCandidatoDAO(fabricaBanco)
     private static final Json json = new Json()
 

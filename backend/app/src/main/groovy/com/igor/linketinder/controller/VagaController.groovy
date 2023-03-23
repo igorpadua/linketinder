@@ -22,7 +22,7 @@ import java.sql.SQLException
 @WebServlet(name = "vaga", value = "/vaga")
 class VagaController extends HttpServlet {
 
-    private static final FabricaBanco fabricaBanco = FabricaBanco.criaInstancia(new PostgesFabric())
+    private static final FabricaBanco fabricaBanco = new PostgesFabric()
     private static final VagaDAO vagaDAO = new VagaDAO(fabricaBanco)
     private static final CompetenciaVagasDAO competenciaVagasDAO = new CompetenciaVagasDAO(fabricaBanco)
     private static final Json json = new Json()

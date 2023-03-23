@@ -10,6 +10,17 @@ class PostgreSql implements BancoDados {
     final password= '123456'
     final drive= "org.postgresql.Driver"
 
+    static PostgreSql instance = null
+
+    private PostgreSql() {}
+
+    static PostgreSql getInstance() {
+        if (instance == null) {
+            instance = new PostgreSql()
+        }
+        return instance
+    }
+
     Sql conectar() {
         Sql sql = Sql.newInstance(url, user, password, drive)
         return sql

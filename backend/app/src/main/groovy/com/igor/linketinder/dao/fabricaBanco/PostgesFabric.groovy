@@ -9,6 +9,6 @@ import groovy.transform.TypeChecked
 class PostgesFabric extends FabricaBanco {
     @Override
     protected BancoDados criarBanco() {
-        return new PostgreSql()
+        return PostgreSql.getInstance()
     }
 }
