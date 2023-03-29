@@ -20,7 +20,7 @@ class Competencia {
                 if (competencia == "") {
                     continue
                 }
-                throw new RuntimeException("Não foi possível encontrar uma competência com o nome fornecido.", e)
+                throw new RuntimeException("Não foi possível encontrar uma competência ${competencia}.", e)
             }
         }
         return competenciasList

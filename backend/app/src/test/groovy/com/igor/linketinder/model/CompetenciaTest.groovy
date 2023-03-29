@@ -1,55 +1,65 @@
 package com.igor.linketinder.model
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import spock.lang.Specification
 
-class CompetenciaTest {
 
-    @Test
-    void constutorTest() {
-        Competencia competencia = new Competencia()
-        Assertions.assertNotNull(competencia)
+class CompetenciaTest extends Specification {
+
+    Competencia competencia = null
+
+    def setup() {
+        competencia = new Competencia()
+        competencia.competencias = [TipoCompetencia.angular, TipoCompetencia.cplusplus]
     }
 
-    @Test
-    void setCompetenciasTest() {
-        Competencia competencia = new Competencia()
-        competencia.setCompetencias(new ArrayList<>())
-        Assertions.assertNotNull(competencia)
+    def "Testa se a competencia foi criada corretamente"() {
+        expect:
+        competencia.competencias == [TipoCompetencia.angular, TipoCompetencia.cplusplus]
     }
 
-    @Test
-    void getCompetenciasTest() {
-        Competencia competencia = new Competencia()
-        competencia.setCompetencias(new ArrayList<>())
-        Assertions.assertNotNull(competencia.getCompetencias())
+    def "Testa o getCompetencias"() {
+        expect:
+        competencia.getCompetencias() == [TipoCompetencia.angular, TipoCompetencia.cplusplus]
     }
 
-    @Test
-    void testTransformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia() {
-        String competencias = "{java,python,c}"
-        List<TipoCompetencia> resul = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
-        Assertions.assertEquals(3, resul.size())
+    def "Testa o setCompetencias"() {
+        when:
+        competencia.setCompetencias([TipoCompetencia.java, TipoCompetencia.python])
+
+        then:
+        competencia.getCompetencias() == [TipoCompetencia.java, TipoCompetencia.python]
     }
 
-    @Test
-    void testTransformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetenciaVazia() {
-        String competencias = "{}"
-        List<TipoCompetencia> resul = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
-        Assertions.assertEquals(0, resul.size())
+    def "Testa transformar uma string de competencias em uma lista de competencias"() {
+        when:
+        List<TipoCompetencia> competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia("{Java, c, angular}")
+
+        then:
+        competencias == [TipoCompetencia.java, TipoCompetencia.c, TipoCompetencia.angular]
     }
 
-    @Test
-    void testTransformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetenciaComEspaco() {
-        String competencias = "{java, python, c}"
-        List<TipoCompetencia> resul = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
-        Assertions.assertEquals(3, resul.size())
+    def "Testa transformar uma string de competencias em uma lista de competencias com uma competencia invalida"() {
+        when:
+        Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia("{Java, c, angular, teste}")
+
+        then:
+        thrown(RuntimeException)
     }
 
-    @Test
-    void testTransformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetenciaComoNomeIncorreto() {
-        String competencias = "{ JAVA, PYTHON, C }"
-        List<TipoCompetencia> resul = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
-        Assertions.assertEquals(3, resul.size())
+    def "Testa transformar uma string de competencias em uma lista de competencias com uma competencia vazia"() {
+        when:
+        List<TipoCompetencia> competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia("{Java, c, angular, }")
+
+        then:
+        competencias == [TipoCompetencia.java, TipoCompetencia.c, TipoCompetencia.angular]
     }
+
+    def "Testa transformar uma string de competencias em uma lista de competencias com uma competencia vazia no meio"() {
+        when:
+        List<TipoCompetencia> competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia("{Java, c, , angular}")
+
+        then:
+        competencias == [TipoCompetencia.java, TipoCompetencia.c, TipoCompetencia.angular]
+    }
+    
 }
