@@ -1,92 +1,107 @@
 package com.igor.linketinder.model
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import spock.lang.Specification
 
-class EmpresaTest {
+class EmpresaTest extends Specification {
 
     Empresa empresa
 
-    @BeforeEach
-    void setup() {
+    def setup() {
         empresa = new Empresa("Empresa", "empresa@gmail.com", '00000000000000', "Brasil", "12345678", "Sou uma empresa legal", "123456")
     }
 
-    @Test
-    void getNomeTest() {
-        Assertions.assertEquals("Empresa", empresa.nome)
+    def "Testa se a empresa foi criada corretamente"() {
+        expect:
+        empresa.nome == "Empresa"
+        empresa.email == "empresa@gmail.com"
+        empresa.cnpj == '00000000000000'
+        empresa.pais == "Brasil"
+        empresa.cep == "12345678"
+        empresa.descricao == "Sou uma empresa legal"
     }
 
-    @Test
-    void getEmailTest() {
-        Assertions.assertEquals("empresa@gmail.com", empresa.email)
+    def "Testa o getNome"() {
+        expect:
+        empresa.getNome() == "Empresa"
     }
 
-    @Test
-    void getCnpjTest() {
-        Assertions.assertEquals('00000000000000', empresa.cnpj)
+    def "Testa o getEmail"() {
+        expect:
+        empresa.getEmail() == "empresa@gmail.com"
     }
 
-    @Test
-    void getPaisTest() {
-        Assertions.assertEquals("Brasil", empresa.pais)
+    def "Testa o getCnpj"() {
+        expect:
+        empresa.getCnpj() == '00000000000000'
     }
 
-    @Test
-    void getCepTest() {
-        Assertions.assertEquals("12345678", empresa.cep)
+    def "Testa o getPais"() {
+        expect:
+        empresa.getPais() == "Brasil"
     }
 
-    @Test
-    void getDescTest() {
-        Assertions.assertEquals("Sou uma empresa legal", empresa.descricao)
+    def "Testa o getCep"() {
+        expect:
+        empresa.getCep() == "12345678"
     }
 
-    @Test
-    void getSenhaTest() {
-        Assertions.assertEquals("123456", empresa.senha)
+    def "Testa o getDescricao"() {
+        expect:
+        empresa.getDescricao() == "Sou uma empresa legal"
     }
 
-    @Test
-    void setNomeTest() {
-        empresa.nome = "Empresa 2"
-        Assertions.assertEquals("Empresa 2", empresa.nome)
+    def "Testa o getSenha"() {
+        expect:
+        empresa.getSenha() == "123456"
     }
 
-    @Test
-    void setEmailTest() {
-        empresa.email = "empresa2@gmail.com"
-        Assertions.assertEquals("empresa2@gmail.com", empresa.email)
+    def "Testa o setNome"() {
+        when:
+        empresa.setNome("Empresa 2")
+        then:
+        empresa.getNome() == "Empresa 2"
     }
 
-    @Test
-    void setCnpjTest() {
-        empresa.cnpj = '11111111111111'
-        Assertions.assertEquals('11111111111111', empresa.cnpj)
+    def "Testa o setEmail"() {
+        when:
+        empresa.setEmail("empresa2@gmail.com")
+
+        then:
+        empresa.getEmail() == "empresa2@gmail.com"
     }
 
-    @Test
-    void setPaisTest() {
-        empresa.pais = "Brasil 2"
-        Assertions.assertEquals("Brasil 2", empresa.pais)
+    def "Testa o setCnpj"() {
+        when:
+        empresa.setCnpj('11111111111111')
+        then:
+        empresa.getCnpj() == '11111111111111'
     }
 
-    @Test
-    void setCepTest() {
-        empresa.cep = "12345679"
-        Assertions.assertEquals("12345679", empresa.cep)
+    def "Testa o setPais"() {
+        when:
+        empresa.setPais("Brasil 2")
+        then:
+        empresa.getPais() == "Brasil 2"
     }
 
-    @Test
-    void setDescTest() {
-        empresa.descricao = "Sou uma empresa legal 2"
-        Assertions.assertEquals("Sou uma empresa legal 2", empresa.descricao)
+    def "Testa o setCep"() {
+        when:
+        empresa.setCep("12345679")
+        then:
+        empresa.getCep() == "12345679"
     }
 
-    @Test
-    void setSenhaTest() {
-        empresa.senha = "1234567"
-        Assertions.assertEquals("1234567", empresa.senha)
+    def "Testa o setDescricao"() {
+        when:
+        empresa.setDescricao("Sou uma empresa legal 2")
+        then:
+        empresa.getDescricao() == "Sou uma empresa legal 2"
+    }
+
+    def "Testa o setSenha"() {
+        when:
+        empresa.setSenha("1234567")
+        then:
+        empresa.getSenha() == "1234567"
     }
 }
