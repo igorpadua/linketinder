@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 class Validacoes {
     static boolean validaCEP(String cep) {
         if (cep == null || cep.isEmpty()) return false
-        Pattern cepRegex = ~/^\d{5}-\d{3}$/
+        final Pattern cepRegex = ~/^\d{5}-\d{3}$/
         if (!cepRegex.matcher(cep).matches()) return false
         return true
     }

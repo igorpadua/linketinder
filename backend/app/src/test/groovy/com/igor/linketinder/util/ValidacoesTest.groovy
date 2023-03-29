@@ -1,91 +1,67 @@
 package com.igor.linketinder.util
 
-import org.junit.jupiter.api.Test
+import spock.lang.Specification
 
-import static org.junit.jupiter.api.Assertions.assertEquals
 
-class ValidacoesTest {
-    @Test
-    void validaCPFTest() {
-        String cpf = "000.000.000-00"
-        Boolean resul = Validacoes.validaCPF(cpf)
-        assertEquals(true, resul)
+class ValidacoesTest extends Specification {
+
+    def "Testa se o cpf é valido"() {
+        expect:
+        Validacoes.validaCPF("000.000.000-00") == true
     }
 
-    @Test
-    void cpfInvalidoLetraTest() {
-        String cpf = "000.000.000-0A"
-        Boolean resul = Validacoes.validaCPF(cpf)
-        assertEquals(false, resul)
+    def "Testa se o cpf é invalido com uma letra"() {
+        expect:
+        Validacoes.validaCPF("000.000.000-0A") == false
     }
 
-    @Test
-    void cpfInvalidoPequenoTest() {
-        String cpf = "000.000.000-0"
-        Boolean resul = Validacoes.validaCPF(cpf)
-        assertEquals(false, resul)
+    def "Testa se o cpf é invalido falta um numero"() {
+        expect:
+        Validacoes.validaCPF("000.000.000-0") == false
     }
 
-    @Test
-    void cpfNulo() {
-        String cpf = null
-        Boolean resul = Validacoes.validaCPF(cpf)
-        assertEquals(false, resul)
+    def "Testa se o cpf é nulo"() {
+        expect:
+        Validacoes.validaCPF(null) == false
     }
 
-    @Test
-    void cnpjValidoTest() {
-        String cnpj = "50.000.000/0000-00"
-        Boolean resul = Validacoes.validaCNPJ(cnpj)
-        assertEquals(true, resul)
+    def "Testa se o cnpj é valido"() {
+        expect:
+        Validacoes.validaCNPJ("50.000.000/0000-00") == true
     }
 
-    @Test
-    void cnpjNulo() {
-        String cnpj = null
-        Boolean resul = Validacoes.validaCNPJ(cnpj)
-        assertEquals(false, resul)
+    def "Testa se o cnpj é nulo"() {
+        expect:
+        Validacoes.validaCNPJ(null) == false
     }
 
-    @Test
-    void cnpjInvalidoLetraTest() {
-        String cnpj = "50.000.000/0000-0A"
-        Boolean resul = Validacoes.validaCNPJ(cnpj)
-        assertEquals(false, resul)
+    def "Testa se o cnpj é invalido com uma letra"() {
+        expect:
+        Validacoes.validaCNPJ("50.000.000/0000-0A") == false
     }
 
-    @Test
-    void cnpjPequenoTest() {
-        String cnpj = "50.000.000/0000-0"
-        Boolean resul = Validacoes.validaCNPJ(cnpj)
-        assertEquals(false, resul)
+    def "Testa se o cnpj é invalido falta um numero"() {
+        expect:
+        Validacoes.validaCNPJ("50.000.000/0000-0") == false
     }
 
-    @Test
-    void validacepTest() {
-        String cep = "00000-000"
-        Boolean resul = Validacoes.validaCEP(cep)
-        assertEquals(true, resul)
+    def "Testa se o cep é valido"() {
+        expect:
+        Validacoes.validaCEP("00000-000") == true
     }
 
-    @Test
-    void cepInvalidoLetraTest() {
-        String cep = "00000-0A0"
-        Boolean resul = Validacoes.validaCEP(cep)
-        assertEquals(false, resul)
+    def "Testa se o cep é invalido com uma letra"() {
+        expect:
+        Validacoes.validaCEP("00000-0A0") == false
     }
 
-    @Test
-    void cepInvalidoPequenoTest() {
-        String cep = "0000-00"
-        Boolean resul = Validacoes.validaCEP(cep)
-        assertEquals(false, resul)
+    def "Testa se o cep é invalido falta um numero"() {
+        expect:
+        Validacoes.validaCEP("00000-00") == false
     }
 
-    @Test
-    void cepNulo() {
-        String cep = null
-        Boolean resul = Validacoes.validaCEP(cep)
-        assertEquals(false, resul)
+    def "Testa se o cep é nulo"() {
+        expect:
+        Validacoes.validaCEP(null) == false
     }
 }
