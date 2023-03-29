@@ -11,7 +11,6 @@ class Vaga {
     String descricao
     String local_vaga
     Competencia competencia
-    Empresa empresa
 
     String toString() {
         return "Vaga: ${id} - ${nome} - ${descricao} - ${local_vaga} - ${competencia.competencias}"
