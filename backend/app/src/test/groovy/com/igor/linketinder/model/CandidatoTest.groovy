@@ -1,130 +1,155 @@
 package com.igor.linketinder.model
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import spock.lang.Specification
 
-class CandidatoTest {
+import java.text.SimpleDateFormat
 
-    private Candidato candidato
 
-    @BeforeEach
-    void setup() {
+class CandidatoTest extends Specification {
+
+    Candidato candidato = null
+
+    def setup() {
         Competencia competencia = new Competencia()
-        competencia.competencias = [TipoCompetencia.java, TipoCompetencia.javascript]
-        candidato = new Candidato("João", "Silva", new Date(1998 - 10 - 10),
-                "joao@gmail.com", "123456789", "Brasil", "12345678", "Sou um cara legal",
-                "123456", competencia)
+        competencia.competencias = [TipoCompetencia.angular, TipoCompetencia.cplusplus]
+        Date nascimento = new SimpleDateFormat("dd/MM/yyyy").parse("28/02/1995")
+        candidato = new Candidato("João", "Silva", nascimento, "joao@gmail.com", "000.000.000-00", "Brasil",
+                "00000-000", "Desenvolvedor", "12345", competencia)
     }
 
-    @Test
-    void getNomeTest() {
-        Assertions.assertEquals("João", candidato.nome)
+    def "Testa se o candidato foi criado corretamente"() {
+        expect:
+        candidato.nome == "João"
+        candidato.sobrenome == "Silva"
+        candidato.nascimento == new SimpleDateFormat("dd/MM/yyyy").parse("28/02/1995")
+        candidato.email == "joao@gmail.com"
+        candidato.cpf == "000.000.000-00"
+        candidato.pais == "Brasil"
+        candidato.cep == "00000-000"
+        candidato.descricao == "Desenvolvedor"
+        candidato.senha == "12345"
+        candidato.competencia.competencias == [TipoCompetencia.angular, TipoCompetencia.cplusplus]
     }
 
-    @Test
-    void getSobrenomeTest() {
-        Assertions.assertEquals("Silva", candidato.sobrenome)
+    def "Testa o getNome"() {
+        expect:
+        candidato.getNome() == "João"
     }
 
-    @Test
-    void getNascimentoTest() {
-        Assertions.assertEquals(new Date(1998 - 10 - 10), candidato.nascimento)
+    def "Testa o getSobrenome"() {
+        expect:
+        candidato.getSobrenome() == "Silva"
     }
 
-    @Test
-    void getEmailTest() {
-        Assertions.assertEquals("joao@gmail.com", candidato.email)
+    def "Testa o getNascimento"() {
+        expect:
+        candidato.getNascimento() == new SimpleDateFormat("dd/MM/yyyy").parse("28/02/1995")
     }
 
-    @Test
-    void getCpfTest() {
-        Assertions.assertEquals("123456789", candidato.cpf)
+    def "Testa o getEmail"() {
+        expect:
+        candidato.getEmail() == "joao@gmail.com"
     }
 
-    @Test
-    void getPaisTest() {
-        Assertions.assertEquals("Brasil", candidato.pais)
+    def "Testa o getCpf"() {
+        expect:
+        candidato.getCpf() == "000.000.000-00"
     }
 
-    @Test
-    void getCepTest() {
-        Assertions.assertEquals("12345678", candidato.cep)
+    def "Testa o getPais"() {
+        expect:
+        candidato.getPais() == "Brasil"
     }
 
-    @Test
-    void getDescTest() {
-        Assertions.assertEquals("Sou um cara legal", candidato.descricao)
+    def "Testa o getCep"() {
+        expect:
+        candidato.getCep() == "00000-000"
     }
 
-    @Test
-    void getSenhaTest() {
-        Assertions.assertEquals("123456", candidato.senha)
+    def "Testa o getDescricao"() {
+        expect:
+        candidato.getDescricao() == "Desenvolvedor"
     }
 
-    @Test
-    void getCompetenciasTest() {
-        Assertions.assertEquals([TipoCompetencia.java, TipoCompetencia.javascript], candidato.competencia.competencias)
+    def "Testa o getSenha"() {
+        expect:
+        candidato.getSenha() == "12345"
     }
 
-    @Test
-    void setNomeTest() {
-        candidato.nome = "Maria"
-        Assertions.assertEquals("Maria", candidato.nome)
+    def "Testa o getCompetencia com a lista de competencias"() {
+        expect:
+        candidato.getCompetencia().competencias == [TipoCompetencia.angular, TipoCompetencia.cplusplus]
     }
 
-    @Test
-    void setSobrenomeTest() {
-        candidato.sobrenome = "Santos"
-        Assertions.assertEquals("Santos", candidato.sobrenome)
+    def "Testa o setNome"() {
+        when:
+        candidato.setNome("Paulo")
+        then:
+        candidato.getNome() == "Paulo"
     }
 
-    @Test
-    void setNascimentoTest() {
-        candidato.nascimento = new Date(1998 - 10 - 10)
-        Assertions.assertEquals(new Date(1998 - 10 - 10), candidato.nascimento)
+    def "Testa o setSobrenome"() {
+        when:
+        candidato.setSobrenome("Santos")
+        then:
+        candidato.getSobrenome() == "Santos"
     }
 
-    @Test
-    void setEmailTest() {
-        candidato.email = "maria@gmail.com"
-        Assertions.assertEquals("maria@gmail.com", candidato.email)
+    def "Testa o setNascimento"() {
+        when:
+        candidato.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse("28/02/1996"))
+        then:
+        candidato.getNascimento() == new SimpleDateFormat("dd/MM/yyyy").parse("28/02/1996")
     }
 
-    @Test
-    void setCpfTest() {
-        candidato.cpf = "987654321"
-        Assertions.assertEquals("987654321", candidato.cpf)
+    def "Testa o setEmail"() {
+        when:
+        candidato.setEmail("paulo@gmail.com")
+        then:
+        candidato.getEmail() == "paulo@gmail.com"
     }
 
-    @Test
-    void setPaisTest() {
-        candidato.pais = "EUA"
-        Assertions.assertEquals("EUA", candidato.pais)
+    def "Testa o setCpf"() {
+        when:
+        candidato.setCpf("111.111.111-11")
+        then:
+        candidato.getCpf() == "111.111.111-11"
     }
 
-    @Test
-    void setCepTest() {
-        candidato.cep = "87654321"
-        Assertions.assertEquals("87654321", candidato.cep)
+    def "Testa o setPais"() {
+        when:
+        candidato.setPais("Argentina")
+        then:
+        candidato.getPais() == "Argentina"
     }
 
-    @Test
-    void setDescTest() {
-        candidato.descricao = "Sou uma pessoa legal"
-        Assertions.assertEquals("Sou uma pessoa legal", candidato.descricao)
+    def "Testa o setCep"() {
+        when:
+        candidato.setCep("11111-111")
+        then:
+        candidato.getCep() == "11111-111"
     }
 
-    @Test
-    void setSenhaTest() {
-        candidato.senha = "654321"
-        Assertions.assertEquals("654321", candidato.senha)
+    def "Testa o setDescricao"() {
+        when:
+        candidato.setDescricao("Desenvolvedor de software")
+        then:
+        candidato.getDescricao() == "Desenvolvedor de software"
     }
 
-    @Test
-    void setCompetenciasTest() {
-        candidato.competencia.competencias = [TipoCompetencia.java, TipoCompetencia.javascript, TipoCompetencia.python]
-        Assertions.assertEquals([TipoCompetencia.java, TipoCompetencia.javascript, TipoCompetencia.python], candidato.competencia.competencias)
+    def "Testa o setSenha"() {
+        when:
+        candidato.setSenha("54321")
+        then:
+        candidato.getSenha() == "54321"
     }
 
+    def "Testa o setCompetencia das listas com competencias"() {
+        when:
+        Competencia competencia = new Competencia()
+        competencia.competencias = [TipoCompetencia.angular, TipoCompetencia.cplusplus, TipoCompetencia.java]
+        candidato.setCompetencia(competencia)
+        then:
+        candidato.getCompetencia().competencias == [TipoCompetencia.angular, TipoCompetencia.cplusplus, TipoCompetencia.java]
+    }
 }
