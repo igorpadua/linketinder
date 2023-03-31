@@ -10,9 +10,9 @@ class Vaga {
     String nome
     String descricao
     String local_vaga
-    Competencia competencia
+    List<Competencia> competencias
 
     String toString() {
-        return "Vaga: ${id} - ${nome} - ${descricao} - ${local_vaga} - ${competencia.competencias}"
+        return "Vaga: ${id} - ${nome} - ${descricao} - ${local_vaga} - ${competencias}"
     }
 }

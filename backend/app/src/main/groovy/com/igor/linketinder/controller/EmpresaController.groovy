@@ -18,7 +18,7 @@ import org.apache.groovy.json.internal.LazyMap
 import java.sql.SQLException
 
 @TypeChecked
-@WebServlet(name = "empresa", value = "/empresa")
+@WebServlet(name = "empresa", urlPatterns = ["/empresa", "/empresa/*"])
 class EmpresaController extends HttpServlet {
 
     private static final FabricaBanco fabricaBanco = new PostgesFabric()
@@ -29,9 +29,9 @@ class EmpresaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             def empresa
-            if (request.getParameter("cnpj") != null) {
-                String cnpj = request.getParameter("cnpj")
-                empresa = pega(cnpj)
+            if (request.getPathInfo() != null) {
+                Integer id = Integer.parseInt(request.getPathInfo().substring(1))
+                empresa = pega(id)
             } else {
                 empresa = pegaEmpresas()
             }
@@ -77,9 +77,9 @@ class EmpresaController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            final String cnpj = request.getParameter("cnpj")
+            final Integer id = Integer.parseInt(request.getPathInfo().substring(1))
             final LazyMap jsonFormatado = json.formataJson(request)
-            final Empresa empresa = criaEmpresa(jsonFormatado, cnpj)
+            final Empresa empresa = criaEmpresa(jsonFormatado, id)
             atualizarNoBanco(empresa)
             response.getWriter().println("Empresa atualizada com sucesso!")
             response.setStatus(200)
@@ -96,8 +96,8 @@ class EmpresaController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            final String cnpj = request.getParameter("cnpj")
-            removeDoBanco(cnpj)
+            final Integer id = Integer.parseInt(request.getPathInfo().substring(1))
+            removeDoBanco(id)
             response.getWriter().println("Empresa deletada com sucesso!")
             response.setStatus(201)
         } catch (SQLException ignored) {
@@ -110,22 +110,18 @@ class EmpresaController extends HttpServlet {
         }
     }
 
-    private static Empresa criaEmpresa(LazyMap jsonFormatado, String CNPJ = null) {
+    private static Empresa criaEmpresa(LazyMap jsonFormatado, Integer id = 0) {
+
         final String nome = jsonFormatado.nome
         final String email = jsonFormatado.email
-        String cnpj
-        if (CNPJ != null) {
-            cnpj = CNPJ
-        } else {
-            cnpj = jsonFormatado.cnpj
-        }
+        final String cnpj = jsonFormatado.cnpj
         Validacoes.validaCNPJ(cnpj)
         final String senha = jsonFormatado.senha
         final String pais = jsonFormatado.pais
         final String cep = jsonFormatado.cep
         Validacoes.validaCEP(cep)
         final String descricao = jsonFormatado.descricao
-        return new Empresa(nome, email, cnpj, pais, cep, descricao, senha)
+        return new Empresa(id, nome, email, cnpj, pais, cep, descricao, senha)
     }
 
     static void salvarNoBanco(Empresa empresa) {
@@ -134,16 +130,16 @@ class EmpresaController extends HttpServlet {
         empresaDAO.salvar(empresa)
     }
 
-    static Empresa pega(String cnpj) {
-        return empresaDAO.pegar(cnpj)
+    static Empresa pega(Integer id) {
+        return empresaDAO.pegar(id)
     }
 
     static void atualizarNoBanco(Empresa empresa) {
         empresaDAO.atualiza(empresa)
     }
 
-    static void removeDoBanco(String cnpj) {
-        empresaDAO.remove(cnpj)
+    static void removeDoBanco(Integer id) {
+        empresaDAO.remove(id)
     }
 
     static List<Empresa> pegaEmpresas() {

@@ -1,9 +1,9 @@
 package com.igor.linketinder.controller
 
 import com.google.gson.Gson
-import com.igor.linketinder.dao.CompetenciaVagasDAO
 import com.igor.linketinder.dao.VagaDAO
 import com.igor.linketinder.model.Competencia
+import com.igor.linketinder.model.TipoCompetencia
 import com.igor.linketinder.model.Vaga
 import com.igor.linketinder.dao.fabricaBanco.FabricaBanco
 import com.igor.linketinder.dao.fabricaBanco.PostgesFabric
@@ -19,20 +19,19 @@ import org.apache.groovy.json.internal.LazyMap
 import java.sql.SQLException
 
 @TypeChecked
-@WebServlet(name = "vaga", value = "/vaga")
+@WebServlet(name = "vaga", urlPatterns = ["/vaga", "/vaga/*"])
 class VagaController extends HttpServlet {
 
     private static final FabricaBanco fabricaBanco = new PostgesFabric()
     private static final VagaDAO vagaDAO = new VagaDAO(fabricaBanco)
-    private static final CompetenciaVagasDAO competenciaVagasDAO = new CompetenciaVagasDAO(fabricaBanco)
     private static final Json json = new Json()
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             def vaga
-            if (request.getParameter("id") != null) {
-                int id = Integer.parseInt(request.getParameter("id"))
+            if (request.getPathInfo() != null) {
+                Integer id = Integer.parseInt(request.getPathInfo().substring(1))
                 vaga = pega(id)
             } else {
                 vaga = pegaVagas()
@@ -56,7 +55,7 @@ class VagaController extends HttpServlet {
             LazyMap jsonFormatado = json.formataJson(request)
 
             final Vaga vaga = criaVaga(jsonFormatado)
-            final int id_empresa = jsonFormatado.id_empresa as int
+            final Integer id_empresa = jsonFormatado.id_empresa as int
 
             salvarNoBanco(vaga, id_empresa)
 
@@ -75,12 +74,10 @@ class VagaController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            final Integer idVaga = Integer.parseInt(request.getPathInfo().substring(1))
             final LazyMap jsonFormatado = json.formataJson(request)
 
-            final String idVaga = request.getParameter("id")
-
-            Vaga vaga = criaVaga(jsonFormatado)
-            vaga.id = Integer.parseInt(idVaga)
+            Vaga vaga = criaVaga(jsonFormatado, idVaga)
 
             atualizarNoBanco(vaga)
 
@@ -99,7 +96,7 @@ class VagaController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            final int idVaga = Integer.parseInt(request.getParameter("id"))
+            final Integer idVaga = Integer.parseInt(request.getPathInfo().substring(1))
             removeDoBanco(idVaga)
             response.getWriter().println("Vaga deletada com sucesso!")
             response.setStatus(201)
@@ -113,32 +110,35 @@ class VagaController extends HttpServlet {
         }
     }
 
-    private static Vaga criaVaga(LazyMap jsonMap) {
+    private static Vaga criaVaga(LazyMap jsonMap, Integer id = 0) {
+
         String nome = jsonMap.nome
         String descricao = jsonMap.descricao
         String local_vaga = jsonMap.local_vaga
-        String competencias = jsonMap.competencias
-        Competencia competencia = new Competencia()
-        competencia.competencias = Competencia.transformaUmArryDeStringDeCompetenciaEmUmaListaDeCompetencia(competencias)
-        return new Vaga(0, nome, descricao, local_vaga, competencia)
+
+        List<Competencia> competencias = []
+
+        jsonMap.competencias.each { competencia ->
+            String nomeCompetencia = competencia["competencia"]
+            competencias.add(new Competencia(TipoCompetencia.valueOf(nomeCompetencia)))
+        }
+
+        return new Vaga(id, nome, descricao, local_vaga, competencias)
     }
 
-    static Vaga pega(int idVaga) {
+    static Vaga pega(Integer idVaga) {
         return vagaDAO.pega(idVaga)
     }
 
-    static void salvarNoBanco(Vaga vaga, int idEmpresa) {
+    static void salvarNoBanco(Vaga vaga, Integer idEmpresa) {
         vagaDAO.salvar(vaga, idEmpresa)
-        vaga.id = vagaDAO.pegaId(vaga)
-        competenciaVagasDAO.salvar(vaga)
     }
 
     static void atualizarNoBanco(Vaga vaga) {
         vagaDAO.atualiza(vaga)
-        competenciaVagasDAO.atualizar(vaga)
     }
 
-    static void removeDoBanco(int idVaga) {
+    static void removeDoBanco(Integer idVaga) {
         vagaDAO.remove(idVaga)
     }
 

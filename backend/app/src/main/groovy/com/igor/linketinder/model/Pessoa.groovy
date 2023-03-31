@@ -6,6 +6,7 @@ import groovy.transform.TypeChecked
 @TypeChecked
 @Canonical
 abstract class Pessoa {
+    Integer id
     String nome
     String email
     String pais

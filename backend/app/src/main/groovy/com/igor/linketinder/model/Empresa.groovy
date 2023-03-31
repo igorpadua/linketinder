@@ -8,8 +8,8 @@ import groovy.transform.TypeChecked
 class Empresa extends Pessoa {
     String cnpj
 
-    Empresa(String nome, String email, String cnpj, String pais, String cep, String descricao, String senha) {
-        super(nome, email, pais, cep, descricao, senha)
+    Empresa(Integer id = 0, String nome, String email, String cnpj, String pais, String cep, String descricao, String senha) {
+        super(id, nome, email, pais, cep, descricao, senha)
         this.cnpj = cnpj
     }
 
