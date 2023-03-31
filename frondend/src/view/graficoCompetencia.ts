@@ -7,7 +7,7 @@ export default function desenharCompetencia(candidatos: Candidato[]) {
     const java = contarCompetencia(candidatos, 'java')
     const javascript = contarCompetencia(candidatos, 'javascript')
     const c = contarCompetencia(candidatos, 'c')
-    const cplusplus = contarCompetencia(candidatos, 'c++')
+    const cplusplus = contarCompetencia(candidatos, 'cplusplus')
     const angular = contarCompetencia(candidatos, 'angular')
     const html = contarCompetencia(candidatos, 'html')
     const nodejs = contarCompetencia(candidatos, 'node')

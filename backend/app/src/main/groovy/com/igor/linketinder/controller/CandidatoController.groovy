@@ -68,6 +68,7 @@ class CandidatoController extends HttpServlet {
             LazyMap jsonFormatado = json.formataJson(request)
 
             final Candidato candidato = criaCandidato(jsonFormatado)
+
             salvarNoBanco(candidato)
 
             response.getWriter().println("Candidato cadastrado com sucesso!")
@@ -123,7 +124,7 @@ class CandidatoController extends HttpServlet {
         String nome = jsonFormatado.nome
         String sobrenome = jsonFormatado.sobrenome
         String stringData = jsonFormatado.nascimento
-        Date nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(stringData)
+        Date nascimento = new SimpleDateFormat("yyyy-MM-dd").parse(stringData.substring(0, 10))
         String email = jsonFormatado.email
         String cpf = jsonFormatado.cpf
         Validacoes.validaCPF(cpf)

@@ -1,13 +1,14 @@
 import Pessoa from "./pessoa.entity";
+import Competencia from "./competencia.entity";
 
 export default class Candidato extends Pessoa {
     sobrenome: string
     cpf: string
     nascimento: Date
-    competencias: string[]
+    competencias: Competencia[]
 
     constructor(nome: string, email: string, cpf: string, desc: string, pais: string,
-                senha: string, nasicmento: Date, cep: string, sobrenome: string,competencias: string[]) {
+                senha: string, nasicmento: Date, cep: string, sobrenome: string,competencias: Competencia[]) {
         super(nome, email, desc, pais, senha, cep)
         this.competencias = competencias
         this.sobrenome = sobrenome
@@ -26,7 +27,13 @@ export default class Candidato extends Pessoa {
             const pais: string = candidato.pais
             const cep: string = candidato.cep
             const senha: string = candidato.senha
-            const competencias: string[] = candidato.competencia.competencias
+
+            let competencias: Competencia[] = []
+
+            candidato.competencias.forEach((competencia: any) => {
+                competencias.push(new Competencia(competencia.competencia))
+            })
+
             const nascimento: Date = new Date(candidato.nascimento)
             candidatos.push(new Candidato(nome, email, cpf, descricao, pais, senha, nascimento, cep, sobrenome, competencias))
         })

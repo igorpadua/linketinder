@@ -10,7 +10,7 @@ export default abstract class ValidaPessoa {
     protected abstract validacaoDadosFilhos(pessoa: Pessoa) : boolean
 
     protected dadosForamPreenchidos(pessoa: Pessoa) : boolean {
-        return !(pessoa.nome && pessoa.email && pessoa.desc && pessoa.pais &&
+        return !(pessoa.nome && pessoa.email && pessoa.descricao && pessoa.pais &&
             pessoa.senha && pessoa.cep && !this.dadosPreenchidos(pessoa))
     }
 
@@ -36,7 +36,7 @@ export default abstract class ValidaPessoa {
             alert("Email inválido!")
             return false
         }
-        if (!this.descRegex.test(pessoa.desc)) {
+        if (!this.descRegex.test(pessoa.descricao)) {
             alert("Descrição inválida!")
             return false
         }

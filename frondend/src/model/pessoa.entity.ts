@@ -2,7 +2,7 @@ export default class Pessoa {
     nome: string
     senha: string
     email: string
-    desc: string
+    descricao: string
     pais: string
     cep: string
 
@@ -11,7 +11,7 @@ export default class Pessoa {
         this.nome = nome
         this.senha = senha
         this.email = email
-        this.desc = desc
+        this.descricao = desc
         this.pais = pais
         this.cep = cep
     }

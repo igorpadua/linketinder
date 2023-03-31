@@ -1,6 +1,7 @@
 import Pessoa from "../model/pessoa.entity";
 import Candidato from "../model/candidato.entity";
 import Empresa from "../model/empresa.entity";
+import Competencia from "../model/competencia.entity";
 export default class PessoasView {
 
     private static pegaDadosPessoa() : string [] {
@@ -20,12 +21,13 @@ export default class PessoasView {
         return [cpf, sobrenome, nascimento]
     }
 
-    private static pegaCompetencias() : string [] {
-        const competencias: string[] = []
+    private static pegaCompetencias() : Competencia [] {
+        const competencias: Competencia[] = []
         const competencias_selecionadas: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="competencias"]:checked')
 
         competencias_selecionadas.forEach((competencia) => {
-            competencias.push(competencia.value)
+            let comp: Competencia = new Competencia(competencia.value)
+            competencias.push(comp)
         })
 
         return competencias
@@ -34,7 +36,7 @@ export default class PessoasView {
     static addPessoa(): Pessoa {
         const radio_selecionado: string = (<HTMLInputElement>document.querySelector('input[name="tipoPessoa"]:checked')).value
         const [nome, email, descricao, pais, cep, senha] = PessoasView.pegaDadosPessoa()
-        const competencias: string[] = PessoasView.pegaCompetencias()
+        const competencias: Competencia[] = PessoasView.pegaCompetencias()
 
         if (radio_selecionado == "Candidato") {
             const [cpf, sobrenome, nascimento] = PessoasView.pegaDadosCandidato()
@@ -67,9 +69,9 @@ export default class PessoasView {
             lista_pessoa += '<tr>'
             if ((pessoa as Candidato).nascimento != undefined) {
                 lista_pessoa += `<td>${(pessoa as Candidato).nascimento.toLocaleString().substring(0, 10)}</td>`
-                lista_pessoa += `<td>${(pessoa as Candidato).competencias}</td>`
+                lista_pessoa += `<td>${(pessoa as Candidato).competencias.map((competencia) => competencia.competencia).join(', ')}</td>`
             }
-            lista_pessoa +=     `<td>${pessoa.desc}</td>`
+            lista_pessoa +=     `<td>${pessoa.descricao}</td>`
             lista_pessoa +=     `<td>${pessoa.pais}</td>`
             lista_pessoa += "</tr>"
         })
