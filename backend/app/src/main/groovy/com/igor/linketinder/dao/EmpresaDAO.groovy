@@ -32,24 +32,24 @@ class EmpresaDAO {
 
         List<Empresa> result = new ArrayList<>()
         sql.eachRow('SELECT * FROM empresas') { rs ->
-            Empresa empresa = new Empresa(rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
+            Empresa empresa = new Empresa(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
                     rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'), rs.getString('senha'))
             result.add(empresa)
             }
         return result
     }
 
-    void remove(String cnpj) {
+    void remove(Integer id) {
 
-        validaEmpresas(pegar(cnpj))
-        sql.execute("DELETE FROM empresas WHERE cnpj = ${cnpj}")
+        validaEmpresas(pegar(id))
+        sql.execute("DELETE FROM empresas WHERE id = ${id}")
     }
 
-    Empresa pegar(String cnpj) {
+    Empresa pegar(Integer id) {
 
         Empresa empresa = null
-        sql.eachRow("SELECT * FROM empresas WHERE cnpj = ${cnpj}") { rs ->
-            empresa = new Empresa(rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
+        sql.eachRow("SELECT * FROM empresas WHERE id = ${id}") { rs ->
+            empresa = new Empresa(rs.getInt('id'), rs.getString('nome').trim(), rs.getString('email').trim(), rs.getString('cnpj'),
                     rs.getString('pais'), rs.getString('cep'), rs.getString('descricao'), rs.getString('senha'))
         }
         validaEmpresas(empresa)
@@ -60,15 +60,6 @@ class EmpresaDAO {
 
         sql.executeUpdate('UPDATE empresas ' +
                 "SET nome = '${empresa.nome}', email = '${empresa.email}', cnpj = '${empresa.cnpj}', pais = '${empresa.pais}', " +
-                "cep = '${empresa.cep}', descricao = '${empresa.descricao}', senha = '${empresa.senha}' WHERE cnpj = '${empresa.cnpj}'")
-    }
-
-    int pegaId(String cnpj) {
-
-        int idEmpresa = 0
-        sql.eachRow("SELECT id FROM empresas WHERE cnpj = ${cnpj}") { rs ->
-            idEmpresa = rs.getInt('id')
-        }
-        return idEmpresa
+                "cep = '${empresa.cep}', descricao = '${empresa.descricao}', senha = '${empresa.senha}' WHERE id = ${empresa.id}")
     }
 }
